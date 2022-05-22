@@ -11,7 +11,6 @@ function catalog(){
 
 
 
-
 function comp_item(){
     document.getElementById('computers').style.display='block'
     document.getElementById('smartphones').style.display='none'
@@ -61,7 +60,7 @@ function itemHover3_out(){
     document.getElementById('item_hover3').style.backgroundColor='transparent';
     }
 
-const req_url ='http://127.0.0.1:8000/notebook_api/9'
+/*const req_url ='http://127.0.0.1:8000/notebook_api/9'
 function send_req(){
     const xhr = new XMLHttpRequest()
     xhr.open('get', req_url)
@@ -71,7 +70,7 @@ function send_req(){
       }
     xhr.send(data)
   }
-
+*/
 
 
 
@@ -83,7 +82,7 @@ function reg() {
 
 
 function users_btn(){
-    if(document.URL != 'https://my-petshop.herokuapp.com/){
+    if(document.URL != 'https://my-petshop.herokuapp.com/'){
         document.getElementById('login').style.display = 'none'
         var name = document.getElementById('user').innerHTML
         if(name != 'AnonymousUser'){

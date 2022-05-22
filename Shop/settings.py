@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ezf+b#8pgve2vp(8o6y@u$f$uo!g(h7)n8h%a@ohtp9nhmuask
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['my-petshop.herokuapp.com']
+ALLOWED_HOSTS = ['my-petshop.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -148,9 +148,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = 'staticfiles'
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
