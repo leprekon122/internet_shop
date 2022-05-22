@@ -1,0 +1,109 @@
+{% extends 'main/layout.html'%}
+
+{%block title%}Detail info{%endblock%}
+
+{%block content%}
+<div class="container detail_container">
+    <div class="container detail_all">
+        {%for el in model%}
+        <div class="container detail_title">
+            <h4>{{el.title}}</h4>
+        </div>
+        <div class="container detail_panel">
+            <div class="detail_panel_a">
+                <a href="" id="detail_start_a">Усе про товар</a>
+            </div>
+            <div class="detail_panel_a">
+                <a href="#" onclick="detail_color_video()" id="detail_video">Відео</a>
+            </div>
+            <div class="detail_panel_a">
+                <a href="#" onclick="detail_color_comments()" id="detail_comments">Відгуки ({{quentety}})</a>
+            </div>
+            <div class="detail_panel_a">
+                <a href="#" onclick="detail_color_question()" id="detail_question">Питання ({{quentety_1}})</a>
+            </div>
+        </div>
+        <br>
+        <div class="detail_pic">
+            <div id="video_youtube">
+                <iframe width="600px" height="400px" src="{{el.video_link}}" title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+            <img src="/media/{{el.pic}}" width="600px" height="400px" id="detail_pic">
+            <br>
+            <div class="container detail_price">
+                <div class="detail_price_elem text-light">
+                    <h4>{{el.price}} UAH</h4>
+                    <div class="detail_button">
+                        <button class="btn btn-success">Купити</button>
+                        <button class="btn btn-dark">Купити в кредит</button>
+                    </div>
+                </div>
+                <br>
+                <div class="container detail_all_comments" id="detail_comment">
+                    <div class="add_detail_comment">
+                        <form method="post">
+                            {%csrf_token%}
+                            <textarea class="form-control" rows="3" placeholder="comment" name="comment"></textarea>
+                            <br>
+                            <button class="btn btn-dark" id="add_comment" name="add_comment" value="{{el.id}}">Додати
+                                коментар
+                            </button>
+                        </form>
+                    </div>
+                    <br>
+                    {%for elem in model_1%}
+                    <div class="detail_comments">
+                        <div class="detail_comments_header">
+                            <p class="detail_comment_name">{{elem.name_of_user}}</p>
+                            <p class="detail_comment_date">{{elem.date}}</p>
+                        </div>
+                        <textarea class="form-control detail_comment">{{elem.comment}}</textarea>
+                    </div>
+                    <br>
+                    {%endfor%}
+                </div>
+
+
+                <div class="container detail_all_questions" id="detail_questions">
+                    <div class="add_detail_comment">
+                        <form method="post">
+                            {%csrf_token%}
+                            <textarea class="form-control" rows="3" placeholder="question" name="question"></textarea>
+                            <br>
+                            <button class="btn btn-dark" id="add_questions" name="add_question" value="{{el.id}}">Додати
+                                питання
+                            </button>
+                        </form>
+                    </div>
+                    <br>
+                    {%for elems in model_2%}
+                    <div class="detail_comments">
+                        <div class="detail_comments_header">
+                            <p class="detail_comment_name">{{elems.name_of_user}}</p>
+                            <p class="detail_comment_date">{{elems.date}}</p>
+                        </div>
+                        <textarea class="form-control detail_comment">{{elems.comment}}</textarea>
+                    </div>
+                    <br>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="detail_description">
+            <p>{{el.description}}</p>
+            <br>
+        </div>
+        {%endfor%}
+
+
+    </div>
+
+    <script src="/static/main/js/stuff_detail.js">
+    </script>
+
+</div>
+{%endblock%}

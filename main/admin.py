@@ -1,0 +1,11 @@
+from django.contrib import admin
+from .models import *
+
+# Register your models here.
+
+admin.site.register(NotebooksList)
+admin.site.register(Videocards)
+admin.site.register(CommentsUsers)
+admin.site.register(QuestionUsers)
+admin.site.register(CommentsUsersVideocard)
+admin.site.register(QuestionUsersVideocard)

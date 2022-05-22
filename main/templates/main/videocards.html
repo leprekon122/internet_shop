@@ -1,0 +1,78 @@
+{%extends 'main/layout.html'%}
+
+
+{%block title%}Відеокарти{%endblock%}
+
+{%block content%}
+<div class="container-fluid">
+    <div class="main_comodety">
+        <div class="manage_panel">
+            <h5>Алфавітний вказівник</h5>
+            <div class="alphabet_search">
+                <form method="get">
+                    <button class="btn btn-success" type="submit">search</button>
+                    <br>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                               value="AMD" checked>
+                        <label class="form-check-label" for="exampleRadios1">AMD</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                               value="Gigabyte" checked>
+                        <label class="form-check-label" for="exampleRadios1">Gigabyte</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
+                               value="Asus" checked>
+                        <label class="form-check-label" for="exampleRadios1">Asus</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5"
+                               value="INNO3D" checked>
+                        <label class="form-check-label" for="exampleRadios1">INNO3D</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6"
+                               value="MSI" checked>
+                        <label class="form-check-label" for="exampleRadios1">MSI</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="all_stuff">
+            {%for el in model%}
+            <form method="get">
+                {%csrf_token%}
+                <button class="btn btn-dark" name="stuff_detail" value="{{el.id}}">
+                    <div class="alert alert-light note-videocard">
+                        <img src="/media/{{el.pic}}" width="240px" height="180px">
+                        <br>
+                        <div class="title_stuff">
+                            <p class="title">{{el.title}}</p>
+                        </div>
+                        <br>
+                        <div class="price_and_bag">
+                            <h5>{{el.price}} UAH</h5>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                        {%if el.in_out == 'Є в наявності'%}
+                        <p class="text-success">готовий до відправлення <span class="truck"><i
+                                class="fa-solid fa-truck"></i></span></p>
+                        {%else%}
+                        <p class="text-unsuccess">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
+                        {%endif%}
+                        <div class="container">
+                            <p class="description " id="des">{{el.description}}</p>
+                        </div>
+
+                    </div>
+                </button>
+            </form>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}

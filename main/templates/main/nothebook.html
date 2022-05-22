@@ -1,0 +1,99 @@
+{%extends 'main/layout.html'%}
+
+
+{%block title%}Ноутбуки{%endblock%}
+
+{%block content%}
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+    <button class="btn btn-danger panel_button" onclick="manage_panel()">Panel</button>
+    <div class="main_comodety">
+        <div class="manage_panel" id="main_panels">
+            <h5>Алфавітний вказівник</h5>
+            <div class="alphabet_search">
+                <form method="get">
+                    <button class="btn btn-success" type="submit">search</button>
+                    <br>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                               value="Apple" checked>
+                        <label class="form-check-label" for="exampleRadios1">Apple</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                               value="Acer" checked>
+                        <label class="form-check-label" for="exampleRadios1">Acer</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
+                               value="Asus" checked>
+                        <label class="form-check-label" for="exampleRadios1">Asus</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4"
+                               value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">Dell</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5"
+                               value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">HP</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6"
+                               value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">Lenovo</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios7"
+                               value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">MSI</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios8"
+                               value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">Razer</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios9"
+                               value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">Samsung</label>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="all_stuff">
+            {%for el in model%}
+            <form method="get">
+                {%csrf_token%}
+                <button class="btn btn-dark bg-success" name="stuff_detail" value="{{el.id}}">
+                    <div class="alert alert-light note">
+                        <img src="/media/{{el.pic}}" width="230px" height="180px">
+                        <br>
+                        <div class="title">
+                            <p>{{el.title}}</p>
+                        </div>
+                        <div class="price_and_bag">
+                            <h5>{{el.price}} UAH</h5>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                        {%if el.in_out == 'Є в наявності'%}
+                        <p class="text-success">готовий до відправлення <span class="truck"><i
+                                class="fa-solid fa-truck"></i></span></p>
+                        {%else%}
+                        <p class="text-unsuccess">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
+                        {%endif%}
+                        <div class="container">
+                            <p class="description " id="des">{{el.description}}</p>
+                        </div>
+                    </div>
+                </button>
+            </form>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+
+<script src="/static/main/js/notebook.js">
+</script>
+{%endblock%}
