@@ -44,7 +44,7 @@
             {%for el in model%}
             <form method="get">
                 {%csrf_token%}
-                <button class="btn btn-dark" name="stuff_detail" value="{{el.id}}">
+                <button class="btn btn-dark bg-success" name="stuff_detail" value="{{el.id}}">
                     <div class="alert alert-light note-videocard">
                         <img src="/media/{{el.pic}}" width="240px" height="180px">
                         <br>
