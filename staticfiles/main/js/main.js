@@ -10,11 +10,11 @@ function catalog(){
 }
 
 
-
 function comp_item(){
     document.getElementById('computers').style.display='block'
     document.getElementById('smartphones').style.display='none'
     document.getElementById('home_appliances').style.display='none'
+    return false
 }
 
 
@@ -23,13 +23,14 @@ function smart() {
     document.getElementById('smartphones').style.display='block'
     document.getElementById('computers').style.display='none';
     document.getElementById('home_appliances').style.display='none'
+    return false
 }
 
 function home_stuff(){
-    console.log('true')
     document.getElementById('home_appliances').style.display='block'
     document.getElementById('smartphones').style.display='none'
     document.getElementById('computers').style.display='none';
+    return false
 }
 
 
@@ -82,7 +83,7 @@ function reg() {
 
 
 function users_btn(){
-    if(document.URL != 'http://127.0.0.1:8000/'){
+    if(document.URL != 'https://my-petshop.herokuapp.com/'){
         document.getElementById('login').style.display = 'none'
         var name = document.getElementById('user').innerHTML
         if(name != 'AnonymousUser'){
