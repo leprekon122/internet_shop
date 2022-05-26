@@ -732,5 +732,11 @@ body .main_page_carusel {margin-top: 5%;
 
     body .comment_video iframe{max-width:270px}
 
+    body .note:hover #des{
+                 transform: scale(1.05);
+                 display: none;
+                 font-size: 12px;
+                 }
+
 
     }
