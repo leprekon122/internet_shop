@@ -31,7 +31,8 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
             </div>
-            <img src="/media/{{el.pic}}" width="600px" height="400px" id="detail_pic">
+            <!--<img src="/media/{{el.pic}}" width="600px" height="400px" id="detail_pic"> -->
+            <img loading="lazy" src="{{el.pic_link}}">
             <br>
             <div class="container detail_price">
                 <div class="detail_price_elem text-light">
