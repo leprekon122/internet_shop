@@ -26,7 +26,7 @@
         <br>
         <div class="detail_pic">
             <div id="video_youtube">
-                <iframe width="600px" height="400px" src="{{el.video_link}}" title="YouTube video player"
+                <iframe loading="lazy" width="600px" height="400px" src="{{el.video_link}}" title="YouTube video player"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
@@ -46,9 +46,13 @@
                     <div class="add_detail_comment">
                         <form method="post">
                             {%csrf_token%}
-                            <textarea class="form-control" rows="3" placeholder="comment" name="comment"></textarea>
+                            <textarea class="form-control" rows="2" placeholder="коментар" name="comment"></textarea>
                             <br>
-                            <button class="btn btn-dark" id="add_comment" name="add_comment" value="{{el.id}}">Додати
+                            <textarea class="form-control" rows="1" placeholder="посилання на ютуб"
+                                      name="link_video"></textarea>
+                            <br>
+                            <button class="btn btn-dark" id="add_comment" name="add_comment" value="{{el.id}}"
+                                    onclick="return add_comm()">Додати
                                 коментар
                             </button>
                         </form>
@@ -60,7 +64,19 @@
                             <p class="detail_comment_name">{{elem.name_of_user}}</p>
                             <p class="detail_comment_date">{{elem.date}}</p>
                         </div>
-                        <textarea class="form-control detail_comment">{{elem.comment}}</textarea>
+                        {%if elem.link_video != ''%}
+                        <div class="comment_video">
+                            <div class="text_comment">
+                                <p class="form-control">{{elem.comment}}</p>
+                            </div>
+                            <iframe loading="lazy" width="250" height="220" src="{{elem.link_video}}"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        </div>
+                        {%else%}
+                        <p class="form-control detail_comment">{{elem.comment}}</p>
+                        {%endif%}
                     </div>
                     <br>
                     {%endfor%}
@@ -73,7 +89,8 @@
                             {%csrf_token%}
                             <textarea class="form-control" rows="3" placeholder="question" name="question"></textarea>
                             <br>
-                            <button class="btn btn-dark" id="add_questions" name="add_question" value="{{el.id}}">Додати
+                            <button class="btn btn-dark" id="add_questions" name="add_question" value="{{el.id}}"
+                                    onclick="return add_comm()">Додати
                                 питання
                             </button>
                         </form>

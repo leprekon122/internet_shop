@@ -3,6 +3,16 @@ function start_hover(){
 }
 start_hover()
 
+function add_comm(){
+    var user = document.getElementById('user').innerHTML
+    if(user == 'AnonymousUser'){
+          window.alert('Вам потрібно авторезуватись!')
+          return false
+        }
+    return true
+    }
+
+
 
 function detail_color_video(){
     document.getElementById('detail_pic').style.display = 'none'
@@ -38,14 +48,15 @@ function detail_color_question(){
 }
 
 
-var csrf_token = ''
+
+
+
+/*var csrf_token = ''
 function get_csrf_token(){
     var token = document.cookie.split('=')
     csrf_token = token[1]
 }
-get_csrf_token()
-
-
+get_csrf_token() */
 
 
 

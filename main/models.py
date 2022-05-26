@@ -54,6 +54,7 @@ class CommentsUsers(models.Model):
     name_of_user = models.CharField(max_length=50, null=True)
     name_of_stuff = models.ForeignKey(NotebooksList, on_delete=models.CASCADE)
     comment = models.TextField()
+    link_video = models.TextField(null=True, blank=True)
     date = models.DateField(auto_now=True)
 
     def __str__(self):
@@ -82,6 +83,7 @@ class CommentsUsersVideocard(models.Model):
     name_of_user = models.CharField(max_length=50, null=True)
     name_of_stuff = models.ForeignKey(Videocards, on_delete=models.CASCADE)
     comment = models.TextField()
+    link_video = models.TextField(null=True, blank=True)
     date = models.DateField(auto_now=True)
 
     def __str__(self):

@@ -81,7 +81,7 @@ function reg() {
 
         }
 
-
+//change buttons login/logout//
 function users_btn(){
     if(document.URL != 'https://my-petshop.herokuapp.com/'){
         document.getElementById('login').style.display = 'none'
@@ -98,4 +98,43 @@ function users_btn(){
       }
     }
 users_btn()
+
+//active menu//
+var count_panel = 0
+function active_panel(){
+    count_panel += 1
+    if(count_panel % 2 == 1){
+        document.getElementById('main_panels').style.transform = 'translateX(0%)'
+        document.getElementById('main_panels').style.width = '25%'
+
+    } else {
+        document.getElementById('main_panels').style.transform = 'translateX(-103%)'
+
+
+
+     }
+}
+
+
+//active menu on phone///
+function manage_panel(){
+    count_panel += 1
+    if(count_panel % 2 == 1){
+        document.getElementById('main_panels').style.transform='translateX(0%)'
+        } else {
+            document.getElementById('main_panels').style.transform='translateX(-110%)'
+        }
+    }
+
+// slider for price filter//
+function price_sliders(){
+    var slider = document.getElementById('price_slider')
+    var slider_2 = document.getElementById('price_slider_2')
+    document.getElementById('price_from').value=slider.value
+    document.getElementById('price_to').value=slider_2.value
+    slider.max = slider_2.value
+    slider_2.min = slider.value
+
+}
+price_sliders()
 

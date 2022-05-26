@@ -5,11 +5,11 @@
 
 {%block content%}
 <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-    <button class="btn btn-danger panel_button" onclick="manage_panel()">Panel</button>
+    <button class="btn btn-danger panel_button" onclick="manage_panel()">фільтри</button>
     <div class="main_comodety">
         <div class="manage_panel" id="main_panels">
-            <h5>Алфавітний вказівник</h5>
             <div class="alphabet_search">
+                <h5>Пошук по бренду</h5>
                 <form method="get">
                     <button class="btn btn-success" type="submit">search</button>
                     <br>
@@ -60,15 +60,39 @@
                     </div>
                 </form>
             </div>
-
+            <br>
+            <div class="coast_main" id="coast">
+                <h5>Пошук за ціною</h5>
+                <br>
+                <form method="get">
+                    <div class="coast_search">
+                        <input type="text" class="form-control" name="price_from" id="price_from" placeholder="Від">
+                        <input type="text" class="form-control" name="price_to" placeholder="До" id="price_to">
+                    </div>
+                    <br>
+                    <div class="sliders">
+                        <input type="range" class="slider" min="0" max="100000" step="500" value="5000"
+                               id="price_slider"
+                               oninput="price_sliders()">
+                        <input type="range" class="slider" min="0" max="100000" step="500" value="90000"
+                               id="price_slider_2" oninput="price_sliders()">
+                    </div>
+                    <br>
+                    <br>
+                    <button class="btn btn-success" type="submit" name="price" value="price">пошук</button>
+                </form>
+            </div>
+            <button class="btn btn-danger" onclick="active_panel()" id="filters">фільтри</button>
         </div>
-        <div class="all_stuff">
+
+
+        <div class="all_stuff" id="all_st">
             {%for el in model%}
             <form method="get">
                 {%csrf_token%}
                 <button class="btn btn-dark bg-success" name="stuff_detail" value="{{el.id}}">
                     <div class="alert alert-light note">
-                        <img src="/media/{{el.pic}}" width="230px" height="180px">
+                        <img src="/media/{{el.pic}}" width="180px" height="140px">
                         <br>
                         <div class="title">
                             <p>{{el.title}}</p>
@@ -83,9 +107,9 @@
                         {%else%}
                         <p class="text-unsuccess">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
                         {%endif%}
-                        <div class="container">
-                            <p class="description " id="des">{{el.description}}</p>
-                        </div>
+
+                        <p class="description " id="des">{{el.description}}</p>
+
                     </div>
                 </button>
             </form>
@@ -93,7 +117,6 @@
         </div>
     </div>
 </div>
+<script src="/static/main/js/notebook.js"></script>
 
-<script src="/static/main/js/notebook.js">
-</script>
 {%endblock%}

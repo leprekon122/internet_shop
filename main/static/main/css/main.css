@@ -33,7 +33,7 @@ body .auth_elem{
 
 body .main_panels {width:90%;
          display: none;
-         z-index: 1;
+         z-index: 3;
          position: fixed
          }
 
@@ -109,49 +109,119 @@ body .main_comodety{
                         }
 
 body .manage_panel {
-    width: 17%;
+    background: black;
     height: 100vh;
     border-right: 2px solid #fff;
-    color: #fff
+    color: #fff;
+    padding:.5%;
+    transform: translateX(-103%);
+    transition-duration: 1s;
+    z-index:2;
+    position:fixed
 
 }
+body .manage_panel .btn-danger{position:absolute;
+                            top:0;
+                            right:-100px}
 
-body .panel_button{width:100%;
+body .main_comodety .btn-danger {height:6vh}
+
+
+
+body .panel_button{width:10%;
                    display: none}
 
+
 body .alphabet_search {
+
+    background: grey;
+    padding: 5%;
     overflow:auto;
-    height: 20vh;
+    height: 30vh;
+
 }
+
+body .coast_main {background: grey;
+                  padding:3%}
+
+body .coast_main button{width:100%}
+
+body .coast_search {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-around;
+
+            }
+
+body .coast_search input{width: 45%}
+
+
+body .slider{-webkit-appearance: none;
+             width:100%;
+             height:7px;
+             background:black}
+
+body .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #3fc72e;
+  cursor: pointer;
+}
+
+body .slider::-webkit-slider-thumb:hover {transform: scale(1.8)}
+
+body .sliders{display:flex;
+              flex-direction: row
+
+              }
 
 body .all_stuff {
                 overflow:auto;
-                height:85vh;
+                height:90vh;
                 padding-left: 4%;
-                padding-top: 4%;
+                padding-top: 5%;
                 display:flex;
                 flex-display:row;
                 flex-wrap: wrap;
+                transition-duration: 1s
+
                 }
 
-body .title_stuff {height: 18vh;
+body .title_stuff {height: 32vh;
                    }
 
+
 body .note {border: 1px solid grey;
-            height: 55vh;}
+            height: 50vh;
+            width:230px}
+
+body .note p{font-size: 14px;}
+
+
+body .note #des{width:200px;
+                padding-left: 0%;
+                padding-top: 0%;
+                }
 
 body .note:hover{transform: scale(1.05);
-                 height:85vh;
+                 height:65vh;
                  z-index: 1;
+
                  }
 
 body .note:hover #des{
                  transform: scale(1.05);
-                 display: block
+                 display: block;
+                 font-size: 12px;
+
                  }
 
+
 body .note-videocard {border: 1px solid grey;
-            height: 60vh;
+            height: 65vh;
             }
 
 
@@ -174,7 +244,7 @@ body .note-videocard:hover #des{
                  display: block;
                  }
 
-body .description {width: 230px;
+body .description {width: 200px;
                   display: none}
 
 
@@ -379,8 +449,15 @@ body .detail_comments {padding: 4%;
                        }
 
 body .detail_comments_header{display: flex;
-                             justify-content: space-between}
+                             justify-content: space-between;
+                             }
 
+body .comment_video{display:flex;
+                    flex-direction:row;
+                    justify-content:space-around}
+
+body .text_comment{width:60%;
+                   }
 
 body .main_page_carusel {margin-top: 5%;
                          }
@@ -441,7 +518,7 @@ body .main_page_carusel {margin-top: 5%;
     body .note img{width: 200px;
                    height: 170px
                    }
-    body .manage_panel{}
+
 
     body .panel_button{width:100%;
                    display: none}
@@ -496,7 +573,7 @@ body .main_page_carusel {margin-top: 5%;
                    }
     body .manage_panel{display: none}
 
-    body .panel_button{width:100%;
+    body .panel_button{width:10%;
                    display: block}
 
     body .auth_panel {
@@ -533,25 +610,27 @@ body .main_page_carusel {margin-top: 5%;
 
 @media screen and (max-width: 483px) {
     body .note {width: 300px;
-                height: 70vh;
+                max-height:55vh;
                 }
 
-    body .title{height: 26vh;
+    body .title{height: 17vh;
                 max-width:350px;
                 }
 
     body .note img{width: 260px;
                    height: 190px
                    }
-    body .manage_panel{display: none;
+    body .manage_panel{display: block;
                        margin-top:5%;
-                       width: 60%;
+                       width: 80%;
                        height: 70vh;
                        z-index:1;
                        position: absolute;
-                       background: grey;
+                       background: #1e1f21;
                        border-bottom: 3px solid #fff;
                        border-top: 3px solid #fff;
+                       transform: translateX(-109%);
+                       transition-duration: 1.5s
                        }
 
     body .main_comodety {flex-direction:column}
@@ -624,11 +703,34 @@ body .main_page_carusel {margin-top: 5%;
 
                        }
 
-    body .detail_panel_a{padding-left: 0%;
+    body .detail_panel_a{padding-left: 1%;
+                         font-size: 12px
                      }
 
     body .detail_panel_a:hover {color: #13cf2b;
                             transform: scale(1.1);
                             transition-duration: 1s;}
+
+    #filters{display: none}
+
+    body .alphabet_search {
+    background: #39393b;
+    padding: 5%;
+    overflow:auto;
+    height: 27vh;
+    }
+
+    body .modal{max-width: 380px}
+
+    body .login_modal {width: 60%}
+
+    body .comment_video{display:flex;
+                    flex-direction:column;
+                    }
+
+    body .text_comment{width:100%}
+
+    body .comment_video iframe{max-width:270px}
+
 
     }

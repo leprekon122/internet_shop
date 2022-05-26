@@ -5,6 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 from .serializers import *
 from .models import *
 from .forms import *
+from django.db.models import Q
 
 from django.middleware.csrf import get_token
 
@@ -37,10 +38,14 @@ class Registration(generics.GenericAPIView,
         return render(request, "main/registration.html", data)
 
     def post(self, request):
-        form = RegistrationUser(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('main')
+        try:
+            form = RegistrationUser(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('main')
+        except Exception:
+            return redirect('registration')
+
 
 
 class DetailInfo(generics.GenericAPIView):
@@ -52,15 +57,31 @@ class DetailInfo(generics.GenericAPIView):
 class Nothebooks(generics.GenericAPIView):
     @staticmethod
     def get(request):
+
         model = NotebooksList.objects.all()
 
         search = request.GET.get('exampleRadios')
         detail = request.GET.get('stuff_detail')
+        prices = request.GET.get('price')
+
+        if prices:
+            try:
+                price_from = request.GET.get('price_from')
+                price_to = request.GET.get('price_to')
+                if price_from != '' and price_to != '':
+                    model = NotebooksList.objects.filter(price__gte=int(price_from), price__lte=int(price_to))
+                elif price_from == '':
+                    model = NotebooksList.objects.filter(price__lte=int(price_to))
+                else:
+                    model = NotebooksList.objects.filter(price__gte=int(price_from))
+
+            except Exception:
+                return redirect('note_main')
 
         if detail:
             model = NotebooksList.objects.filter(id=detail)
             model_1 = CommentsUsers.objects.filter(name_of_stuff=NotebooksList(detail)).values('name_of_user',
-                                                                                               'comment', 'date')
+                                                                                               'comment','link_video', 'date')
             model_2 = QuestionUsers.objects.filter(name_of_stuff=NotebooksList(detail)).values('name_of_user',
                                                                                                'comment', 'date')
             quentety = len(model_1)
@@ -79,20 +100,19 @@ class Nothebooks(generics.GenericAPIView):
             if search == "Apple":
                 model = NotebooksList.objects.filter(brand='Apple')
                 data = {'model': model}
-                return render(request, 'main/nothebook.html', data)
+                # return render(request, 'main/nothebook.html', data)
 
             elif search == "Acer":
                 model = NotebooksList.objects.filter(brand='Acer')
                 data = {'model': model}
-                return render(request, 'main/nothebook.html', data)
+                # return render(request, 'main/nothebook.html', data)
 
             elif search == "Asus":
                 model = NotebooksList.objects.filter(brand='Asus')
                 data = {'model': model}
-                return render(request, 'main/nothebook.html', data)
+                # return render(request, 'main/nothebook.html', data)
 
         username = request.user
-        videocard = 'videocard'
         data = {'model': model,
                 'username': username,
                 }
@@ -105,8 +125,9 @@ class Nothebooks(generics.GenericAPIView):
             username = request.user
             stuff_name = request.POST.get('add_comment')
             comment = request.POST.get('comment')
+            link_video = request.POST.get('link_video')
             CommentsUsers.objects.create(name_of_user=username, name_of_stuff=NotebooksList(stuff_name),
-                                         comment=comment)
+                                         comment=comment, link_video=link_video)
             model = NotebooksList.objects.filter(id=stuff_name)
             model_1 = CommentsUsers.objects.filter(name_of_stuff=NotebooksList(stuff_name)).values('name_of_user',
                                                                                                    'comment', 'date')
@@ -148,13 +169,30 @@ class Nothebooks(generics.GenericAPIView):
 class Videocard(generics.GenericAPIView):
     @staticmethod
     def get(request):
+        model = Videocards.objects.all()
+
         search = request.GET.get('exampleRadios')
         detail = request.GET.get('stuff_detail')
+        prices = request.GET.get('price')
+
+        if prices:
+            try:
+                price_from = request.GET.get('price_from')
+                price_to = request.GET.get('price_to')
+                if price_from != '' and price_to != '':
+                    model = Videocards.objects.filter(price__gte=int(price_from), price__lte=int(price_to))
+                elif price_from == '':
+                    model = Videocards.objects.filter(price__lte=int(price_to))
+                else:
+                    model = Videocards.objects.filter(price__gte=int(price_from))
+
+            except Exception:
+                return redirect('videocards')
 
         if detail:
             model = Videocards.objects.filter(id=detail)
             model_1 = CommentsUsersVideocard.objects.filter(name_of_stuff=Videocards(detail)).values('name_of_user',
-                                                                                                     'comment',
+                                                                                                     'comment', 'link_video',
                                                                                                      'date')
             model_2 = QuestionUsersVideocard.objects.filter(name_of_stuff=Videocards(detail)).values('name_of_user',
                                                                                                      'comment',
@@ -173,30 +211,25 @@ class Videocard(generics.GenericAPIView):
 
         if search == "AMD":
             model = Videocards.objects.filter(brand='AMD')
-            data = {'model': model}
-            return render(request, "main/videocards.html", data)
+
 
         elif search == "Gigabyte":
             model = Videocards.objects.filter(brand='Gigabyte')
-            data = {'model': model}
-            return render(request, "main/videocards.html", data)
+
 
         elif search == "Asus":
             model = Videocards.objects.filter(brand='Asus')
-            data = {'model': model}
-            return render(request, "main/videocards.html", data)
+
 
         elif search == "INNO3D":
             model = Videocards.objects.filter(brand='INNO3D')
-            data = {'model': model}
-            return render(request, "main/videocards.html", data)
+
 
         elif search == "MSI":
             model = Videocards.objects.filter(brand='MSI')
-            data = {'model': model}
-            return render(request, "main/videocards.html", data)
 
-        model = Videocards.objects.all()
+
+
         username = request.user
         data = {"model": model,
                 'username': username}
@@ -211,8 +244,9 @@ class Videocard(generics.GenericAPIView):
             username = request.user
             stuff_name = request.POST.get('add_comment')
             comment = request.POST.get('comment')
+            link_video = request.POST.get('link_video')
             CommentsUsersVideocard.objects.create(name_of_user=username, name_of_stuff=Videocards(stuff_name),
-                                                  comment=comment)
+                                                  comment=comment, link_video=link_video)
             model = Videocards.objects.filter(id=stuff_name)
             model_1 = CommentsUsersVideocard.objects.filter(name_of_stuff=Videocards(stuff_name)).values('name_of_user',
                                                                                                          'comment',
