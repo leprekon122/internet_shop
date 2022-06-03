@@ -813,6 +813,7 @@ body .main_page_carusel {margin-top: 5%;
     body .main_comodety {flex-direction:column}
 
     body .all_stuff{justify-content:center;
+                    width:100%;
                     }
 
     body .panel_button{width:100%;
