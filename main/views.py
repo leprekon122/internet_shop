@@ -1,13 +1,11 @@
 from django.shortcuts import render, redirect
 from rest_framework import generics, mixins, permissions
 from django.contrib.auth import authenticate, login
-from rest_framework.viewsets import ModelViewSet
 from .serializers import *
 from .models import *
 from .forms import *
-from django.db.models import Q
 
-from django.middleware.csrf import get_token
+from django.db.models import Max
 
 
 # Create your views here.
@@ -47,7 +45,6 @@ class Registration(generics.GenericAPIView,
             return redirect('registration')
 
 
-
 class DetailInfo(generics.GenericAPIView):
     @staticmethod
     def get(request):
@@ -79,11 +76,30 @@ class Nothebooks(generics.GenericAPIView):
                 return redirect('note_main')
 
         if detail:
+            model_rating = CommentsUsers.objects.filter(name_of_stuff=detail).values('rating')
+
+            avr_rating = 0
+            for el in model_rating:
+                res = el['rating']
+                if res is not None:
+                    avr_rating += int(res)
+                else:
+                    res = 0
+                    avr_rating += res
+
             model = NotebooksList.objects.filter(id=detail)
-            model_1 = CommentsUsers.objects.filter(name_of_stuff=NotebooksList(detail)).values('name_of_user',
-                                                                                               'comment','link_video', 'date')
+            model_1 = CommentsUsers.objects.filter(name_of_stuff=NotebooksList(detail)).values('rating', 'name_of_user',
+                                                                                               'comment', 'link_video',
+                                                                                               'date')
             model_2 = QuestionUsers.objects.filter(name_of_stuff=NotebooksList(detail)).values('name_of_user',
                                                                                                'comment', 'date')
+            try:
+                avr_rating_plural = avr_rating // len(model_rating)
+            except Exception:
+                avr_rating_plural = 0
+
+            quantity_of_comment = len(model_rating)
+
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
@@ -92,29 +108,29 @@ class Nothebooks(generics.GenericAPIView):
                     'model_2': model_2,
                     'username': username,
                     'quentety': quentety,
-                    'quentety_1': quentety_1
+                    'quentety_1': quentety_1,
+                    'avg_rating': avr_rating_plural,
+                    'quantity_of_comment': quantity_of_comment
                     }
             return render(request, 'main/stuff_detail.html', data)
 
         if search:
             if search == "Apple":
                 model = NotebooksList.objects.filter(brand='Apple')
-                data = {'model': model}
-                # return render(request, 'main/nothebook.html', data)
+
 
             elif search == "Acer":
                 model = NotebooksList.objects.filter(brand='Acer')
-                data = {'model': model}
-                # return render(request, 'main/nothebook.html', data)
+
 
             elif search == "Asus":
                 model = NotebooksList.objects.filter(brand='Asus')
-                data = {'model': model}
-                # return render(request, 'main/nothebook.html', data)
 
+        price_max = model.aggregate(Max('price'))
         username = request.user
         data = {'model': model,
                 'username': username,
+                'price_max': price_max['price__max']
                 }
         return render(request, 'main/nothebook.html', data)
 
@@ -123,13 +139,15 @@ class Nothebooks(generics.GenericAPIView):
         add_questions = request.POST.get('add_question')
         if add_comment:
             username = request.user
+            rating = request.POST.get('simple-rating')
             stuff_name = request.POST.get('add_comment')
             comment = request.POST.get('comment')
             link_video = request.POST.get('link_video')
-            CommentsUsers.objects.create(name_of_user=username, name_of_stuff=NotebooksList(stuff_name),
+            CommentsUsers.objects.create(rating=rating, name_of_user=username, name_of_stuff=NotebooksList(stuff_name),
                                          comment=comment, link_video=link_video)
             model = NotebooksList.objects.filter(id=stuff_name)
-            model_1 = CommentsUsers.objects.filter(name_of_stuff=NotebooksList(stuff_name)).values('name_of_user',
+            model_1 = CommentsUsers.objects.filter(name_of_stuff=NotebooksList(stuff_name)).values('rating',
+                                                                                                   'name_of_user',
                                                                                                    'comment', 'date')
 
             model_2 = QuestionUsers.objects.filter(name_of_stuff=NotebooksList(stuff_name)).values('name_of_user',
@@ -152,7 +170,8 @@ class Nothebooks(generics.GenericAPIView):
             QuestionUsers.objects.create(name_of_user=username, name_of_stuff=NotebooksList(stuff_name),
                                          comment=comment)
             model = NotebooksList.objects.filter(id=stuff_name)
-            model_1 = CommentsUsers.objects.filter(name_of_stuff=NotebooksList(stuff_name)).values('name_of_user',
+            model_1 = CommentsUsers.objects.filter(name_of_stuff=NotebooksList(stuff_name)).values('rating',
+                                                                                                   'name_of_user',
                                                                                                    'comment', 'date')
             model_2 = QuestionUsers.objects.filter(name_of_stuff=NotebooksList(stuff_name)).values('name_of_user',
                                                                                                    'comment', 'date')
@@ -190,13 +209,32 @@ class Videocard(generics.GenericAPIView):
                 return redirect('videocards')
 
         if detail:
+            model_rating = CommentsUsersVideocard.objects.filter(name_of_stuff=detail).values('rating')
+
+            avr_rating = 0
+            for el in model_rating:
+                res = el['rating']
+                if res is not None:
+                    avr_rating += int(res)
+                else:
+                    res = 0
+                    avr_rating += res
+
             model = Videocards.objects.filter(id=detail)
-            model_1 = CommentsUsersVideocard.objects.filter(name_of_stuff=Videocards(detail)).values('name_of_user',
-                                                                                                     'comment', 'link_video',
-                                                                                                     'date')
-            model_2 = QuestionUsersVideocard.objects.filter(name_of_stuff=Videocards(detail)).values('name_of_user',
+            model_1 = CommentsUsersVideocard.objects.filter(name_of_stuff=Videocards(detail)).values('rating',
+                                                                                                     'name_of_user',
                                                                                                      'comment',
+                                                                                                     'link_video',
                                                                                                      'date')
+
+            model_2 = QuestionUsersVideocard.objects.filter(name_of_stuff=Videocards(detail)).values('name_of_user',
+                                                                                                     'comment', 'date')
+            try:
+                avr_rating_plural = avr_rating // len(model_rating)
+            except Exception:
+                avr_rating_plural = 0
+            quantity_of_comment = len(model_rating)
+
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
@@ -205,34 +243,33 @@ class Videocard(generics.GenericAPIView):
                     'model_2': model_2,
                     'username': username,
                     'quentety': quentety,
-                    'quentety_1': quentety_1
+                    'quentety_1': quentety_1,
+                    'avg_rating': avr_rating_plural,
+                    'quantity_of_comment': quantity_of_comment
                     }
             return render(request, 'main/stuff_detail.html', data)
 
         if search == "AMD":
             model = Videocards.objects.filter(brand='AMD')
 
-
         elif search == "Gigabyte":
             model = Videocards.objects.filter(brand='Gigabyte')
-
 
         elif search == "Asus":
             model = Videocards.objects.filter(brand='Asus')
 
-
         elif search == "INNO3D":
             model = Videocards.objects.filter(brand='INNO3D')
-
 
         elif search == "MSI":
             model = Videocards.objects.filter(brand='MSI')
 
-
-
         username = request.user
+        price_max = model.aggregate(Max('price'))
+
         data = {"model": model,
-                'username': username}
+                'username': username,
+                'price_max': price_max['price__max']}
 
         return render(request, "main/videocards.html", data)
 
@@ -242,10 +279,12 @@ class Videocard(generics.GenericAPIView):
 
         if add_comment:
             username = request.user
+            rating = request.POST.get('simple-rating')
             stuff_name = request.POST.get('add_comment')
             comment = request.POST.get('comment')
             link_video = request.POST.get('link_video')
-            CommentsUsersVideocard.objects.create(name_of_user=username, name_of_stuff=Videocards(stuff_name),
+            CommentsUsersVideocard.objects.create(rating=rating, name_of_user=username,
+                                                  name_of_stuff=Videocards(stuff_name),
                                                   comment=comment, link_video=link_video)
             model = Videocards.objects.filter(id=stuff_name)
             model_1 = CommentsUsersVideocard.objects.filter(name_of_stuff=Videocards(stuff_name)).values('name_of_user',
@@ -277,6 +316,299 @@ class Videocard(generics.GenericAPIView):
                                                                                                          'date')
 
             model_2 = QuestionUsersVideocard.objects.filter(name_of_stuff=Videocards(stuff_name)).values(
+                'name_of_user',
+                'comment', 'date')
+
+            quentety = len(model_1)
+            quentety_1 = len(model_2)
+            data = {'model': model,
+                    'model_1': model_2,
+                    'username': username,
+                    'quentety': quentety,
+                    'quentety_1': quentety_1}
+            return render(request, 'main/stuff_detail.html', data)
+
+
+class Monitors(generics.GenericAPIView):
+
+    @staticmethod
+    def get(request):
+        search = request.GET.get('exampleRadios')
+        detail = request.GET.get('stuff_detail')
+        prices = request.GET.get('price')
+
+        model = Monitors_list.objects.all()
+
+        if prices:
+            try:
+                price_from = request.GET.get('price_from')
+                price_to = request.GET.get('price_to')
+                if price_from != '' and price_to != '':
+                    model = Monitors_list.objects.filter(price__gte=int(price_from), price__lte=int(price_to))
+                elif price_from == '':
+                    model = Monitors_list.objects.filter(price__lte=int(price_to))
+                else:
+                    model = Monitors_list.objects.filter(price__gte=int(price_from))
+
+            except Exception:
+                return redirect('displays')
+
+        if detail:
+            model_rating = CommentsUserMonitor.objects.filter(name_of_stuff=detail).values('rating')
+
+            avr_rating = 0
+            for el in model_rating:
+                res = el['rating']
+                if res is not None:
+                    avr_rating += int(res)
+                else:
+                    res = 0
+                    avr_rating += res
+
+            model = Monitors_list.objects.filter(id=detail)
+            model_1 = CommentsUserMonitor.objects.filter(name_of_stuff=Monitors_list(detail)).values('rating',
+                                                                                                     'name_of_user',
+                                                                                                     'comment',
+                                                                                                     'link_video',
+                                                                                                     'date')
+            model_2 = QuestionUsersMonitor.objects.filter(name_of_stuff=Monitors_list(detail)).values('name_of_user',
+                                                                                                      'comment', 'date')
+
+            try:
+                avr_rating_plural = avr_rating // len(model_rating)
+            except Exception:
+                avr_rating_plural = 0
+            quantity_of_comment = len(model_rating)
+
+            quentety = len(model_1)
+            quentety_1 = len(model_2)
+            username = request.user
+            data = {'model': model,
+                    'model_1': model_1,
+                    'model_2': model_2,
+                    'username': username,
+                    'quentety': quentety,
+                    'quentety_1': quentety_1,
+                    'avg_rating': avr_rating_plural,
+                    'quantity_of_comment': quantity_of_comment
+                    }
+            return render(request, 'main/stuff_detail.html', data)
+
+        if search == "Asus":
+            model = Monitors_list.objects.filter(brand='Asus')
+
+        elif search == "Acer":
+            model = Monitors_list.objects.filter(brand='Acer')
+
+        elif search == "BenQ":
+            model = Monitors_list.objects.filter(brand='BenQ')
+
+        elif search == "Dell":
+            model = Monitors_list.objects.filter(brand='Dell')
+
+        elif search == "LG":
+            model = Monitors_list.objects.filter(brand='LG')
+
+        price_max = model.aggregate(Max('price'))
+        username = request.user
+        data = {'username': username,
+                'model': model,
+                'price_max': price_max['price__max']
+                }
+        return render(request, 'main/displays.html', data)
+
+    def post(self, request):
+        add_comment = request.POST.get('add_comment')
+        add_question = request.POST.get('add_question')
+
+        if add_comment:
+            username = request.user
+            rating = request.POST.get('simple-rating')
+            stuff_name = request.POST.get('add_comment')
+            comment = request.POST.get('comment')
+            link_video = request.POST.get('link_video')
+            CommentsUserMonitor.objects.create(rating=rating, name_of_user=username,
+                                               name_of_stuff=Monitors_list(stuff_name),
+                                               comment=comment, link_video=link_video)
+            model = Monitors_list.objects.filter(id=stuff_name)
+            model_1 = CommentsUserMonitor.objects.filter(name_of_stuff=Monitors_list(stuff_name)).values('rating',
+                                                                                                         'name_of_user',
+                                                                                                         'comment',
+                                                                                                         'date')
+            model_2 = QuestionUsersMonitor.objects.filter(name_of_stuff=Monitors_list(stuff_name)).values(
+                'name_of_user',
+                'comment', 'date')
+
+            quentety = len(model_1)
+            quentety_1 = len(model_2)
+            data = {'model': model,
+                    'model_1': model_1,
+                    'username': username,
+                    'quentety': quentety,
+                    'quentety_1': quentety_1,
+
+                    }
+            return render(request, 'main/stuff_detail.html', data)
+
+        if add_question:
+            username = request.user
+            stuff_name = request.POST.get('add_question')
+            comment = request.POST.get('question')
+            QuestionUsersMonitor.objects.create(name_of_user=username, name_of_stuff=Monitors_list(stuff_name),
+                                                comment=comment)
+            model = Monitors_list.objects.filter(id=stuff_name)
+            model_1 = CommentsUserMonitor.objects.filter(name_of_stuff=Monitors_list(stuff_name)).values('name_of_user',
+                                                                                                         'comment',
+                                                                                                         'date')
+
+            model_2 = QuestionUsersMonitor.objects.filter(name_of_stuff=Monitors_list(stuff_name)).values(
+                'name_of_user',
+                'comment', 'date')
+
+            quentety = len(model_1)
+            quentety_1 = len(model_2)
+            data = {'model': model,
+                    'model_1': model_2,
+                    'username': username,
+                    'quentety': quentety,
+                    'quentety_1': quentety_1}
+            return render(request, 'main/stuff_detail.html', data)
+
+
+class Memory(generics.GenericAPIView):
+
+    @staticmethod
+    def get(request):
+        search = request.GET.get('exampleRadios')
+        detail = request.GET.get('stuff_detail')
+        prices = request.GET.get('price')
+
+        model = Memory_list.objects.all()
+
+        if prices:
+            try:
+                price_from = request.GET.get('price_from')
+                price_to = request.GET.get('price_to')
+                if price_from != '' and price_to != '':
+                    model = Memory_list.objects.filter(price__gte=int(price_from), price__lte=int(price_to))
+                elif price_from == '':
+                    model = Memory_list.objects.filter(price__lte=int(price_to))
+                else:
+                    model = Memory_list.objects.filter(price__gte=int(price_from))
+
+            except Exception:
+                return redirect('memory')
+
+        if detail:
+            model_rating = CommentsUserMemory.objects.filter(name_of_stuff=detail).values('rating')
+
+            avr_rating = 0
+            for el in model_rating:
+                res = el['rating']
+                if res is not None:
+                    avr_rating += int(res)
+                else:
+                    res = 0
+                    avr_rating += res
+
+            model = Memory_list.objects.filter(id=detail)
+            model_1 = CommentsUserMemory.objects.filter(name_of_stuff=Memory_list(detail)).values('rating',
+                                                                                                  'name_of_user',
+                                                                                                  'comment',
+                                                                                                  'link_video',
+                                                                                                  'date')
+            model_2 = QuestionUsersMemory.objects.filter(name_of_stuff=Memory_list(detail)).values('name_of_user',
+                                                                                                   'comment', 'date')
+
+            try:
+                avr_rating_plural = avr_rating // len(model_rating)
+            except Exception:
+                avr_rating_plural = 0
+            quantity_of_comment = len(model_rating)
+
+            quentety = len(model_1)
+            quentety_1 = len(model_2)
+            username = request.user
+            data = {'model': model,
+                    'model_1': model_1,
+                    'model_2': model_2,
+                    'username': username,
+                    'quentety': quentety,
+                    'quentety_1': quentety_1,
+                    'avg_rating': avr_rating_plural,
+                    'quantity_of_comment': quantity_of_comment
+                    }
+            return render(request, 'main/stuff_detail.html', data)
+
+        if search == "AMD":
+            model = Memory_list.objects.filter(brand='AMD')
+
+        elif search == "Crucial":
+            model = Memory_list.objects.filter(brand='Crucial')
+
+        elif search == "HyperX":
+            model = Memory_list.objects.filter(brand='HyperX')
+
+        elif search == "Kingston":
+            model = Memory_list.objects.filter(brand='Kingston')
+
+        elif search == "Samsung":
+            model = Memory_list.objects.filter(brand='Samsung')
+
+        price_max = model.aggregate(Max('price'))
+        username = request.user
+        data = {'username': username,
+                'model': model,
+                'price_max': price_max['price__max']
+                }
+
+        return render(request, 'main/memory.html', data)
+
+    def post(self, request):
+        add_comment = request.POST.get('add_comment')
+        add_question = request.POST.get('add_question')
+
+        if add_comment:
+            username = request.user
+            rating = request.POST.get('simple-rating')
+            stuff_name = request.POST.get('add_comment')
+            comment = request.POST.get('comment')
+            link_video = request.POST.get('link_video')
+            CommentsUserMemory.objects.create(rating=rating, name_of_user=username,
+                                              name_of_stuff=Memory_list(stuff_name),
+                                              comment=comment, link_video=link_video)
+            model = Memory_list.objects.filter(id=stuff_name)
+            model_1 = CommentsUserMemory.objects.filter(name_of_stuff=Memory_list(stuff_name)).values('rating',
+                                                                                                      'name_of_user',
+                                                                                                      'comment',
+                                                                                                      'date')
+            model_2 = QuestionUsersMemory.objects.filter(name_of_stuff=Memory_list(stuff_name)).values(
+                'name_of_user',
+                'comment', 'date')
+
+            quentety = len(model_1)
+            quentety_1 = len(model_2)
+            data = {'model': model,
+                    'model_1': model_1,
+                    'username': username,
+                    'quentety': quentety,
+                    'quentety_1': quentety_1,
+
+                    }
+            return render(request, 'main/stuff_detail.html', data)
+
+        if add_question:
+            username = request.user
+            stuff_name = request.POST.get('add_question')
+            comment = request.POST.get('question')
+            QuestionUsersMemory.objects.create(name_of_user=username, name_of_stuff=Memory_list(stuff_name),
+                                               comment=comment)
+            model = Memory_list.objects.filter(id=stuff_name)
+            model_1 = CommentsUserMemory.objects.filter(name_of_stuff=Memory_list(stuff_name)).values('name_of_user',
+                                                                                                      'comment',
+                                                                                                      'date')
+
+            model_2 = QuestionUsersMonitor.objects.filter(name_of_stuff=Memory_list(stuff_name)).values(
                 'name_of_user',
                 'comment', 'date')
 

@@ -15,6 +15,8 @@ urlpatterns = [
     path('notebook_api/', views.NothebookApi.as_view()),
     path('notebook_api/<int:pk>', views.NothebookApiDeleteOrupdate.as_view()),
     path('videocards/', views.Videocard.as_view(), name="videocards"),
+    path('displays/', views.Monitors.as_view(), name="displays"),
+    path('memory/', views.Memory.as_view(), name="memory"),
     path('accounts/', include('allauth.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

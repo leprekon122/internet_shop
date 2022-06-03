@@ -8,6 +8,51 @@
         {%for el in model%}
         <div class="container detail_title">
             <h4>{{el.title}}</h4>
+            <div class="title_rating">
+                {%if avg_rating == 0%}
+                <span class="comment_rating">★</span>
+                <span class="comment_rating">★</span>
+                <span class="comment_rating">★</span>
+                <span class="comment_rating">★</span>
+                <span class="comment_rating">★</span>
+                <span class="comment_rating_quantity">({{quantity_of_comment}})</span>
+                {%elif avg_rating == 1 %}
+                <span class="comment_rating_1">★</span>
+                <span class="comment_rating_1">★</span>
+                <span class="comment_rating_1">★</span>
+                <span class="comment_rating_1">★</span>
+                <span class="comment_rating_1">★</span>
+                <span>({{quantity_of_comment}})</span>
+                {%elif avg_rating == 2 %}
+                <span class="comment_rating_2">★</span>
+                <span class="comment_rating_2">★</span>
+                <span class="comment_rating_2">★</span>
+                <span class="comment_rating_2">★</span>
+                <span class="comment_rating_2">★</span>
+                <span>({{quantity_of_comment}})</span>
+                {%elif avg_rating == 3 %}
+                <span class="comment_rating_3">★</span>
+                <span class="comment_rating_3">★</span>
+                <span class="comment_rating_3">★</span>
+                <span class="comment_rating_3">★</span>
+                <span class="comment_rating_3">★</span>
+                <span>({{quantity_of_comment}})</span>
+                {%elif avg_rating == 4 %}
+                <span class="comment_rating_4">★</span>
+                <span class="comment_rating_4">★</span>
+                <span class="comment_rating_4">★</span>
+                <span class="comment_rating_4">★</span>
+                <span class="comment_rating_4">★</span>
+                <span>({{quantity_of_comment}})</span>
+                {%elif avg_rating == 5 %}
+                <span class="comment_rating_5">★</span>
+                <span class="comment_rating_5">★</span>
+                <span class="comment_rating_5">★</span>
+                <span class="comment_rating_5">★</span>
+                <span class="comment_rating_5">★</span>
+                <p>({{quantity_of_comment}})</p>
+                {%endif%}
+            </div>
         </div>
         <div class="container detail_panel">
             <div class="detail_panel_a">
@@ -31,7 +76,7 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
             </div>
-            <!--<img src="/media/{{el.pic}}" width="600px" height="400px" id="detail_pic"> -->
+            <!-- <img src="/media/{{el.pic}}" width="600px" height="400px" id="detail_pic"> -->
             <img loading="lazy" src="{{el.pic_link}}" width="600px" height="400px" id="detail_pic">
             <br>
             <div class="container detail_price">
@@ -47,6 +92,25 @@
                     <div class="add_detail_comment">
                         <form method="post">
                             {%csrf_token%}
+                            <div class="simple-rating">
+                                <div class="simple-rating__items">
+                                    <input id="simple-rating_5" class="simple-rating__item" name="simple-rating"
+                                           type="radio" value="5">
+                                    <label for="simple-rating_5" class="simple-rating__label"></label>
+                                    <input id="simple-rating_4" class="simple-rating__item" name="simple-rating"
+                                           type="radio" value="4">
+                                    <label for="simple-rating_4" class="simple-rating__label"></label>
+                                    <input id="simple-rating_3" class="simple-rating__item" name="simple-rating"
+                                           type="radio" value="3">
+                                    <label for="simple-rating_3" class="simple-rating__label"></label>
+                                    <input id="simple-rating_2" class="simple-rating__item" name="simple-rating"
+                                           type="radio" value="2">
+                                    <label for="simple-rating_2" class="simple-rating__label"></label>
+                                    <input id="simple-rating_1" class="simple-rating__item" name="simple-rating"
+                                           type="radio" value="1">
+                                    <label for="simple-rating_1" class="simple-rating__label"></label>
+                                </div>
+                            </div>
                             <textarea class="form-control" rows="2" placeholder="коментар" name="comment"></textarea>
                             <br>
                             <textarea class="form-control" rows="1" placeholder="посилання на ютуб"
@@ -61,6 +125,43 @@
                     <br>
                     {%for elem in model_1%}
                     <div class="detail_comments">
+                        {%if elem.rating == None%}
+                        <span class="comment_rating">★</span>
+                        <span class="comment_rating">★</span>
+                        <span class="comment_rating">★</span>
+                        <span class="comment_rating">★</span>
+                        <span class="comment_rating">★</span>
+                        {%elif elem.rating == '1' %}
+                        <span class="comment_rating_1">★</span>
+                        <span class="comment_rating_1">★</span>
+                        <span class="comment_rating_1">★</span>
+                        <span class="comment_rating_1">★</span>
+                        <span class="comment_rating_1">★</span>
+                        {%elif elem.rating == '2' %}
+                        <span class="comment_rating_2">★</span>
+                        <span class="comment_rating_2">★</span>
+                        <span class="comment_rating_2">★</span>
+                        <span class="comment_rating_2">★</span>
+                        <span class="comment_rating_2">★</span>
+                        {%elif elem.rating == '3' %}
+                        <span class="comment_rating_3">★</span>
+                        <span class="comment_rating_3">★</span>
+                        <span class="comment_rating_3">★</span>
+                        <span class="comment_rating_3">★</span>
+                        <span class="comment_rating_3">★</span>
+                        {%elif elem.rating == '4' %}
+                        <span class="comment_rating_4">★</span>
+                        <span class="comment_rating_4">★</span>
+                        <span class="comment_rating_4">★</span>
+                        <span class="comment_rating_4">★</span>
+                        <span class="comment_rating_4">★</span>
+                        {%elif elem.rating == '5' %}
+                        <span class="comment_rating_5">★</span>
+                        <span class="comment_rating_5">★</span>
+                        <span class="comment_rating_5">★</span>
+                        <span class="comment_rating_5">★</span>
+                        <span class="comment_rating_5">★</span>
+                        {%endif%}
                         <div class="detail_comments_header">
                             <p class="detail_comment_name">{{elem.name_of_user}}</p>
                             <p class="detail_comment_date">{{elem.date}}</p>
@@ -88,7 +189,7 @@
                     <div class="add_detail_comment">
                         <form method="post">
                             {%csrf_token%}
-                            <textarea class="form-control" rows="3" placeholder="question" name="question"></textarea>
+                            <textarea class="form-control" rows="3" placeholder="Задайте питнання" name="question"></textarea>
                             <br>
                             <button class="btn btn-dark" id="add_questions" name="add_question" value="{{el.id}}"
                                     onclick="return add_comm()">Додати

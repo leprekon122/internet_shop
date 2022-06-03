@@ -1,5 +1,5 @@
 {% extends 'main/layout.html'%}
-
+{% load socialaccount %}
 
 {%block title%}Main page{%endblock%}
 
@@ -21,20 +21,26 @@
                             <input class="form-control" type="text" name="username">
                             <br>
                             <input class="form-control" type="password" name="password">
-                        </div>
-                        <div class="oauth">
-                            <button class="btn btn-light">google</button>
-                        </div>
-                    </div>
+                            <div class="modal-footer bg-dark">
+                                <button type="submit" class="btn btn-success" name="login" value="login">Login</button>
 
-                    <div class="modal-footer bg-dark">
-                        <button type="submit" class="btn btn-success" name="login" value="login">Login</button>
-                        <a href="{% url 'registration'%}">зареєструватися</a>
-                    </div>
+                                <a href="{% url 'registration'%}">зареєструватися</a>
+                            </div>
+                        </div>
                 </form>
+                <div class="oauth">
+                    <form method="post" action="{% provider_login_url 'google' %}">
+                        {%csrf_token%}
+                        <button class="btn btn-light" type="submit"><img
+                                src="https://cdn-icons-png.flaticon.com/512/281/281764.png" width="25px"
+                                height="25px"> google
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <div class="container-fluid main_page_carusel">

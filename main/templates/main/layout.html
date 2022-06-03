@@ -63,7 +63,7 @@
                         </button>
                     </form>
                 </div>
-                <h5>Hello there: <span id="user">{{username}}</span></h5>
+                <h5 class="username">Hello there: <span id="user">{{username}}</span></h5>
             </div>
         </div>
     </div>
@@ -92,8 +92,8 @@
                 <div class="computers">
                     <a href="{%url 'note_main' %}">Ноутбуки</a>
                     <a href="{% url 'videocards'%}">Відеокарти</a>
-                    <a href="">Монітори</a>
-                    <a href="">Пам'ять</a>
+                    <a href="{% url 'displays' %}">Монітори</a>
+                    <a href="{% url 'memory' %}">Пам'ять</a>
                     <a href="">Накопичувачі</a>
                     <a href="">Материнські плати</a>
                 </div>

@@ -1,14 +1,14 @@
 {%extends 'main/layout.html'%}
 
 
-{%block title%}Відеокарти{%endblock%}
+{%block title%}Пам'ять{%endblock%}
 
 {%block content%}
-<div class="container-fluid">
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
     <button class="btn btn-danger panel_button" onclick="manage_panel()">фільтри</button>
     <div class="main_comodety">
         <div class="manage_panel" id="main_panels">
-            <div class="alphabet_search" id="main_panel">
+            <div class="alphabet_search">
                 <h5>Пошук по бренду</h5>
                 <form method="get">
                     <button class="btn btn-success" type="submit">search</button>
@@ -20,23 +20,23 @@
                     </div>
                     <div>
                         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                               value="Gigabyte" checked>
-                        <label class="form-check-label" for="exampleRadios1">Gigabyte</label>
+                               value="Crucial" checked>
+                        <label class="form-check-label" for="exampleRadios1">Crucial</label>
                     </div>
                     <div>
                         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
-                               value="Asus" checked>
-                        <label class="form-check-label" for="exampleRadios1">Asus</label>
+                               value="HyperX" checked>
+                        <label class="form-check-label" for="exampleRadios1">HyperX</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4"
+                               value="Kingston" checked>
+                        <label class="form-check-label" for="exampleRadios1">Kingston</label>
                     </div>
                     <div>
                         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5"
-                               value="INNO3D" checked>
-                        <label class="form-check-label" for="exampleRadios1">INNO3D</label>
-                    </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6"
-                               value="MSI" checked>
-                        <label class="form-check-label" for="exampleRadios1">MSI</label>
+                               value="Samsung" checked>
+                        <label class="form-check-label" for="exampleRadios1">Samsung</label>
                     </div>
                 </form>
             </div>
@@ -51,12 +51,13 @@
                     </div>
                     <br>
                     <div class="sliders">
-                        <input type="range" class="slider" min="0" max="{{price_max}}" step="100" value="3000"
+                        <input type="range" class="slider" min="0" max="{{price_max}}" step="100" value="1000"
                                id="price_slider"
                                oninput="price_sliders()">
                         <input type="range" class="slider" min="0" max="{{price_max}}" step="100" value="{{price_max}}"
                                id="price_slider_2" oninput="price_sliders()">
                     </div>
+                    <br>
                     <br>
                     <button class="btn btn-success" type="submit" name="price" value="price">пошук</button>
                 </form>
@@ -67,19 +68,19 @@
         </div>
 
 
-        <div class="all_stuff">
+        <div class="all_stuff" id="all_st">
             {%for el in model%}
             <form method="get">
                 {%csrf_token%}
                 <button class="btn btn-dark bg-success" name="stuff_detail" value="{{el.id}}">
                     <div class="alert alert-light note">
-                        <!-- <img src="/media/{{el.pic}}" width="180px" height="140px"> -->
+                        <!--<img src="/media/{{el.pic}}" width="180px" height="140px"> -->
                         <img loading="lazy" src="{{el.pic_link}}" width="180px" height="140px">
                         <br>
                         <div class="title">
                             <p>{{el.title}}</p>
                         </div>
-                        <br>
+
                         <div class="price_and_bag">
                             <h5>{{el.price}} UAH</h5>
                             <i class="fa-solid fa-cart-shopping"></i>
@@ -90,7 +91,7 @@
                         {%else%}
                         <p class="text-unsuccess">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
                         {%endif%}
-                        <p class="description" id="des">{{el.description}}</p>
+                        <p class="description " id="des">{{el.description}}</p>
                     </div>
                 </button>
             </form>
@@ -98,5 +99,6 @@
         </div>
     </div>
 </div>
+<script src="/static/main/js/notebook.js"></script>
 
 {%endblock%}

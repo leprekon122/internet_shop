@@ -105,7 +105,11 @@ function active_panel(){
     count_panel += 1
     if(count_panel % 2 == 1){
         document.getElementById('main_panels').style.transform = 'translateX(0%)'
-        document.getElementById('main_panels').style.width = '25%'
+        if(window.screen.width > 1200){
+            document.getElementById('main_panels').style.width = '25%'
+          } else {
+            document.getElementById('main_panels').style.width = '35%'
+          }
 
     } else {
         document.getElementById('main_panels').style.transform = 'translateX(-103%)'
