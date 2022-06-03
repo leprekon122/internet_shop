@@ -83,7 +83,7 @@ function reg() {
 
 //change buttons login/logout//
 function users_btn(){
-    if(document.URL != 'https://my-petshop.herokuapp.com/'){
+    if(document.URL != 'https://my-petshop.herokuapp.com'){
         document.getElementById('login').style.display = 'none'
         var name = document.getElementById('user').innerHTML
         if(name != 'AnonymousUser'){
