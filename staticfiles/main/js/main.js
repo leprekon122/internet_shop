@@ -120,6 +120,20 @@ function active_panel(){
 }
 
 
+window.onload = (function just_test(){
+    var total_sum = 0
+    var item = document.getElementsByClassName('cart_price')
+    document.getElementById('value_cart').innerHTML = item.length
+    for(var i = 0; i <= item.length; i++){
+        var res = item[i].innerText
+        total_sum += Number(res)
+        document.getElementById('sum').innerHTML = total_sum
+        }
+
+})
+
+
+
 //active menu on phone///
 function manage_panel(){
     count_panel += 1
@@ -129,6 +143,10 @@ function manage_panel(){
             document.getElementById('main_panels').style.transform='translateX(-110%)'
         }
     }
+
+function cart_buy(){
+
+}
 
 // slider for price filter//
 function price_sliders(){
@@ -141,4 +159,5 @@ function price_sliders(){
 
 }
 price_sliders()
+
 

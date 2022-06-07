@@ -7,7 +7,7 @@
     <div class="container detail_all">
         {%for el in model%}
         <div class="container detail_title">
-            <h4>{{el.title}}</h4>
+            <h4 id="detail_title">{{el.title}}</h4>
             <div class="title_rating">
                 {%if avg_rating == 0%}
                 <span class="comment_rating">★</span>
@@ -76,16 +76,22 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
             </div>
-            <!-- <img src="/media/{{el.pic}}" width="600px" height="400px" id="detail_pic"> -->
-            <img loading="lazy" src="{{el.pic_link}}" width="600px" height="400px" id="detail_pic">
+            <img src="/media/{{el.pic}}" width="600px" height="400px" id="detail_pic">
+            <!-- <img loading="lazy" src="{{el.pic_link}}" width="600px" height="400px" id="detail_pic"> -->
             <br>
             <div class="container detail_price">
                 <div class="detail_price_elem text-light">
                     <h4>{{el.price}} UAH</h4>
-                    <div class="detail_button">
-                        <button class="btn btn-success">Купити</button>
-                        <button class="btn btn-dark">Купити в кредит</button>
-                    </div>
+                    <form method="post">{%csrf_token%}
+                        <div class="detail_button">
+                            <button class="btn btn-success" type="submit" name="buy" value="{{el.id}}"
+                                    onclick="cart_buy()" id="cart_buy_item">
+                                Купити
+                            </button>
+                            <button class="btn btn-success" id="cart_sold">Товар у кошеку</button>
+                            <button class="btn btn-dark">Купити в кредит</button>
+                        </div>
+                    </form>
                 </div>
                 <br>
                 <div class="container detail_all_comments" id="detail_comment">
@@ -189,7 +195,8 @@
                     <div class="add_detail_comment">
                         <form method="post">
                             {%csrf_token%}
-                            <textarea class="form-control" rows="3" placeholder="Задайте питнання" name="question"></textarea>
+                            <textarea class="form-control" rows="3" placeholder="Задайте питнання"
+                                      name="question"></textarea>
                             <br>
                             <button class="btn btn-dark" id="add_questions" name="add_question" value="{{el.id}}"
                                     onclick="return add_comm()">Додати
@@ -217,8 +224,6 @@
             <br>
         </div>
         {%endfor%}
-
-
     </div>
 
     <script src="/static/main/js/stuff_detail.js">

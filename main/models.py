@@ -253,3 +253,21 @@ class QuestionUsersMemory(models.Model):
     class Meta:
         verbose_name = 'QuestionUsersMemory'
         verbose_name_plural = "QuestionUsersMemory"
+
+
+class ProductCart(models.Model):
+    in_out_list = (('Є в наявності', 'Є в наявності'),
+                   ('Немає в наявності', 'Немає в наявності'))
+
+    user_name = models.ForeignKey(User, on_delete=models.CASCADE)
+    product_title = models.CharField(max_length=255)
+    product_pic = models.TextField()
+    product_price = models.IntegerField()
+    product_status = models.CharField(max_length=255, choices=in_out_list)
+
+    def __str__(self):
+        return f"{self.user_name} {self.product_title} {self.product_pic} {self.product_price} {self.product_status}"
+
+    class Meta:
+        verbose_name = 'ProductCart'
+        verbose_name_plural = 'ProductsCart'

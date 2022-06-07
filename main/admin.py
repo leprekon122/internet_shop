@@ -13,4 +13,4 @@ admin.site.register(CommentsUsersVideocard)
 admin.site.register(QuestionUsersVideocard)
 admin.site.register(QuestionUsersMonitor)
 admin.site.register(QuestionUsersMemory)
-
+admin.site.register(ProductCart)

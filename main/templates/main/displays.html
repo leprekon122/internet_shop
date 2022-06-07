@@ -5,7 +5,9 @@
 
 {%block content%}
 <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
-    <button class="btn btn-danger panel_button" onclick="manage_panel()">фільтри</button>
+    <button class="btn btn-success panel_button" onclick="manage_panel()"><i class="fa-solid fa-layer-group"></i>
+        фільтри
+    </button>
     <div class="main_comodety">
         <div class="manage_panel" id="main_panels">
             <div class="alphabet_search">
@@ -74,8 +76,8 @@
                 {%csrf_token%}
                 <button class="btn btn-dark bg-success" name="stuff_detail" value="{{el.id}}">
                     <div class="alert alert-light note">
-                        <!--<img src="/media/{{el.pic}}" width="180px" height="140px">-->
-                        <img loading="lazy" src="{{el.pic_link}}" width="180px" height="140px">
+                        <img src="/media/{{el.pic}}" width="180px" height="140px">
+                        <!-- <img loading="lazy" src="{{el.pic_link}}" width="180px" height="140px"> -->
                         <br>
                         <div class="title">
                             <p>{{el.title}}</p>

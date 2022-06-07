@@ -13,6 +13,7 @@ class MainPage(generics.GenericAPIView):
     @staticmethod
     def get(request):
         if request.GET.get('login'):
+            print('hello')
             username = request.GET.get('username')
             password = request.GET.get('password')
 
@@ -22,8 +23,17 @@ class MainPage(generics.GenericAPIView):
                 login(request, user)
                 return redirect('main')
         username = request.user
-        data = {'username': username}
+        model_cart = ProductCart.objects.all()
+        data = {'username': username,
+                'model_cart': model_cart}
         return render(request, 'main/main_page.html', data)
+
+    def post(self, request):
+        delete_btn = request.POST.get('delete_btn')
+
+        if delete_btn:
+            ProductCart.objects.filter(id=delete_btn).delete()
+            return redirect('main')
 
 
 class Registration(generics.GenericAPIView,
@@ -56,6 +66,7 @@ class Nothebooks(generics.GenericAPIView):
     def get(request):
 
         model = NotebooksList.objects.all()
+        model_cart = ProductCart.objects.all()
 
         search = request.GET.get('exampleRadios')
         detail = request.GET.get('stuff_detail')
@@ -77,6 +88,7 @@ class Nothebooks(generics.GenericAPIView):
 
         if detail:
             model_rating = CommentsUsers.objects.filter(name_of_stuff=detail).values('rating')
+            model_cart = ProductCart.objects.all()
 
             avr_rating = 0
             for el in model_rating:
@@ -110,7 +122,8 @@ class Nothebooks(generics.GenericAPIView):
                     'quentety': quentety,
                     'quentety_1': quentety_1,
                     'avg_rating': avr_rating_plural,
-                    'quantity_of_comment': quantity_of_comment
+                    'quantity_of_comment': quantity_of_comment,
+                    'model_cart': model_cart
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -130,13 +143,34 @@ class Nothebooks(generics.GenericAPIView):
         username = request.user
         data = {'model': model,
                 'username': username,
-                'price_max': price_max['price__max']
+                'price_max': price_max['price__max'],
+                'model_cart': model_cart
                 }
         return render(request, 'main/nothebook.html', data)
 
     def post(self, request):
         add_comment = request.POST.get('add_comment')
         add_questions = request.POST.get('add_question')
+        buy = request.POST.get('buy')
+        delete_btn = request.POST.get('delete_btn')
+
+        if delete_btn:
+            ProductCart.objects.filter(id=delete_btn).delete()
+            return redirect('note_main')
+
+        if buy:
+            test = NotebooksList.objects.filter(id=buy).values()[0]
+            username = request.user
+            title = test['title']
+            product_pic = test['pic_link']
+            product_price = test['price']
+            product_status = test['in_out']
+
+            ProductCart.objects.create(user_name=username, product_title=title, product_pic=product_pic,
+                                       product_price=product_price, product_status=product_status)
+
+            return redirect('note_main')
+
         if add_comment:
             username = request.user
             rating = request.POST.get('simple-rating')
@@ -189,6 +223,7 @@ class Videocard(generics.GenericAPIView):
     @staticmethod
     def get(request):
         model = Videocards.objects.all()
+        model_cart = ProductCart.objects.all()
 
         search = request.GET.get('exampleRadios')
         detail = request.GET.get('stuff_detail')
@@ -245,7 +280,8 @@ class Videocard(generics.GenericAPIView):
                     'quentety': quentety,
                     'quentety_1': quentety_1,
                     'avg_rating': avr_rating_plural,
-                    'quantity_of_comment': quantity_of_comment
+                    'quantity_of_comment': quantity_of_comment,
+                    'model_cart': model_cart
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -269,13 +305,34 @@ class Videocard(generics.GenericAPIView):
 
         data = {"model": model,
                 'username': username,
-                'price_max': price_max['price__max']}
+                'price_max': price_max['price__max'],
+                'model_cart': model_cart
+                }
 
         return render(request, "main/videocards.html", data)
 
     def post(self, request):
         add_comment = request.POST.get('add_comment')
         add_question = request.POST.get('add_question')
+        buy = request.POST.get('buy')
+        delete_btn = request.POST.get('delete_btn')
+
+        if delete_btn:
+            ProductCart.objects.filter(id=delete_btn).delete()
+            return redirect('videocards')
+
+        if buy:
+            test = Videocards.objects.filter(id=buy).values()[0]
+            username = request.user
+            title = test['title']
+            product_pic = test['pic_link']
+            product_price = test['price']
+            product_status = test['in_out']
+
+            ProductCart.objects.create(user_name=username, product_title=title, product_pic=product_pic,
+                                       product_price=product_price, product_status=product_status)
+
+            return redirect('videocards')
 
         if add_comment:
             username = request.user
@@ -338,6 +395,7 @@ class Monitors(generics.GenericAPIView):
         prices = request.GET.get('price')
 
         model = Monitors_list.objects.all()
+        model_cart = ProductCart.objects.all()
 
         if prices:
             try:
@@ -390,7 +448,8 @@ class Monitors(generics.GenericAPIView):
                     'quentety': quentety,
                     'quentety_1': quentety_1,
                     'avg_rating': avr_rating_plural,
-                    'quantity_of_comment': quantity_of_comment
+                    'quantity_of_comment': quantity_of_comment,
+                    'model_cart': model_cart
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -413,13 +472,33 @@ class Monitors(generics.GenericAPIView):
         username = request.user
         data = {'username': username,
                 'model': model,
-                'price_max': price_max['price__max']
+                'price_max': price_max['price__max'],
+                'model_cart': model_cart
                 }
         return render(request, 'main/displays.html', data)
 
     def post(self, request):
         add_comment = request.POST.get('add_comment')
         add_question = request.POST.get('add_question')
+        buy = request.POST.get('buy')
+        delete_btn = request.POST.get('delete_btn')
+
+        if delete_btn:
+            ProductCart.objects.filter(id=delete_btn).delete()
+            return redirect('displays')
+
+        if buy:
+            test = Monitors_list.objects.filter(id=buy).values()[0]
+            username = request.user
+            title = test['title']
+            product_pic = test['pic_link']
+            product_price = test['price']
+            product_status = test['in_out']
+
+            ProductCart.objects.create(user_name=username, product_title=title, product_pic=product_pic,
+                                       product_price=product_price, product_status=product_status)
+
+            return redirect('displays')
 
         if add_comment:
             username = request.user
@@ -484,6 +563,7 @@ class Memory(generics.GenericAPIView):
         prices = request.GET.get('price')
 
         model = Memory_list.objects.all()
+        model_cart = ProductCart.objects.all()
 
         if prices:
             try:
@@ -536,7 +616,8 @@ class Memory(generics.GenericAPIView):
                     'quentety': quentety,
                     'quentety_1': quentety_1,
                     'avg_rating': avr_rating_plural,
-                    'quantity_of_comment': quantity_of_comment
+                    'quantity_of_comment': quantity_of_comment,
+                    'model_cart': model_cart
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -559,7 +640,8 @@ class Memory(generics.GenericAPIView):
         username = request.user
         data = {'username': username,
                 'model': model,
-                'price_max': price_max['price__max']
+                'price_max': price_max['price__max'],
+                'model_cart': model_cart
                 }
 
         return render(request, 'main/memory.html', data)
@@ -567,6 +649,25 @@ class Memory(generics.GenericAPIView):
     def post(self, request):
         add_comment = request.POST.get('add_comment')
         add_question = request.POST.get('add_question')
+        buy = request.POST.get('buy')
+        delete_btn = request.POST.get('delete_btn')
+
+        if delete_btn:
+            ProductCart.objects.filter(id=delete_btn).delete()
+            return redirect('memory')
+
+        if buy:
+            test = Memory_list.objects.filter(id=buy).values()[0]
+            username = request.user
+            title = test['title']
+            product_pic = test['pic_link']
+            product_price = test['price']
+            product_status = test['in_out']
+
+            ProductCart.objects.create(user_name=username, product_title=title, product_pic=product_pic,
+                                       product_price=product_price, product_status=product_status)
+
+            return redirect('memory')
 
         if add_comment:
             username = request.user

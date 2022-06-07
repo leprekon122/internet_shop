@@ -36,7 +36,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <button class="btn btn-dark" onclick="catalog()" id="btn_catalog">
-                <i class="fa-solid fa-rectangle-history"></i>Catalog
+                <i class="fa-solid fa-layer-group"></i> Каталог
             </button>
         </div>
 
@@ -63,7 +63,13 @@
                         </button>
                     </form>
                 </div>
-                <h5 class="username">Hello there: <span id="user">{{username}}</span></h5>
+                <div class="navbar-nav username">
+                    <h5>Hello there: <span id="user">{{username}}</span></h5>
+                </div>
+                <div class="navbar-nav cart">
+                    <i class="fa-solid fa-cart-shopping" data-target="#cart" data-toggle="modal"></i>
+                    <span id="value_cart">1</span>
+                </div>
             </div>
         </div>
     </div>
@@ -79,7 +85,7 @@
         <div class="alert alert-dark">
             <div class="list_items">
                 <div id="item_hover1" onmouseover="itemHover1()" onmouseout="itemHover1_out()">
-                    <a href=""  onclick="return comp_item()" >Ноутбуки та компютери</a>
+                    <a href="" onclick="return comp_item()">Ноутбуки та компютери</a>
                 </div>
                 <div id="item_hover2" onmouseover="itemHover2()" onmouseout="itemHover2_out()">
                     <a href="" onclick="return smart()">Смартфони, тв і електроника</a>
@@ -117,6 +123,58 @@
             </div>
         </div>
     </div>
+
+    <div class="modal cart-modal" tabindex="-1" role="dialog" id="cart">
+        <div class="modal-dialog modal-lg cart-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Кошик</h5>
+                    <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body product_cart">
+                    <div class="container">
+                        {%for cart in model_cart%}
+                        {%if username == cart.user_name%}
+                        <div class="product_cart_info">
+                            <img loading="lazy" src="{{cart.product_pic}}" width="100px" height="90px">
+                            <h5 class="cart_title">{{cart.product_title}}</h5>
+
+                            <div class="cart_count">
+                                <i class="fa-solid fa-minus"></i>
+                                <textarea class="form-control">1</textarea>
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
+                            <h5 class="cart_price">{{cart.product_price}}</h5>
+                            <form method="post">{%csrf_token%}
+                                <button type="submit" name="delete_btn" value="{{cart.id}}">X</button>
+                            </form>
+                        </div>
+                        <br>
+                        {%endif%}
+                        {%endfor%}
+                    </div>
+                </div>
+                <div class="container total_price">
+                    <div class="total_sum">
+                        <div class="sum_and_sign>">
+                            <span>Ітого: </span>
+                            <span id="sum">0</span>
+                            <i class="fa-solid fa-hryvnia-sign"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="cart_footers">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Продовжити покупки</button>
+                        <button type="button" class="btn btn-success">Оформети заказ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 {%block content%}
 {%endblock%}
