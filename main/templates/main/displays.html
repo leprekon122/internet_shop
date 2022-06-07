@@ -76,8 +76,8 @@
                 {%csrf_token%}
                 <button class="btn btn-dark bg-success" name="stuff_detail" value="{{el.id}}">
                     <div class="alert alert-light note">
-                        <img src="/media/{{el.pic}}" width="180px" height="140px">
-                        <!-- <img loading="lazy" src="{{el.pic_link}}" width="180px" height="140px"> -->
+                        <!--<img src="/media/{{el.pic}}" width="180px" height="140px"> -->
+                        <img loading="lazy" src="{{el.pic_link}}" width="180px" height="140px">
                         <br>
                         <div class="title">
                             <p>{{el.title}}</p>
