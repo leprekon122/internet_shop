@@ -27,6 +27,8 @@ class MainPage(generics.GenericAPIView):
 
         '''cart_total_price'''
         cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+        if username == 'AnonymousUser':
+            cart_sum = {'product_price__sum': 0}
 
         data = {'username': username,
                 'model_cart': model_cart,
@@ -123,6 +125,10 @@ class Nothebooks(generics.GenericAPIView):
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
+
+            if username == 'AnonymousUser':
+                cart_sum = {'product_price__sum': 0}
+
             data = {'model': model,
                     'model_1': model_1,
                     'model_2': model_2,
@@ -151,6 +157,9 @@ class Nothebooks(generics.GenericAPIView):
         price_max = model.aggregate(Max('price'))
         username = request.user
         cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+        if username == 'AnonymousUser':
+            cart_sum = {'product_price__sum': 0}
+
         data = {'model': model,
                 'username': username,
                 'price_max': price_max['price__max'],
@@ -286,6 +295,10 @@ class Videocard(generics.GenericAPIView):
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
+
+            if username == 'AnonymousUser':
+                cart_sum = {'product_price__sum': 0}
+
             data = {'model': model,
                     'model_1': model_1,
                     'model_2': model_2,
@@ -318,6 +331,8 @@ class Videocard(generics.GenericAPIView):
         price_max = model.aggregate(Max('price'))
 
         cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+        if username == 'AnonymousUser':
+            cart_sum = {'product_price__sum': 0}
 
         data = {"model": model,
                 'username': username,
@@ -461,6 +476,10 @@ class Monitors(generics.GenericAPIView):
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
+
+            if username == 'AnonymousUser':
+                cart_sum = {'product_price__sum': 0}
+
             data = {'model': model,
                     'model_1': model_1,
                     'model_2': model_2,
@@ -493,6 +512,10 @@ class Monitors(generics.GenericAPIView):
 
         price_max = model.aggregate(Max('price'))
         username = request.user
+
+        if username == 'AnonymousUser':
+            cart_sum = {'product_price__sum': 0}
+
         data = {'username': username,
                 'model': model,
                 'price_max': price_max['price__max'],
@@ -635,6 +658,10 @@ class Memory(generics.GenericAPIView):
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
+
+            if username == 'AnonymousUser':
+                cart_sum = {'product_price__sum': 0}
+
             data = {'model': model,
                     'model_1': model_1,
                     'model_2': model_2,
@@ -666,6 +693,10 @@ class Memory(generics.GenericAPIView):
         cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
         price_max = model.aggregate(Max('price'))
         username = request.user
+
+        if username == 'AnonymousUser':
+            cart_sum = {'product_price__sum': 0}
+
         data = {'username': username,
                 'model': model,
                 'price_max': price_max['price__max'],
