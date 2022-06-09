@@ -23,7 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ezf+b#8pgve2vp(8o6y@u$f$uo!g(h7)n8h%a@ohtp9nhmuask'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+
 
 ALLOWED_HOSTS = ['my-petshop.herokuapp.com', '127.0.0.1']
 
@@ -57,12 +58,12 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 
-#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '909548435939-7037e8g3uiu9ktroiqje8pn38q5vr8fq.apps.googleusercontent.com'
-#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '909548435939-7037e8g3uiu9ktroiqje8pn38q5vr8fq.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 """local creditionals"""
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '605176420122-t1niqvg1ere0l5gafmkj74mq3v4ku919.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '605176420122-t1niqvg1ere0l5gafmkj74mq3v4ku919.apps.googleusercontent.com'
+#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 
 
