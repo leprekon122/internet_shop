@@ -126,9 +126,6 @@ class Nothebooks(generics.GenericAPIView):
             quentety_1 = len(model_2)
             username = request.user
 
-            if username == 'AnonymousUser':
-                cart_sum = {'product_price__sum': 0}
-
             data = {'model': model,
                     'model_1': model_1,
                     'model_2': model_2,
@@ -157,8 +154,6 @@ class Nothebooks(generics.GenericAPIView):
         price_max = model.aggregate(Max('price'))
         username = request.user
         cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
-        if username == 'AnonymousUser':
-            cart_sum = {'product_price__sum': 0}
 
         data = {'model': model,
                 'username': username,
@@ -296,9 +291,6 @@ class Videocard(generics.GenericAPIView):
             quentety_1 = len(model_2)
             username = request.user
 
-            if username == 'AnonymousUser':
-                cart_sum = {'product_price__sum': 0}
-
             data = {'model': model,
                     'model_1': model_1,
                     'model_2': model_2,
@@ -331,8 +323,6 @@ class Videocard(generics.GenericAPIView):
         price_max = model.aggregate(Max('price'))
 
         cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
-        if username == 'AnonymousUser':
-            cart_sum = {'product_price__sum': 0}
 
         data = {"model": model,
                 'username': username,
@@ -477,9 +467,6 @@ class Monitors(generics.GenericAPIView):
             quentety_1 = len(model_2)
             username = request.user
 
-            if username == 'AnonymousUser':
-                cart_sum = {'product_price__sum': 0}
-
             data = {'model': model,
                     'model_1': model_1,
                     'model_2': model_2,
@@ -512,9 +499,6 @@ class Monitors(generics.GenericAPIView):
 
         price_max = model.aggregate(Max('price'))
         username = request.user
-
-        if username == 'AnonymousUser':
-            cart_sum = {'product_price__sum': 0}
 
         data = {'username': username,
                 'model': model,
@@ -658,9 +642,6 @@ class Memory(generics.GenericAPIView):
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
-
-            if username == 'AnonymousUser':
-                cart_sum = {'product_price__sum': 0}
 
             data = {'model': model,
                     'model_1': model_1,

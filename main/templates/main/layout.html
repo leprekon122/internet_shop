@@ -162,7 +162,11 @@
                     <div class="total_sum">
                         <div class="sum_and_sign>">
                             <span>Ітого: </span>
+                            {%if username != 'AnonymousUser' %}
                             <span id="sum">{{cart_sum}}</span>
+                            {%else%}
+                            <span>0</span>
+                            {%endif%}
                             <i class="fa-solid fa-hryvnia-sign"></i>
                         </div>
                     </div>
