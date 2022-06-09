@@ -119,18 +119,19 @@ function active_panel(){
      }
 }
 
-
+// change the buy button by click //
 window.onload = (function just_test(){
-    var total_sum = 0
     var item = document.getElementsByClassName('cart_price')
+    var product_title = document.getElementsByClassName('cart_title')
+    var items = document.getElementById('detail_title')
     document.getElementById('value_cart').innerHTML = item.length
-    for(var i = 0; i <= item.length; i++){
-        var res = item[i].innerText
-        total_sum += Number(res)
-        document.getElementById('sum').innerHTML = total_sum
+    for(var i = 0; i <= product_title.length; i++){
+        if(items.innerHTML == product_title[i].innerHTML){
+               document.getElementById('cart_buy_item').style.display = 'none'
+               document.getElementById('cart_sold').style.display = 'block';
         }
-
-})
+       }
+    })
 
 
 
@@ -143,21 +144,4 @@ function manage_panel(){
             document.getElementById('main_panels').style.transform='translateX(-110%)'
         }
     }
-
-function cart_buy(){
-
-}
-
-// slider for price filter//
-function price_sliders(){
-    var slider = document.getElementById('price_slider')
-    var slider_2 = document.getElementById('price_slider_2')
-    document.getElementById('price_from').value=slider.value
-    document.getElementById('price_to').value=slider_2.value
-    slider.max = slider_2.value
-    slider_2.min = slider.value
-
-}
-price_sliders()
-
 

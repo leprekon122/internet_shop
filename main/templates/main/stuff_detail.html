@@ -85,10 +85,11 @@
                     <form method="post">{%csrf_token%}
                         <div class="detail_button">
                             <button class="btn btn-success" type="submit" name="buy" value="{{el.id}}"
-                                    onclick="cart_buy()" id="cart_buy_item">
+                                    onclick="stuff_in_cart()" id="cart_buy_item">
                                 Купити
                             </button>
-                            <button class="btn btn-success" id="cart_sold">Товар у кошеку</button>
+                            <a class="btn btn-success" id="cart_sold" data-target="#cart" data-toggle="modal">Товар у кошеку <i
+                                    class="fa-solid fa-cart-arrow-down"></i></a>
                             <button class="btn btn-dark">Купити в кредит</button>
                         </div>
                     </form>

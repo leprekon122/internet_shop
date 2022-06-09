@@ -9,6 +9,3 @@ function price_sliders(){
 
 }
 price_sliders()
-
-
-

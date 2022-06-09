@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from .serializers import *
 from .models import *
 from .forms import *
+from django.db.models import Sum
 
 from django.db.models import Max
 
@@ -13,7 +14,6 @@ class MainPage(generics.GenericAPIView):
     @staticmethod
     def get(request):
         if request.GET.get('login'):
-            print('hello')
             username = request.GET.get('username')
             password = request.GET.get('password')
 
@@ -24,8 +24,13 @@ class MainPage(generics.GenericAPIView):
                 return redirect('main')
         username = request.user
         model_cart = ProductCart.objects.all()
+
+        '''cart_total_price'''
+        cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+
         data = {'username': username,
-                'model_cart': model_cart}
+                'model_cart': model_cart,
+                'cart_sum': cart_sum['product_price__sum']}
         return render(request, 'main/main_page.html', data)
 
     def post(self, request):
@@ -66,6 +71,7 @@ class Nothebooks(generics.GenericAPIView):
     def get(request):
 
         model = NotebooksList.objects.all()
+        '''cart_all_items'''
         model_cart = ProductCart.objects.all()
 
         search = request.GET.get('exampleRadios')
@@ -112,6 +118,8 @@ class Nothebooks(generics.GenericAPIView):
 
             quantity_of_comment = len(model_rating)
 
+            cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
@@ -123,7 +131,8 @@ class Nothebooks(generics.GenericAPIView):
                     'quentety_1': quentety_1,
                     'avg_rating': avr_rating_plural,
                     'quantity_of_comment': quantity_of_comment,
-                    'model_cart': model_cart
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum']
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -141,10 +150,12 @@ class Nothebooks(generics.GenericAPIView):
 
         price_max = model.aggregate(Max('price'))
         username = request.user
+        cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
         data = {'model': model,
                 'username': username,
                 'price_max': price_max['price__max'],
-                'model_cart': model_cart
+                'model_cart': model_cart,
+                'cart_sum': cart_sum['product_price__sum'],
                 }
         return render(request, 'main/nothebook.html', data)
 
@@ -156,7 +167,7 @@ class Nothebooks(generics.GenericAPIView):
 
         if delete_btn:
             ProductCart.objects.filter(id=delete_btn).delete()
-            return redirect('note_main')
+            return redirect(request.path_info)
 
         if buy:
             test = NotebooksList.objects.filter(id=buy).values()[0]
@@ -169,7 +180,7 @@ class Nothebooks(generics.GenericAPIView):
             ProductCart.objects.create(user_name=username, product_title=title, product_pic=product_pic,
                                        product_price=product_price, product_status=product_status)
 
-            return redirect('note_main')
+            return redirect(request.path_info)
 
         if add_comment:
             username = request.user
@@ -270,6 +281,8 @@ class Videocard(generics.GenericAPIView):
                 avr_rating_plural = 0
             quantity_of_comment = len(model_rating)
 
+            cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
@@ -281,7 +294,8 @@ class Videocard(generics.GenericAPIView):
                     'quentety_1': quentety_1,
                     'avg_rating': avr_rating_plural,
                     'quantity_of_comment': quantity_of_comment,
-                    'model_cart': model_cart
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum']
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -303,15 +317,19 @@ class Videocard(generics.GenericAPIView):
         username = request.user
         price_max = model.aggregate(Max('price'))
 
+        cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+
         data = {"model": model,
                 'username': username,
                 'price_max': price_max['price__max'],
-                'model_cart': model_cart
+                'model_cart': model_cart,
+                'cart_sum': cart_sum['product_price__sum']
                 }
 
         return render(request, "main/videocards.html", data)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         add_comment = request.POST.get('add_comment')
         add_question = request.POST.get('add_question')
         buy = request.POST.get('buy')
@@ -438,6 +456,8 @@ class Monitors(generics.GenericAPIView):
                 avr_rating_plural = 0
             quantity_of_comment = len(model_rating)
 
+            cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
@@ -449,7 +469,8 @@ class Monitors(generics.GenericAPIView):
                     'quentety_1': quentety_1,
                     'avg_rating': avr_rating_plural,
                     'quantity_of_comment': quantity_of_comment,
-                    'model_cart': model_cart
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum']
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -468,12 +489,15 @@ class Monitors(generics.GenericAPIView):
         elif search == "LG":
             model = Monitors_list.objects.filter(brand='LG')
 
+        cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+
         price_max = model.aggregate(Max('price'))
         username = request.user
         data = {'username': username,
                 'model': model,
                 'price_max': price_max['price__max'],
-                'model_cart': model_cart
+                'model_cart': model_cart,
+                'cart_sum': cart_sum['product_price__sum']
                 }
         return render(request, 'main/displays.html', data)
 
@@ -606,6 +630,8 @@ class Memory(generics.GenericAPIView):
                 avr_rating_plural = 0
             quantity_of_comment = len(model_rating)
 
+            cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
@@ -617,7 +643,8 @@ class Memory(generics.GenericAPIView):
                     'quentety_1': quentety_1,
                     'avg_rating': avr_rating_plural,
                     'quantity_of_comment': quantity_of_comment,
-                    'model_cart': model_cart
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum']
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -636,12 +663,14 @@ class Memory(generics.GenericAPIView):
         elif search == "Samsung":
             model = Memory_list.objects.filter(brand='Samsung')
 
+        cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
         price_max = model.aggregate(Max('price'))
         username = request.user
         data = {'username': username,
                 'model': model,
                 'price_max': price_max['price__max'],
-                'model_cart': model_cart
+                'model_cart': model_cart,
+                'cart_sum': cart_sum['product_price__sum']
                 }
 
         return render(request, 'main/memory.html', data)

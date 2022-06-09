@@ -26,6 +26,7 @@
             crossorigin="anonymous"></script>
 </head>
 
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light">
     <a class="navbar-brand" id="logo" href="{% url 'main' %}"><i class="fa-solid fa-m text-warning"></i>y
         Shop</a>
@@ -68,16 +69,15 @@
                 </div>
                 <div class="navbar-nav cart">
                     <i class="fa-solid fa-cart-shopping" data-target="#cart" data-toggle="modal"></i>
-                    <span id="value_cart">1</span>
+                    <div class="value_cart">
+                        <span id="value_cart">1</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </nav>
 
-
-<script src="/static/main/js/main.js">
-</script>
 
 <body>
 <div class="container">
@@ -125,7 +125,7 @@
     </div>
 
     <div class="modal cart-modal" tabindex="-1" role="dialog" id="cart">
-        <div class="modal-dialog modal-lg cart-dialog" role="document">
+        <div class="modal-dialog modal-xl cart-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Кошик</h5>
@@ -139,16 +139,17 @@
                         {%if username == cart.user_name%}
                         <div class="product_cart_info">
                             <img loading="lazy" src="{{cart.product_pic}}" width="100px" height="90px">
-                            <h5 class="cart_title">{{cart.product_title}}</h5>
+                            <span class="cart_title">{{cart.product_title}}</span>
 
-                            <div class="cart_count">
-                                <i class="fa-solid fa-minus"></i>
-                                <textarea class="form-control">1</textarea>
-                                <i class="fa-solid fa-plus"></i>
-                            </div>
-                            <h5 class="cart_price">{{cart.product_price}}</h5>
+                            <!--<div class="cart_count">
+                                <i class="fa-solid fa-minus" onclick="item_minus()"></i>
+                                <textarea class="form-control quentety_of_items">1</textarea>
+                                <i class="fa-solid fa-plus" onclick="item_plus()"></i>
+                            </div> -->
+                            <h5 class="cart_price">{{cart.product_price}} <i class="fa-solid fa-hryvnia-sign"></i></h5>
                             <form method="post">{%csrf_token%}
-                                <button type="submit" name="delete_btn" value="{{cart.id}}">X</button>
+                                <button class="btn btn-light" type="submit" name="delete_btn" value="{{cart.id}}">X
+                                </button>
                             </form>
                         </div>
                         <br>
@@ -156,18 +157,20 @@
                         {%endfor%}
                     </div>
                 </div>
+                <br>
                 <div class="container total_price">
                     <div class="total_sum">
                         <div class="sum_and_sign>">
                             <span>Ітого: </span>
-                            <span id="sum">0</span>
+                            <span id="sum">{{cart_sum}}</span>
                             <i class="fa-solid fa-hryvnia-sign"></i>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="cart_footers">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Продовжити покупки</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Продовжити покупки
+                        </button>
                         <button type="button" class="btn btn-success">Оформети заказ</button>
                     </div>
                 </div>
@@ -175,6 +178,8 @@
         </div>
     </div>
 
+    <script src="/static/main/js/main.js">
+    </script>
 </div>
 {%block content%}
 {%endblock%}

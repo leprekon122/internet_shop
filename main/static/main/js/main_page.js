@@ -26,3 +26,16 @@ function catalog(){
     }
 }
 
+
+window.onload = (function just_test(){
+    var item = document.getElementsByClassName('cart_price')
+    var product_title = document.getElementsByClassName('cart_title')
+    var items = document.getElementById('detail_title')
+    document.getElementById('value_cart').innerHTML = item.length
+    for(var i = 0; i <= product_title.length; i++){
+        if(items.innerHTML == product_title[i].innerHTML){
+               document.getElementById('cart_buy_item').style.display = 'none'
+               document.getElementById('cart_sold').style.display = 'block';
+        }
+       }
+    })
