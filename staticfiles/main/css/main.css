@@ -483,7 +483,8 @@ body .note {border: 1px solid grey;
             height: 55vh;
             width:230px}
 
-.note .fa-heart{color: #e35032}
+.note .fa-heart{color: #e35032;
+                font-size:18px;}
 
 .note button{background-color:#fff}
 
@@ -1033,7 +1034,7 @@ body .main_page_carusel {margin-top: 5%;
                 max-height:55vh;
                 }
 
-    body .title{height: 12vh;
+    body .title{height: 14vh;
                 max-width:350px;
                 }
 

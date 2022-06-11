@@ -83,12 +83,13 @@
                 <div class="title">
                     <p>{{el.title}}</p>
                 </div>
-                <br>
+                <i class="fa-solid fa-heart"></i>
+
                 <div class="price_and_bag">
                     <h5>{{el.price}} UAH</h5>
                     <form method="post">{%csrf_token%}
                         <button class="btn btn-light" type="submit" name="buy" value="{{el.id}}"
-                        ><i
+                                onclick="return stuff_in_cart()"><i
                                 class="fa-solid fa-cart-shopping"></i></button>
                         <i class="fa-solid fa-cart-plus" id="in_cart"></i>
                     </form>

@@ -115,7 +115,7 @@ WSGI_APPLICATION = 'Shop.wsgi.application'
 
 
 DATABASES = {
-    'default': {
+   'default': {
         # postgresql_psycopg2
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'd7rf4ue3n9ne06',
