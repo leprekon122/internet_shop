@@ -1031,7 +1031,7 @@ body .main_page_carusel {margin-top: 5%;
 
 @media screen and (max-width: 483px) {
     body .note {width: 300px;
-                max-height:55vh;
+                max-height:63vh;
                 }
 
     body .title{height: 14vh;
