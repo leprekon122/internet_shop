@@ -26,9 +26,7 @@ class MainPage(generics.GenericAPIView):
         model_cart = ProductCart.objects.all()
 
         '''cart_total_price'''
-        cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
-        if username == 'AnonymousUser':
-            cart_sum = {'product_price__sum': 0}
+        cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
 
         data = {'username': username,
                 'model_cart': model_cart,
@@ -120,11 +118,10 @@ class Nothebooks(generics.GenericAPIView):
 
             quantity_of_comment = len(model_rating)
 
-            cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
-
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
             quentety = len(model_1)
             quentety_1 = len(model_2)
-            username = request.user
 
             data = {'model': model,
                     'model_1': model_1,
@@ -153,7 +150,7 @@ class Nothebooks(generics.GenericAPIView):
 
         price_max = model.aggregate(Max('price'))
         username = request.user
-        cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+        cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
 
         data = {'model': model,
                 'username': username,
@@ -285,11 +282,10 @@ class Videocard(generics.GenericAPIView):
                 avr_rating_plural = 0
             quantity_of_comment = len(model_rating)
 
-            cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
-
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
 
             data = {'model': model,
                     'model_1': model_1,
@@ -322,7 +318,7 @@ class Videocard(generics.GenericAPIView):
         username = request.user
         price_max = model.aggregate(Max('price'))
 
-        cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
+        cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
 
         data = {"model": model,
                 'username': username,
@@ -461,11 +457,10 @@ class Monitors(generics.GenericAPIView):
                 avr_rating_plural = 0
             quantity_of_comment = len(model_rating)
 
-            cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
-
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
 
             data = {'model': model,
                     'model_1': model_1,
@@ -495,10 +490,9 @@ class Monitors(generics.GenericAPIView):
         elif search == "LG":
             model = Monitors_list.objects.filter(brand='LG')
 
-        cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
-
         price_max = model.aggregate(Max('price'))
         username = request.user
+        cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
 
         data = {'username': username,
                 'model': model,
@@ -637,11 +631,10 @@ class Memory(generics.GenericAPIView):
                 avr_rating_plural = 0
             quantity_of_comment = len(model_rating)
 
-            cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
-
             quentety = len(model_1)
             quentety_1 = len(model_2)
             username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
 
             data = {'model': model,
                     'model_1': model_1,
@@ -671,12 +664,9 @@ class Memory(generics.GenericAPIView):
         elif search == "Samsung":
             model = Memory_list.objects.filter(brand='Samsung')
 
-        cart_sum = ProductCart.objects.aggregate(Sum('product_price'))
         price_max = model.aggregate(Max('price'))
         username = request.user
-
-        if username == 'AnonymousUser':
-            cart_sum = {'product_price__sum': 0}
+        cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
 
         data = {'username': username,
                 'model': model,

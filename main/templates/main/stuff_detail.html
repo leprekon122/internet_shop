@@ -85,7 +85,7 @@
                     <form method="post">{%csrf_token%}
                         <div class="detail_button">
                             <button class="btn btn-success" type="submit" name="buy" value="{{el.id}}"
-                                    onclick="stuff_in_cart()" id="cart_buy_item">
+                                    onclick="return stuff_in_cart()" id="cart_buy_item">
                                 Купити
                             </button>
                             <a class="btn btn-success" id="cart_sold" data-target="#cart" data-toggle="modal">Товар у кошеку <i

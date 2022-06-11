@@ -72,32 +72,37 @@
 
         <div class="all_stuff" id="all_st">
             {%for el in model%}
-            <form method="get">
-                {%csrf_token%}
-                <button class="btn btn-dark bg-success" name="stuff_detail" value="{{el.id}}">
-                    <div class="alert alert-light note">
-                        <!--<img src="/media/{{el.pic}}" width="180px" height="140px"> -->
+
+            <div class="alert alert-light note">
+                <!--<img src="/media/{{el.pic}}" width="180px" height="140px"> -->
+                <form method="get">
+                    {%csrf_token%}
+                    <button class="btn btn-light bg-light" name="stuff_detail" value="{{el.id}}">
                         <img loading="lazy" src="{{el.pic_link}}" width="180px" height="140px">
-                        <br>
-                        <div class="title">
-                            <p>{{el.title}}</p>
-                        </div>
-                        <div class="price_and_bag">
-                            <h5>{{el.price}} UAH</h5>
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </div>
-                        {%if el.in_out == 'Є в наявності'%}
-                        <p class="text-success">готовий до відправлення <span class="truck"><i
-                                class="fa-solid fa-truck"></i></span></p>
-                        {%else%}
-                        <p class="text-unsuccess">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
-                        {%endif%}
+                    </button>
+                </form>
+                <br>
+                <div class="title">
+                    <p>{{el.title}}</p>
+                </div>
+                <div class="price_and_bag">
+                    <h5>{{el.price}} UAH</h5>
+                    <form method="post">{%csrf_token%}
+                        <button class="btn btn-light" type="submit" name="buy" value="{{el.id}}" id="bout_item"
+                        ><i
+                                class="fa-solid fa-cart-shopping"></i></button>
+                        <i class="fa-solid fa-cart-plus" id="in_cart"></i>
+                    </form>
+                </div>
+                {%if el.in_out == 'Є в наявності'%}
+                <p class="text-success">готовий до відправлення <span class="truck"><i
+                        class="fa-solid fa-truck"></i></span></p>
+                {%else%}
+                <p class="text-unsuccess">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
+                {%endif%}
 
-                        <p class="description " id="des">{{el.description}}</p>
-
-                    </div>
-                </button>
-            </form>
+                <p class="description " id="des">{{el.description}}</p>
+            </div>
             {%endfor%}
         </div>
     </div>

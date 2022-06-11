@@ -124,14 +124,32 @@ window.onload = (function just_test(){
     var item = document.getElementsByClassName('cart_price')
     var product_title = document.getElementsByClassName('cart_title')
     var items = document.getElementById('detail_title')
+
+    if(item.length != 0){
+    document.getElementById('value_cart').style.display = 'block'
     document.getElementById('value_cart').innerHTML = item.length
+    }
+
     for(var i = 0; i <= product_title.length; i++){
         if(items.innerHTML == product_title[i].innerHTML){
                document.getElementById('cart_buy_item').style.display = 'none'
                document.getElementById('cart_sold').style.display = 'block';
+
         }
        }
+
     })
+
+
+function stuff_in_cart(){
+    var user = document.getElementById('user').innerHTML
+    if(user == 'AnonymousUser'){
+        window.alert('Необхідно увійти у систему');
+        return false
+    } else{
+        return true
+    }
+}
 
 
 

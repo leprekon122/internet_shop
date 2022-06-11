@@ -35,14 +35,16 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <br>
         <div class="navbar-nav">
             <button class="btn btn-dark" onclick="catalog()" id="btn_catalog">
                 <i class="fa-solid fa-layer-group"></i> Каталог
             </button>
         </div>
+        <br>
 
 
-        <div class="auth_panel">
+        <div class="container auth_panel">
             <div class="search_elements">
                 <input type="text" class="form-control" placeholder="search" id="search">
                 <button class="btn btn-success">Знайти</button>
@@ -70,7 +72,7 @@
                 <div class="navbar-nav cart">
                     <i class="fa-solid fa-cart-shopping" data-target="#cart" data-toggle="modal"></i>
                     <div class="value_cart">
-                        <span id="value_cart">1</span>
+                        <span id="value_cart"></span>
                     </div>
                 </div>
             </div>
@@ -79,7 +81,6 @@
 </nav>
 
 
-<body>
 <div class="container">
     <div class="main_panels" id="panels">
         <div class="alert alert-dark">
@@ -124,67 +125,74 @@
         </div>
     </div>
 
-    <div class="modal cart-modal" tabindex="-1" role="dialog" id="cart">
-        <div class="modal-dialog modal-xl cart-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Кошик</h5>
-                    <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                <div class="modal-body product_cart">
-                    <div class="container">
-                        {%for cart in model_cart%}
-                        {%if username == cart.user_name%}
-                        <div class="product_cart_info">
-                            <img loading="lazy" src="{{cart.product_pic}}" width="100px" height="90px">
-                            <span class="cart_title">{{cart.product_title}}</span>
+    <script src="/static/main/js/main.js">
+    </script>
+</div>
 
-                            <!--<div class="cart_count">
-                                <i class="fa-solid fa-minus" onclick="item_minus()"></i>
-                                <textarea class="form-control quentety_of_items">1</textarea>
-                                <i class="fa-solid fa-plus" onclick="item_plus()"></i>
-                            </div> -->
-                            <h5 class="cart_price">{{cart.product_price}} <i class="fa-solid fa-hryvnia-sign"></i></h5>
-                            <form method="post">{%csrf_token%}
-                                <button class="btn btn-light" type="submit" name="delete_btn" value="{{cart.id}}">X
-                                </button>
-                            </form>
-                        </div>
-                        <br>
-                        {%endif%}
-                        {%endfor%}
+<div class="modal cart-modal" tabindex="-1" role="dialog" id="cart">
+    <div class="modal-dialog  modal-xl cart-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Кошик</h5>
+                <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body product_cart">
+                <div class="container">
+                    {%for cart in model_cart%}
+                    {%if username == cart.user_name%}
+                    <div class="product_cart_info">
+                        <img loading="lazy" src="{{cart.product_pic}}" width="100px" height="90px">
+                        <span class="cart_title">{{cart.product_title}}</span>
+
+                        <!--<div class="cart_count">
+                            <i class="fa-solid fa-minus" onclick="item_minus()"></i>
+                            <textarea class="form-control quentety_of_items">1</textarea>
+                            <i class="fa-solid fa-plus" onclick="item_plus()"></i>
+                        </div> -->
+                        <h5 class="cart_price">{{cart.product_price}} <i class="fa-solid fa-hryvnia-sign"></i></h5>
+                        <form method="post">{%csrf_token%}
+                            <button class="btn btn-light" type="submit" name="delete_btn" value="{{cart.id}}">X
+                            </button>
+                        </form>
+                    </div>
+                    <br>
+                    {%endif%}
+                    {%endfor%}
+                </div>
+            </div>
+            <br>
+            {%if cart_sum != None %}
+            <div class="container total_price">
+                <div class="total_sum">
+                    <div class="sum_and_sign" id="sum_and_signs">
+                        <span>Ітого: {{cart_sum}} <i class="fa-solid fa-hryvnia-sign"></i></span>
+
                     </div>
                 </div>
-                <br>
-                <div class="container total_price">
-                    <div class="total_sum">
-                        <div class="sum_and_sign>">
-                            <span>Ітого: </span>
-                            {%if username != 'AnonymousUser' %}
-                            <span id="sum">{{cart_sum}}</span>
-                            {%else%}
-                            <span>0</span>
-                            {%endif%}
-                            <i class="fa-solid fa-hryvnia-sign"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="cart_footers">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Продовжити покупки
-                        </button>
-                        <button type="button" class="btn btn-success">Оформети заказ</button>
-                    </div>
+            </div>
+            {%else%}
+            <div class="container empty_cart_title">
+                <h5>Кошек пустий <i class="fa-solid fa-face-sad-tear"></i>Але ти можешь його
+                    заповнети </h5>
+            </div>
+            <div class="container empty_pic">
+                <img src="https://img.freepik.com/free-vector/shopping-cart-realistic_1284-6011.jpg?w=2000"
+                     width="200px" height="170px" id="cart_pic_empty">
+            </div>
+            {%endif%}
+            <div class="modal-footer">
+                <div class="cart_footers">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Продовжити покупки
+                    </button>
+                    <button type="button" class="btn btn-success">Оформети заказ</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="/static/main/js/main.js">
-    </script>
 </div>
+<body>
 {%block content%}
 {%endblock%}
 </body>
