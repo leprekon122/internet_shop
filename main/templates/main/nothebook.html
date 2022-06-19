@@ -4,69 +4,100 @@
 {%block title%}Ноутбуки{%endblock%}
 
 {%block content%}
-<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <button class="btn btn-success panel_button" onclick="manage_panel()"><i class="fa-solid fa-layer-group"></i>
         фільтри
     </button>
     <div class="main_comodety">
         <div class="manage_panel" id="main_panels">
-            <div class="alphabet_search">
-                <h5>Пошук по бренду</h5>
-                <form method="get">
-                    <button class="btn btn-success" type="submit">search</button>
+            <form method="get">
+                <button type="submit" class="text-light btn btn-success" name="test" value="test"> пошук</button>
+                <div class="alphabet_search">
+                    <h5 class="text-dark">Пошук по бренду</h5>
+                    <!-- <form method="get"> -->
                     <br>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                               value="Apple" checked>
-                        <label class="form-check-label" for="exampleRadios1">Apple</label>
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Apple"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            Apple
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                               value="Acer" checked>
-                        <label class="form-check-label" for="exampleRadios1">Acer</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Acer"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            Acer
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
-                               value="Asus" checked>
-                        <label class="form-check-label" for="exampleRadios1">Asus</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Asus"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            Asus
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4"
-                               value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">Dell</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Dell"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            Dell
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5"
-                               value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">HP</label>
+
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="HP"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            HP
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6"
-                               value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">Lenovo</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Lenovo"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            Lenovo
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios7"
-                               value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">MSI</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="MSI"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            MSI
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios8"
-                               value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">Razer</label>
+
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Razer"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            Razer
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios9"
-                               value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">Samsung</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Samsung"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            Samsung
+                        </label>
                     </div>
-                </form>
-            </div>
-            <br>
-            <div class="coast_main" id="coast">
-                <h5>Пошук за ціною</h5>
+
+                    <!--<button class="btn btn-success" type="submit">пошук</button> -->
+                    <!-- </form> -->
+                </div>
                 <br>
-                <form method="get">
+                <div class="coast_main" id="coast">
+                    <h5 class="text-dark">Пошук за ціною</h5>
+                    <br>
+                    <!--<form method="get"> -->
                     <div class="coast_search">
                         <input type="text" class="form-control" name="price_from" id="price_from" placeholder="Від">
                         <input type="text" class="form-control" name="price_to" placeholder="До" id="price_to">
@@ -76,14 +107,16 @@
                         <input type="range" class="slider" min="0" max="{{price_max}}" step="500" value="5000"
                                id="price_slider"
                                oninput="price_sliders()">
-                        <input type="range" class="slider" min="0" max="{{price_max}}" step="100" value="{{price_max}}"
+                        <input type="range" class="slider" min="0" max="{{price_max}}" step="100"
+                               value="{{price_max}}"
                                id="price_slider_2" oninput="price_sliders()">
                     </div>
                     <br>
                     <br>
-                    <button class="btn btn-success" type="submit" name="price" value="price">пошук</button>
-                </form>
-            </div>
+                    <!--<button class="btn btn-success" type="submit" name="prices" value="prices">пошук</button> -->
+                    <!--</form> -->
+                </div>
+            </form>
             <button class="btn btn-light" onclick="active_panel()" id="filters">
                 <i class="fa-solid fa-sliders"></i>
             </button>
@@ -105,7 +138,11 @@
                 <div class="title title_note">
                     <p>{{el.title}}</p>
                 </div>
-                <i class="fa-solid fa-heart"></i>
+                <form method="post">{% csrf_token %}
+                    <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"><i
+                            class="fa-solid fa-heart"></i></button>
+                </form>
+
 
                 <div class="price_and_bag">
                     <h5>{{el.price}} UAH</h5>
@@ -127,6 +164,7 @@
             {%endfor%}
         </div>
     </div>
+
 </div>
 <script src="/static/main/js/notebook.js"></script>
 

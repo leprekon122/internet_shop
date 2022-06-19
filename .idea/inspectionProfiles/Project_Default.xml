@@ -1,0 +1,35 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E501" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="Educate_Platform.main.models.Books.*" />
+          <option value="Educate_Platform.main.models.Conversation1.*" />
+          <option value="Educate_Platform.main.models.EducateCollection.*" />
+          <option value="Educate_Platform.main.models.Motivation.*" />
+          <option value="Educate_Platform.send_message.models.MessageNew.*" />
+          <option value="synergy.main.models.CreatedGroup.*" />
+          <option value="synergy.main.models.CreatedUsers.*" />
+          <option value="smartfield.prod_settings" />
+          <option value="Shop.main.models.ProductCart.objects" />
+          <option value="Shop.main.models.NotebooksList.*" />
+          <option value="Shop.main.models.CommentsUsers.*" />
+          <option value="Shop.main.models.QuestionUsers.*" />
+          <option value="Shop.main.models.Videocards.*" />
+          <option value="Shop.main.models.Monitors_list.*" />
+          <option value="Shop.main.models.CommentsUserMonitor.*" />
+          <option value="Shop.main.models.Memory_list.*" />
+          <option value="Shop.main.models.CommentsUserMemory.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

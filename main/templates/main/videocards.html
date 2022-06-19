@@ -83,7 +83,10 @@
                 <div class="title">
                     <p>{{el.title}}</p>
                 </div>
-                <i class="fa-solid fa-heart"></i>
+                <form method="post">{% csrf_token %}
+                    <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"><i
+                            class="fa-solid fa-heart"></i></button>
+                </form>
 
                 <div class="price_and_bag">
                     <h5>{{el.price}} UAH</h5>

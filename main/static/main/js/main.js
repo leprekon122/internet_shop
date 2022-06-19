@@ -36,29 +36,38 @@ function home_stuff(){
 
 function itemHover1(){
     document.getElementById('item_hover1').style.backgroundColor='#396620'
+    document.getElementById('item_hover1').style.padding= '3%'
+    document.getElementById('item_hover1').style.fontSize= '13px'
 }
 
 function itemHover1_out(){
     document.getElementById('item_hover1').style.backgroundColor='transparent';
+    document.getElementById('item_hover1').style.padding= '0%'
 
 }
 
 
 function itemHover2(){
     document.getElementById('item_hover2').style.backgroundColor='#396620';
+    document.getElementById('item_hover2').style.padding='3%';
+    document.getElementById('item_hover2').style.fontSize='13px';
 }
 
 function itemHover2_out(){
     document.getElementById('item_hover2').style.backgroundColor='transparent';
+    document.getElementById('item_hover2').style.padding='0%';
     }
 
 
 function itemHover3(){
     document.getElementById('item_hover3').style.backgroundColor='#396620';
+    document.getElementById('item_hover3').style.padding='3%';
+    document.getElementById('item_hover3').style.fontSize='13px';
 }
 
 function itemHover3_out(){
     document.getElementById('item_hover3').style.backgroundColor='transparent';
+    document.getElementById('item_hover3').style.padding='0%';
     }
 
 /*const req_url ='http://127.0.0.1:8000/notebook_api/9'
@@ -106,7 +115,7 @@ function active_panel(){
     if(count_panel % 2 == 1){
         document.getElementById('main_panels').style.transform = 'translateX(0%)'
         if(window.screen.width > 1200){
-            document.getElementById('main_panels').style.width = '25%'
+            document.getElementById('main_panels').style.width = '20%'
           } else {
             document.getElementById('main_panels').style.width = '35%'
           }

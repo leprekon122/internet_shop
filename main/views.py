@@ -13,6 +13,7 @@ from django.db.models import Max
 class MainPage(generics.GenericAPIView):
     @staticmethod
     def get(request):
+
         if request.GET.get('login'):
             username = request.GET.get('username')
             password = request.GET.get('password')
@@ -28,9 +29,14 @@ class MainPage(generics.GenericAPIView):
         '''cart_total_price'''
         cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
 
+        """Like like all"""
+        model_like = LikeListModel.objects.all()
+
         data = {'username': username,
                 'model_cart': model_cart,
-                'cart_sum': cart_sum['product_price__sum']}
+                'cart_sum': cart_sum['product_price__sum'],
+                'model_like': model_like
+                }
         return render(request, 'main/main_page.html', data)
 
     def post(self, request):
@@ -74,23 +80,35 @@ class Nothebooks(generics.GenericAPIView):
         '''cart_all_items'''
         model_cart = ProductCart.objects.all()
 
-        search = request.GET.get('exampleRadios')
-        detail = request.GET.get('stuff_detail')
-        prices = request.GET.get('price')
+        """Like like all"""
+        model_like = LikeListModel.objects.all()
 
-        if prices:
-            try:
-                price_from = request.GET.get('price_from')
-                price_to = request.GET.get('price_to')
-                if price_from != '' and price_to != '':
-                    model = NotebooksList.objects.filter(price__gte=int(price_from), price__lte=int(price_to))
-                elif price_from == '':
+        detail = request.GET.get('stuff_detail')
+        # prices = request.GET.get('prices')
+        filter = request.GET.get('test')
+
+        if filter:
+            search = request.GET.get('exampleRadios')
+            price_to = request.GET.get('price_to')
+            price_from = request.GET.get('price_from')
+            if search is not None:
+                if price_from is not None and price_to is not None:
+                    model = NotebooksList.objects.filter(brand=search, price__gte=int(price_from),
+                                                         price__lte=int(price_to))
+                elif price_from is None:
+                    model = NotebooksList.objects.filter(brand=search, price__lte=int(price_to))
+                else:
+                    price_from = request.GET.get('price_from')
+                    model = NotebooksList.objects.filter(brand=search, price__gte=int(price_from))
+            elif search is None:
+                if price_from is not None and price_to is not None:
+                    model = NotebooksList.objects.filter(price__gte=int(price_from),
+                                                         price__lte=int(price_to))
+                elif price_from is None:
                     model = NotebooksList.objects.filter(price__lte=int(price_to))
                 else:
+                    price_from = request.GET.get('price_from')
                     model = NotebooksList.objects.filter(price__gte=int(price_from))
-
-            except Exception:
-                return redirect('note_main')
 
         if detail:
             model_rating = CommentsUsers.objects.filter(name_of_stuff=detail).values('rating')
@@ -132,21 +150,9 @@ class Nothebooks(generics.GenericAPIView):
                     'avg_rating': avr_rating_plural,
                     'quantity_of_comment': quantity_of_comment,
                     'model_cart': model_cart,
-                    'cart_sum': cart_sum['product_price__sum']
+                    'cart_sum': cart_sum['product_price__sum'],
                     }
             return render(request, 'main/stuff_detail.html', data)
-
-        if search:
-            if search == "Apple":
-                model = NotebooksList.objects.filter(brand='Apple')
-
-
-            elif search == "Acer":
-                model = NotebooksList.objects.filter(brand='Acer')
-
-
-            elif search == "Asus":
-                model = NotebooksList.objects.filter(brand='Asus')
 
         price_max = model.aggregate(Max('price'))
         username = request.user
@@ -157,26 +163,42 @@ class Nothebooks(generics.GenericAPIView):
                 'price_max': price_max['price__max'],
                 'model_cart': model_cart,
                 'cart_sum': cart_sum['product_price__sum'],
+                'model_like': model_like,
                 }
         return render(request, 'main/nothebook.html', data)
 
     def post(self, request):
+
         add_comment = request.POST.get('add_comment')
         add_questions = request.POST.get('add_question')
         buy = request.POST.get('buy')
+        add_like = request.POST.get('add_like')
         delete_btn = request.POST.get('delete_btn')
+
+        if add_like:
+            model_add_like = NotebooksList.objects.filter(id=add_like).values()[0]
+            username = request.user
+            title = model_add_like['title']
+            product_pic = model_add_like['pic_link']
+            product_price = model_add_like['price']
+            product_status = model_add_like['in_out']
+
+            LikeListModel.objects.create(user_name=username, product_title=title, product_pic=product_pic,
+                                         product_price=product_price, product_status=product_status)
+
+            return redirect(request.path)
 
         if delete_btn:
             ProductCart.objects.filter(id=delete_btn).delete()
             return redirect(request.path_info)
 
         if buy:
-            test = NotebooksList.objects.filter(id=buy).values()[0]
+            model_add_cart = NotebooksList.objects.filter(id=buy).values()[0]
             username = request.user
-            title = test['title']
-            product_pic = test['pic_link']
-            product_price = test['price']
-            product_status = test['in_out']
+            title = model_add_cart['title']
+            product_pic = model_add_cart['pic_link']
+            product_price = model_add_cart['price']
+            product_status = model_add_cart['in_out']
 
             ProductCart.objects.create(user_name=username, product_title=title, product_pic=product_pic,
                                        product_price=product_price, product_status=product_status)
@@ -318,13 +340,18 @@ class Videocard(generics.GenericAPIView):
         username = request.user
         price_max = model.aggregate(Max('price'))
 
+        """aggregate sum of all cart items"""
         cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+        """Like like all"""
+        model_like = LikeListModel.objects.all()
 
         data = {"model": model,
                 'username': username,
                 'price_max': price_max['price__max'],
                 'model_cart': model_cart,
-                'cart_sum': cart_sum['product_price__sum']
+                'cart_sum': cart_sum['product_price__sum'],
+                'model_like': model_like
                 }
 
         return render(request, "main/videocards.html", data)
@@ -334,7 +361,21 @@ class Videocard(generics.GenericAPIView):
         add_comment = request.POST.get('add_comment')
         add_question = request.POST.get('add_question')
         buy = request.POST.get('buy')
+        add_like = request.POST.get('add_like')
         delete_btn = request.POST.get('delete_btn')
+
+        if add_like:
+            model_add_like = Videocards.objects.filter(id=add_like).values()[0]
+            username = request.user
+            title = model_add_like['title']
+            product_pic = model_add_like['pic_link']
+            product_price = model_add_like['price']
+            product_status = model_add_like['in_out']
+
+            LikeListModel.objects.create(user_name=username, product_title=title, product_pic=product_pic,
+                                         product_price=product_price, product_status=product_status)
+
+            return redirect(request.path)
 
         if delete_btn:
             ProductCart.objects.filter(id=delete_btn).delete()
@@ -492,13 +533,19 @@ class Monitors(generics.GenericAPIView):
 
         price_max = model.aggregate(Max('price'))
         username = request.user
+
+        """aggregate sum of all cart items"""
         cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+        """Like like all"""
+        model_like = LikeListModel.objects.all()
 
         data = {'username': username,
                 'model': model,
                 'price_max': price_max['price__max'],
                 'model_cart': model_cart,
-                'cart_sum': cart_sum['product_price__sum']
+                'cart_sum': cart_sum['product_price__sum'],
+                'model_like': model_like
                 }
         return render(request, 'main/displays.html', data)
 
@@ -506,7 +553,21 @@ class Monitors(generics.GenericAPIView):
         add_comment = request.POST.get('add_comment')
         add_question = request.POST.get('add_question')
         buy = request.POST.get('buy')
+        add_like = request.POST.get('add_like')
         delete_btn = request.POST.get('delete_btn')
+
+        if add_like:
+            model_add_like = Monitors_list.objects.filter(id=add_like).values()[0]
+            username = request.user
+            title = model_add_like['title']
+            product_pic = model_add_like['pic_link']
+            product_price = model_add_like['price']
+            product_status = model_add_like['in_out']
+
+            LikeListModel.objects.create(user_name=username, product_title=title, product_pic=product_pic,
+                                         product_price=product_price, product_status=product_status)
+
+            return redirect(request.path)
 
         if delete_btn:
             ProductCart.objects.filter(id=delete_btn).delete()
@@ -666,13 +727,19 @@ class Memory(generics.GenericAPIView):
 
         price_max = model.aggregate(Max('price'))
         username = request.user
+
+        """aggregate sum of all cart items"""
         cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+        """Like like all"""
+        model_like = LikeListModel.objects.all()
 
         data = {'username': username,
                 'model': model,
                 'price_max': price_max['price__max'],
                 'model_cart': model_cart,
-                'cart_sum': cart_sum['product_price__sum']
+                'cart_sum': cart_sum['product_price__sum'],
+                'model_like': model_like
                 }
 
         return render(request, 'main/memory.html', data)
@@ -681,7 +748,21 @@ class Memory(generics.GenericAPIView):
         add_comment = request.POST.get('add_comment')
         add_question = request.POST.get('add_question')
         buy = request.POST.get('buy')
+        add_like = request.POST.get('add_like')
         delete_btn = request.POST.get('delete_btn')
+
+        if add_like:
+            model_add_like = Memory_list.objects.filter(id=add_like).values()[0]
+            username = request.user
+            title = model_add_like['title']
+            product_pic = model_add_like['pic_link']
+            product_price = model_add_like['price']
+            product_status = model_add_like['in_out']
+
+            LikeListModel.objects.create(user_name=username, product_title=title, product_pic=product_pic,
+                                         product_price=product_price, product_status=product_status)
+
+            return redirect(request.path)
 
         if delete_btn:
             ProductCart.objects.filter(id=delete_btn).delete()
@@ -797,3 +878,13 @@ class DetailCommentsApi(generics.GenericAPIView,
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, *kwargs)
+
+
+class CartApi(generics.GenericAPIView,
+              mixins.CreateModelMixin,
+              mixins.ListModelMixin):
+    queryset = ProductCart.objects.all()
+    serializer_class = CartApiSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
