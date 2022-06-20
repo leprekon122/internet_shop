@@ -258,6 +258,9 @@ body .cart_footers{display:flex;
 .like_header {background: linear-gradient(to right, #080707, #5d21bf, #080707)}
 /*================*/
 
+.ready_to_delivery {padding: 3%;
+                    border-bottom: 2px solid grey}
+
 
 .main_page_carusel {background-color:black}
 
@@ -526,8 +529,7 @@ body .all_stuff {
                 display:flex;
                 flex-display:row;
                 flex-wrap: wrap;
-                transition-duration: 1s
-
+                transition-duration: 1s;
                 }
 
 body .title_stuff {height: 32vh;
@@ -1121,9 +1123,9 @@ body .text_comment{width:60%;
                    }
     body .manage_panel{display: block;
                        margin-top:5%;
-                       width: 80%;
-                       height: 70vh;
-                       z-index:1;
+                       width: 90%;
+                       height: 90vh;
+                       z-index:2;
                        position: absolute;
                        background: #fff;
                        border-bottom: 3px solid #fff;
@@ -1158,7 +1160,7 @@ body .text_comment{width:60%;
                     margin-top:3%;
                     width: 90%}
 
-    body .carousel-item img {height:250px;}
+    body .carousel-item img {height:22vh;}
 
     body .registration_all{
                        width: 100%;
@@ -1237,10 +1239,10 @@ body .text_comment{width:60%;
 
     body .comment_video iframe{max-width:270px}
 
+
     body .note:hover #des{
-                 transform: scale(1.05);
                  display: none;
-                 font-size: 12px;
+
                  }
 
     body .detail_title {width: 100%;
@@ -1383,9 +1385,9 @@ body .text_comment{width:60%;
 
 
    .main_page_2 {width:100%;
-                 height:35vh}
+                 height:39vh}
    .main_page_2 img{width:100%;
-                    height:35vh;
+                    height:39vh;
                 }
 
    .main_page_2_text {z-index: 1;
@@ -1396,10 +1398,10 @@ body .text_comment{width:60%;
 
 
   .main_page_3 {width:100%;
-                height:35vh}
+                height:39vh}
 
   .main_page_3 img{width:100%;
-                   height:35vh;
+                   height:39vh;
                 }
 
   .main_page_3_text {z-index: 1;

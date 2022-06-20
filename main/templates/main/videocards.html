@@ -10,104 +10,140 @@
     </button>
     <div class="main_comodety">
         <div class="manage_panel" id="main_panels">
-            <div class="alphabet_search" id="main_panel">
-                <h5>Пошук по бренду</h5>
-                <form method="get">
-                    <button class="btn btn-success" type="submit">search</button>
+            <form method="get">
+                <button type="submit" class="text-light btn btn-success" name="search" value="search">
+                    <i class="fa-solid fa-magnifying-glass"></i> пошук
+                </button>
+                <button class="btn btn-danger" type="submit" name="reject_filters" value="reject_filters">скасувати
+                </button>
+
+                <div class="alphabet_search">
+                    <h5 class="text-dark">Пошук по бренду</h5>
+                    <!-- <form method="get"> -->
                     <br>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                               value="AMD" checked>
-                        <label class="form-check-label" for="exampleRadios1">AMD</label>
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="AMD"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            AMD
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                               value="Gigabyte" checked>
-                        <label class="form-check-label" for="exampleRadios1">Gigabyte</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Asus"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            Asus
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
-                               value="Asus" checked>
-                        <label class="form-check-label" for="exampleRadios1">Asus</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Gigabyte"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            Gigabyte
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5"
-                               value="INNO3D" checked>
-                        <label class="form-check-label" for="exampleRadios1">INNO3D</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="INNO3D"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            INNDO3D
+                        </label>
                     </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6"
-                               value="MSI" checked>
-                        <label class="form-check-label" for="exampleRadios1">MSI</label>
+
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="MSI"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            MSI
+                        </label>
                     </div>
-                </form>
-            </div>
-            <br>
-            <div class="coast_main" id="coast">
-                <h5>Пошук за ціною</h5>
+
+                </div>
                 <br>
-                <form method="get">
+                <div class="coast_main" id="coast">
+                    <h5 class="text-dark">Пошук за ціною</h5>
+                    <br>
+                    <!--<form method="get"> -->
                     <div class="coast_search">
                         <input type="text" class="form-control" name="price_from" id="price_from" placeholder="Від">
                         <input type="text" class="form-control" name="price_to" placeholder="До" id="price_to">
                     </div>
                     <br>
                     <div class="sliders">
-                        <input type="range" class="slider" min="0" max="{{price_max}}" step="100" value="3000"
+                        <input type="range" class="slider" min="0" max="{{price_max}}" step="500" value="5000"
                                id="price_slider"
                                oninput="price_sliders()">
-                        <input type="range" class="slider" min="0" max="{{price_max}}" step="100" value="{{price_max}}"
+                        <input type="range" class="slider" min="0" max="{{price_max}}" step="100"
+                               value="{{price_max}}"
                                id="price_slider_2" oninput="price_sliders()">
                     </div>
                     <br>
-                    <button class="btn btn-success" type="submit" name="price" value="price">пошук</button>
-                </form>
-            </div>
+                    <br>
+                    <!--<button class="btn btn-success" type="submit" name="prices" value="prices">пошук</button> -->
+                    <!--</form> -->
+                </div>
+                <br>
+                <div class="ready_to_delivery">
+                    <div class="form-check">
+                        <input class="form-check-input" name="ready_deliver" type="checkbox" value="ready_deliver"
+                               id="flexCheckDefault">
+                        <label class="form-check-label text-dark" for="flexCheckDefault">
+                            готовий до відправлення
+                        </label>
+                    </div>
+                </div>
+            </form>
             <button class="btn btn-light" onclick="active_panel()" id="filters">
                 <i class="fa-solid fa-sliders"></i>
             </button>
         </div>
-
-
-        <div class="all_stuff">
-            {%for el in model%}
-            <div class="alert alert-light note">
-                <!--<img src="/media/{{el.pic}}" width="180px" height="140px"> -->
-                <form method="get">
-                    {%csrf_token%}
-                    <button class="btn btn-light bg-light" name="stuff_detail" value="{{el.id}}">
-                        <img loading="lazy" src="{{el.pic_link}}" width="180px" height="140px">
-                    </button>
-                </form>
-                <br>
-                <div class="title">
-                    <p>{{el.title}}</p>
-                </div>
-                <form method="post">{% csrf_token %}
-                    <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"><i
-                            class="fa-solid fa-heart"></i></button>
-                </form>
-
-                <div class="price_and_bag">
-                    <h5>{{el.price}} UAH</h5>
-                    <form method="post">{%csrf_token%}
-                        <button class="btn btn-light" type="submit" name="buy" value="{{el.id}}"
-                                onclick="return stuff_in_cart()"><i
-                                class="fa-solid fa-cart-shopping"></i></button>
-                        <i class="fa-solid fa-cart-plus" id="in_cart"></i>
-                    </form>
-                </div>
-                {%if el.in_out == 'Є в наявності'%}
-                <p class="text-success">готовий до відправлення <span class="truck"><i
-                        class="fa-solid fa-truck"></i></span></p>
-                {%else%}
-                <p class="text-unsuccess">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
-                {%endif%}
-                <p class="description" id="des">{{el.description}}</p>
-            </div>
-            {%endfor%}
-        </div>
     </div>
+</div>
+
+<div class="container-fluid">
+    <div class="all_stuff">
+        {%for el in model%}
+        <div class="alert alert-light note">
+            <!--<img src="/media/{{el.pic}}" width="180px" height="140px"> -->
+            <form method="get">
+                {%csrf_token%}
+                <button class="btn btn-light bg-light" name="stuff_detail" value="{{el.id}}">
+                    <img loading="lazy" src="{{el.pic_link}}" width="180px" height="140px">
+                </button>
+            </form>
+            <br>
+            <div class="title">
+                <p>{{el.title}}</p>
+            </div>
+            <form method="post">{% csrf_token %}
+                <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"><i
+                        class="fa-solid fa-heart"></i></button>
+            </form>
+
+            <div class="price_and_bag">
+                <h5>{{el.price}} UAH</h5>
+                <form method="post">{%csrf_token%}
+                    <button class="btn btn-light" type="submit" name="buy" value="{{el.id}}"
+                            onclick="return stuff_in_cart()"><i
+                            class="fa-solid fa-cart-shopping"></i></button>
+                    <i class="fa-solid fa-cart-plus" id="in_cart"></i>
+                </form>
+            </div>
+            {%if el.in_out == 'Є в наявності'%}
+            <p class="text-success">готовий до відправлення <span class="truck"><i
+                    class="fa-solid fa-truck"></i></span></p>
+            {%else%}
+            <p class="text-unsuccess">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
+            {%endif%}
+            <p class="description" id="des">{{el.description}}</p>
+        </div>
+        {%endfor%}
+    </div>
+</div>
 </div>
 <script src="/static/main/js/videocard.js"></script>
 {%endblock%}
