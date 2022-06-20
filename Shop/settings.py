@@ -121,7 +121,7 @@ DATABASES = {
         'USER': 'vdnykejhafgtvo',
         'PASSWORD': 'ce812f69596457b403b4ef89adfdcd81e0d742f413563e3842dc44b9273cc577',
         'HOST': 'ec2-54-75-184-144.eu-west-1.compute.amazonaws.com',
- }
+    }
 }
 
 # Password validation
