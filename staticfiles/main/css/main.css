@@ -447,6 +447,7 @@ body .main_comodety{
                         }
 
 body .manage_panel {
+    display: block;
     background: #fff;
     height: 100vh;
     border-right: 2px solid #5d21bf;
@@ -456,6 +457,7 @@ body .manage_panel {
     transition-duration: 1s;
     z-index:2;
     position:fixed;
+
 
 }
 
@@ -1132,6 +1134,7 @@ body .text_comment{width:60%;
                        border-top: 3px solid #fff;
                        transform: translateX(-109%);
                        transition-duration: 1.5s
+                       overflow: auto;
                        }
 
     body .main_comodety {flex-direction:column}
