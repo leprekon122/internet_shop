@@ -4,9 +4,7 @@ from django.contrib.auth import authenticate, login
 from .serializers import *
 from .models import *
 from .forms import *
-from django.db.models import Sum
-
-from django.db.models import Max
+from django.db.models import Sum, Avg, Max
 
 
 # Create your views here.
@@ -92,6 +90,7 @@ class Nothebooks(generics.GenericAPIView):
             search = request.GET.get('exampleRadios')
             price_to = request.GET.get('price_to')
             price_from = request.GET.get('price_from')
+            print(search)
 
             if search is not None:
                 # filter with start and end price
@@ -268,6 +267,11 @@ class Nothebooks(generics.GenericAPIView):
         buy = request.POST.get('buy')
         add_like = request.POST.get('add_like')
         delete_btn = request.POST.get('delete_btn')
+        del_like = request.POST.get('del_like')
+
+        if del_like:
+            LikeListModel.objects.filter(id=del_like).delete()
+            return redirect(request.path)
 
         if add_like:
             model_add_like = NotebooksList.objects.filter(id=add_like).values()[0]
@@ -544,7 +548,13 @@ class Videocard(generics.GenericAPIView):
         buy = request.POST.get('buy')
         add_like = request.POST.get('add_like')
         delete_btn = request.POST.get('delete_btn')
+        del_like = request.POST.get('del_like')
 
+        # delete stuff from like list
+        if del_like:
+            LikeListModel.objects.filter(id=del_like).delete()
+            return redirect(request.path)
+        # add stuff to list like
         if add_like:
             model_add_like = Videocards.objects.filter(id=add_like).values()[0]
             username = request.user
@@ -824,6 +834,12 @@ class Monitors(generics.GenericAPIView):
         buy = request.POST.get('buy')
         add_like = request.POST.get('add_like')
         delete_btn = request.POST.get('delete_btn')
+        del_like = request.POST.get('del_like')
+
+        # delete stuff from like list
+        if del_like:
+            LikeListModel.objects.filter(id=del_like).delete()
+            return redirect(request.path)
 
         if add_like:
             model_add_like = Monitors_list.objects.filter(id=add_like).values()[0]
@@ -1107,6 +1123,12 @@ class Memory(generics.GenericAPIView):
         buy = request.POST.get('buy')
         add_like = request.POST.get('add_like')
         delete_btn = request.POST.get('delete_btn')
+        del_like = request.POST.get('del_like')
+
+        # delete stuff from like list
+        if del_like:
+            LikeListModel.objects.filter(id=del_like).delete()
+            return redirect(request.path)
 
         if add_like:
             model_add_like = Memory_list.objects.filter(id=add_like).values()[0]

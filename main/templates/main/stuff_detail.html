@@ -4,10 +4,10 @@
 
 {%block content%}
 <div class="container detail_container">
-    <div class="container detail_all">
+    <div class="detail_all">
         {%for el in model%}
         <div class="container detail_title">
-            <h4 id="detail_title">{{el.title}}</h4>
+            <h4 id="container detail_title">{{el.title}}</h4>
             <div class="title_rating">
                 {%if avg_rating == 0%}
                 <span class="comment_rating">★</span>
@@ -54,7 +54,7 @@
                 {%endif%}
             </div>
         </div>
-        <div class="container detail_panel">
+        <div class="container-fluid detail_panel">
             <div class="detail_panel_a">
                 <a href="" id="detail_start_a">Усе про товар</a>
             </div>
@@ -91,7 +91,7 @@
                             <a class="btn btn-success" id="cart_sold" data-target="#cart" data-toggle="modal">Товар у
                                 кошеку <i
                                         class="fa-solid fa-cart-arrow-down"></i></a>
-                            <button class="btn btn-dark">Купити в кредит</button>
+                            <button class="btn btn-primary">Купити в кредит</button>
                         </div>
                     </form>
                 </div>
@@ -221,7 +221,7 @@
             </div>
         </div>
         <br>
-        <div class="detail_description">
+        <div class="detail_description" id="detail_des">
             <p>{{el.description}}</p>
             <br>
         </div>

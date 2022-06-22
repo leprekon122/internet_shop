@@ -111,13 +111,13 @@ class Memory_list(models.Model):
 
 
 class CommentsUsers(models.Model):
-    rating_choice = (('1', '1'),
-                     ('2', '2'),
-                     ('3', '3'),
-                     ('4', '4'),
-                     ('5', '5')
+    rating_choice = ((1, 1),
+                     (2, 2),
+                     (3, 3),
+                     (4, 4),
+                     (5, 5)
                      )
-    rating = models.CharField(max_length=15, choices=rating_choice, null=True, blank=True)
+    rating = models.IntegerField(choices=rating_choice, null=True, blank=True)
     name_of_user = models.CharField(max_length=50, null=True)
     name_of_stuff = models.ForeignKey(NotebooksList, on_delete=models.CASCADE)
     comment = models.TextField()
@@ -192,13 +192,13 @@ class CommentsUserMonitor(models.Model):
 
 
 class CommentsUserMemory(models.Model):
-    rating_choice = (('1', '1'),
-                     ('2', '2'),
-                     ('3', '3'),
-                     ('4', '4'),
-                     ('5', '5')
+    rating_choice = ((1, 1),
+                     (2, 2),
+                     (3, 3),
+                     (4, 4),
+                     (5, 5)
                      )
-    rating = models.CharField(max_length=15, choices=rating_choice, null=True, blank=True)
+    rating = models.IntegerField(choices=rating_choice, null=True, blank=True)
     name_of_user = models.CharField(max_length=50)
     name_of_stuff = models.ForeignKey(Memory_list, on_delete=models.CASCADE)
     comment = models.TextField()
@@ -206,7 +206,7 @@ class CommentsUserMemory(models.Model):
     date = models.DateField(auto_now=True)
 
     def __str__(self):
-        return f" {self.name_of_stuff} {self.comment} {self.date} {self.rating}"
+        return f" {self.name_of_stuff} {self.comment} {self.date}"
 
     class Meta:
         verbose_name = 'CommentsUserMemory'

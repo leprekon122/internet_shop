@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="navbar-nav like_list">
-                    <i class="fa-solid fa-list" data-toggle="modal" data-target="#likes_list"></i>
+                    <i class="fa-brands fa-gratipay" data-toggle="modal" data-target="#likes_list"></i>
                 </div>
 
             </div>
@@ -89,12 +89,13 @@
 <div class="container">
     <div class="main_panels" id="panels">
         <div class="alert alert-dark">
-            <div class="list_items">
+            <div class="list_items" id="list_item">
                 <div id="item_hover1" onmouseover="itemHover1()" onmouseout="itemHover1_out()">
                     <a href="" onclick="return comp_item()"><i class="fa-solid fa-laptop"></i> Ноутбуки та компютери</a>
                 </div>
                 <div id="item_hover2" onmouseover="itemHover2()" onmouseout="itemHover2_out()">
-                    <a href="" onclick="return smart()"><i class="fa-solid fa-mobile-screen"></i> Смартфони, тв і електроника</a>
+                    <a href="" onclick="return smart()"><i class="fa-solid fa-mobile-screen"></i> Смартфони, тв і
+                        електроника</a>
                 </div>
                 <div id="item_hover3" onmouseover="itemHover3()" onmouseout="itemHover3_out()">
                     <a href="" onclick="return home_stuff()"><i class="fa-solid fa-tv"></i> Побутова техніка</a>
@@ -102,6 +103,10 @@
             </div>
             <div id="computers">
                 <div class="computers">
+                    <div class="all_cat" id="all_cat">
+                        <p class="text-light" onclick="return back_to_cat()"><i class="fa-solid fa-arrow-left"></i> Усі категорії</p>
+                        <br>
+                    </div>
                     <a href="{%url 'note_main' %}">Ноутбуки</a>
                     <a href="{% url 'videocards'%}">Відеокарти</a>
                     <a href="{% url 'displays' %}">Монітори</a>
@@ -112,6 +117,10 @@
             </div>
             <div id="smartphones">
                 <div class="smart_and_gadgets">
+                    <div class="all_cat" id="all_cat_2">
+                        <p class="text-light" onclick="return back_to_cat()"><i class="fa-solid fa-arrow-left"></i> Усі категорії</p>
+                        <br>
+                    </div>
                     <a href="">Смартфони</a>
                     <a href="">Фото техніка</a>
                     <a href="">Навушники</a>
@@ -120,6 +129,10 @@
             </div>
             <div id="home_appliances">
                 <div class="home_electronics">
+                    <div class="all_cat" id="all_cat_3">
+                        <p class="text-light" onclick="return back_to_cat()"><i class="fa-solid fa-arrow-left"></i> Усі категорії</p>
+                        <br>
+                    </div>
                     <a href="">Холодильники</a>
                     <a href="">Пральні машини</a>
                     <a href="">Кондіціонери</a>
@@ -211,6 +224,11 @@
                 {% for like in model_like %}
                 {% if like.user_name == username %}
                 <div class="alert alert-light like_list_all">
+                    <div class="del_like">
+                        <form method="post">{%csrf_token%}
+                            <button type="submit" class="btn btn-light" name="del_like" value="{{like.id}}">x</button>
+                        </form>
+                    </div>
                     <img src="{{like.product_pic}}" width="180px" height="140px">
                     <br>
                     <span class="text-dark like_title">{{like.product_title}}</span>

@@ -40,13 +40,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'main',
 
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google'
 ]
-
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -60,9 +58,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '909548435939-7037e8g3uiu9ktroiqje8pn38q5vr8fq.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 """local creditionals"""
-#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '605176420122-t1niqvg1ere0l5gafmkj74mq3v4ku919.apps.googleusercontent.com'
-#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '605176420122-t1niqvg1ere0l5gafmkj74mq3v4ku919.apps.googleusercontent.com'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 
 MIDDLEWARE = [
@@ -74,8 +71,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-
 
 ROOT_URLCONF = 'Shop.urls'
 
@@ -100,7 +95,7 @@ WSGI_APPLICATION = 'Shop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
 #        # postgresql_psycopg2
 #        'ENGINE': 'django.db.backends.postgresql',
@@ -110,11 +105,11 @@ WSGI_APPLICATION = 'Shop.wsgi.application'
 #        'HOST': '127.0.0.1',
 #        'PORT': '5432'
 #    }
-#}
+# }
 
 
 DATABASES = {
-   'default': {
+    'default': {
         # postgresql_psycopg2
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'd7rf4ue3n9ne06',
@@ -165,5 +160,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-

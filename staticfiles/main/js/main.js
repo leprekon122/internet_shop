@@ -11,25 +11,60 @@ function catalog(){
 
 
 function comp_item(){
-    document.getElementById('computers').style.display='block'
-    document.getElementById('smartphones').style.display='none'
-    document.getElementById('home_appliances').style.display='none'
+    var width = window.screen.width
+    if(width <= 412){
+        document.getElementById('computers').style.display='block'
+        document.getElementById('all_cat').style.display='block'
+        document.getElementById('smartphones').style.display='none'
+        document.getElementById('home_appliances').style.display='none'
+        document.getElementById('list_item').style.display='none'
+    } else{
+        document.getElementById('computers').style.display='block'
+        document.getElementById('smartphones').style.display='none'
+        document.getElementById('home_appliances').style.display='none'
+    }
     return false
 }
 
 
 
 function smart() {
-    document.getElementById('smartphones').style.display='block'
-    document.getElementById('computers').style.display='none';
-    document.getElementById('home_appliances').style.display='none'
+    var width = window.screen.width
+    if(width <= 412){
+        document.getElementById('smartphones').style.display='block'
+        document.getElementById('all_cat_2').style.display='block'
+        document.getElementById('computers').style.display='none';
+        document.getElementById('home_appliances').style.display='none'
+        document.getElementById('list_item').style.display='none'
+    } else {
+        document.getElementById('smartphones').style.display='block'
+        document.getElementById('computers').style.display='none';
+        document.getElementById('home_appliances').style.display='none'
+    }
     return false
 }
 
 function home_stuff(){
+    var width = window.screen.width
+    if(width <= 412){
     document.getElementById('home_appliances').style.display='block'
+    document.getElementById('all_cat_3').style.display='block'
     document.getElementById('smartphones').style.display='none'
-    document.getElementById('computers').style.display='none';
+    document.getElementById('computers').style.display='none'
+    document.getElementById('list_item').style.display='none'
+    } else {
+        document.getElementById('home_appliances').style.display='block'
+        document.getElementById('smartphones').style.display='none'
+        document.getElementById('computers').style.display='none'
+    }
+    return false
+}
+
+function back_to_cat(){
+    document.getElementById('list_item').style.display='block'
+    document.getElementById('home_appliances').style.display='none'
+    document.getElementById('smartphones').style.display='none'
+    document.getElementById('computers').style.display='none'
     return false
 }
 
