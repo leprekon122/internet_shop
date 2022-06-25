@@ -19,7 +19,6 @@
 
                 <div class="alphabet_search">
                     <h5 class="text-dark">Пошук по бренду</h5>
-                    <!-- <form method="get"> -->
                     <br>
                     <div class="form-check">
                         <input class="form-check-input" name="exampleRadios" type="checkbox" value="Apple"
@@ -126,56 +125,51 @@
                     </div>
                 </div>
             </form>
-            <button class="btn btn-light" onclick="active_panel()" id="filters">
+            <!-- <button class="btn btn-light" onclick="active_panel()" id="filters">
                 <i class="fa-solid fa-sliders"></i>
-            </button>
+            </button> -->
         </div>
-    </div>
-</div>
 
 
-<div class="container-fluid">
-
-    <div class="all_stuff" id="all_st">
-        {%for el in model%}
-        <div class="alert alert-light note">
-            <!--<img src="/media/{{el.pic}}" width="180px" height="140px"> -->
-            <form method="get">
-                {%csrf_token%}
-                <button class="btn btn-light" name="stuff_detail" value="{{el.id}}">
-                    <img loading="lazy" src="{{el.pic_link}}" width="180px" height="140px">
-                </button>
-            </form>
-            <br>
-            <div class="title title_note">
-                <p>{{el.title}}</p>
-            </div>
-            <form method="post">{% csrf_token %}
-                <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"><i
-                        class="fa-solid fa-heart"></i></button>
-            </form>
-
-
-            <div class="price_and_bag">
-                <h5>{{el.price}} UAH</h5>
-                <form method="post">{%csrf_token%}
-                    <button class="btn btn-light" type="submit" name="buy" value="{{el.id}}"
-                            onclick="return stuff_in_cart()"><i
-                            class="fa-solid fa-cart-shopping"></i></button>
-                    <i class="fa-solid fa-cart-plus" id="in_cart"></i>
+        <div class="all_stuff" id="all_st">
+            {%for el in model%}
+            <div class="alert alert-light note">
+                <!--<img src="/media/{{el.pic}}" width="180px" height="140px"> -->
+                <form method="get">
+                    {%csrf_token%}
+                    <button class="btn btn-light" name="stuff_detail" value="{{el.id}}">
+                        <img loading="lazy" src="{{el.pic_link}}" width="160px" height="130px">
+                    </button>
                 </form>
-            </div>
-            {%if el.in_out == 'Є в наявності'%}
-            <p class="text-success">готовий до відправлення <span class="truck"><i
-                    class="fa-solid fa-truck"></i></span></p>
-            {%else%}
-            <p class="text-unsuccess" id="not_have">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
-            {%endif%}
-            <p class="description" id="des">{{el.description}}</p>
-        </div>
-        {%endfor%}
-    </div>
-</div>
-<script src="/static/main/js/notebook.js"></script>
+                <div class="title title_note">
+                    <p>{{el.title}}</p>
+                </div>
+                <form method="post">{% csrf_token %}
+                    <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"><i
+                            class="fa-solid fa-heart"></i></button>
+                </form>
 
-{%endblock%}
+
+                <div class="price_and_bag">
+                    <h5>{{el.price}} UAH</h5>
+                    <form method="post">{%csrf_token%}
+                        <button class="btn btn-light" type="submit" name="buy" value="{{el.id}}"
+                                onclick="return stuff_in_cart()"><i
+                                class="fa-solid fa-cart-shopping"></i></button>
+                        <i class="fa-solid fa-cart-plus" id="in_cart"></i>
+                    </form>
+                </div>
+                {%if el.in_out == 'Є в наявності'%}
+                <p class="text-success">готовий до відправлення <span class="truck"><i
+                        class="fa-solid fa-truck"></i></span></p>
+                {%else%}
+                <p class="text-unsuccess" id="not_have">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
+                {%endif%}
+                <p class="description" id="des">{{el.description}}</p>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+    <script src="/static/main/js/notebook.js"></script>
+
+    {%endblock%}

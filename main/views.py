@@ -5,6 +5,7 @@ from .serializers import *
 from .models import *
 from .forms import *
 from django.db.models import Sum, Avg, Max
+from django.contrib import messages
 
 
 # Create your views here.
@@ -20,6 +21,9 @@ class MainPage(generics.GenericAPIView):
 
             if user is not None:
                 login(request, user)
+                return redirect('main')
+            else:
+                messages.error(request, 'Неправельний логін або пароль!!!')
                 return redirect('main')
         username = request.user
         model_cart = ProductCart.objects.all()
@@ -261,7 +265,6 @@ class Nothebooks(generics.GenericAPIView):
         return render(request, 'main/nothebook.html', data)
 
     def post(self, request):
-
         add_comment = request.POST.get('add_comment')
         add_questions = request.POST.get('add_question')
         buy = request.POST.get('buy')
@@ -320,6 +323,7 @@ class Nothebooks(generics.GenericAPIView):
                                                                                                    'comment', 'date')
             quentety = len(model_1)
             quentety_1 = len(model_2)
+
 
             data = {'model': model,
                     'model_1': model_1,

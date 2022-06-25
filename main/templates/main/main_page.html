@@ -21,6 +21,12 @@
                             <input class="form-control" type="text" name="username">
                             <br>
                             <input class="form-control" type="password" name="password">
+                            {% if messages %}
+                            {% for message in messages%}
+                            <br>
+                            <p class="text-warning">{{message}}!!!</p>
+                            {%endfor%}
+                            {%endif%}
                             <div class="modal-footer bg-dark">
                                 <button type="submit" class="btn btn-success" name="login" value="login">Login</button>
 

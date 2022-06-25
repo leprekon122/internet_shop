@@ -91,56 +91,51 @@
                     </div>
                 </div>
             </form>
-            <button class="btn btn-light" onclick="active_panel()" id="filters">
-                <i class="fa-solid fa-sliders"></i>
-            </button>
         </div>
-    </div>
-</div>
 
-<div class="container-fluid">
-    <div class="all_stuff" id="all_st">
-        {%for el in model%}
 
-        <div class="alert alert-light note">
-            <!--<img src="/media/{{el.pic}}" width="180px" height="140px"> -->
-            <form method="get">
-                {%csrf_token%}
-                <button class="btn btn-light bg-light" name="stuff_detail" value="{{el.id}}">
-                    <img loading="lazy" src="{{el.pic_link}}" width="180px" height="140px">
-                </button>
-            </form>
-            <br>
-            <div class="title">
-                <p>{{el.title}}</p>
-            </div>
-            <form method="post">{% csrf_token %}
-                <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"><i
-                        class="fa-solid fa-heart"></i></button>
-            </form>
+        <div class="all_stuff" id="all_st">
+            {%for el in model%}
 
-            <div class="price_and_bag">
-                <h5>{{el.price}} UAH</h5>
-                <form method="post">{%csrf_token%}
-                    <button class="btn btn-light" type="submit" name="buy" value="{{el.id}}"
-                            onclick="return stuff_in_cart()"
-                    ><i
-                            class="fa-solid fa-cart-shopping"></i></button>
-                    <i class="fa-solid fa-cart-plus" id="in_cart"></i>
+            <div class="alert alert-light note">
+                <!--<img src="/media/{{el.pic}}" width="180px" height="140px"> -->
+                <form method="get">
+                    {%csrf_token%}
+                    <button class="btn btn-light bg-light" name="stuff_detail" value="{{el.id}}">
+                        <img loading="lazy" src="{{el.pic_link}}" width="160px" height="130px">
+                    </button>
                 </form>
+                <br>
+                <div class="title">
+                    <p>{{el.title}}</p>
+                </div>
+                <form method="post">{% csrf_token %}
+                    <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"><i
+                            class="fa-solid fa-heart"></i></button>
+                </form>
+
+                <div class="price_and_bag">
+                    <h5>{{el.price}} UAH</h5>
+                    <form method="post">{%csrf_token%}
+                        <button class="btn btn-light" type="submit" name="buy" value="{{el.id}}"
+                                onclick="return stuff_in_cart()"
+                        ><i
+                                class="fa-solid fa-cart-shopping"></i></button>
+                        <i class="fa-solid fa-cart-plus" id="in_cart"></i>
+                    </form>
+                </div>
+                {%if el.in_out == 'Є в наявності'%}
+                <p class="text-success">готовий до відправлення <span class="truck"><i
+                        class="fa-solid fa-truck"></i></span></p>
+                {%else%}
+                <p class="text-unsuccess">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
+                {%endif%}
+
+                <p class="description " id="des">{{el.description}}</p>
             </div>
-            {%if el.in_out == 'Є в наявності'%}
-            <p class="text-success">готовий до відправлення <span class="truck"><i
-                    class="fa-solid fa-truck"></i></span></p>
-            {%else%}
-            <p class="text-unsuccess">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
-            {%endif%}
-
-            <p class="description " id="des">{{el.description}}</p>
+            {%endfor%}
         </div>
-        {%endfor%}
     </div>
-</div>
-<script src="/static/main/js/monitors.js"></script>
+    <script src="/static/main/js/monitors.js"></script>
 
-{%endblock%}
+    {%endblock%}

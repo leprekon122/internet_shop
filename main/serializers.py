@@ -11,7 +11,7 @@ class NothebooksSerializer(serializers.ModelSerializer):
 class CommentUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommentsUsers
-        fields = ['id', 'name_of_user', 'name_of_stuff', 'comment']
+        fields = ['id', 'rating', 'name_of_user', 'name_of_stuff', 'comment']
 
 
 class CartApiSerializer(serializers.ModelSerializer):

@@ -26,7 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['my-petshop.herokuapp.com', '127.0.0.1']
 
-CART_SESSION_ID = 'cart'
 
 # Application definition
 
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'main',
+    #"debug_toolbar",
 
     'allauth',
     'allauth.account',
@@ -70,7 +70,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+   # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+
+#INTERNAL_IPS = [
+#    "127.0.0.1",
+#]
 
 ROOT_URLCONF = 'Shop.urls'
 
@@ -95,29 +100,28 @@ WSGI_APPLICATION = 'Shop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#    'default': {
-#        # postgresql_psycopg2
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'shop',
-#        'USER': 'shop_admin',
-#        'PASSWORD': '12345',
-#        'HOST': '127.0.0.1',
-#        'PORT': '5432'
-#    }
-# }
-
-
 DATABASES = {
     'default': {
         # postgresql_psycopg2
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd7rf4ue3n9ne06',
-        'USER': 'vdnykejhafgtvo',
-        'PASSWORD': 'ce812f69596457b403b4ef89adfdcd81e0d742f413563e3842dc44b9273cc577',
-        'HOST': 'ec2-54-75-184-144.eu-west-1.compute.amazonaws.com',
+        'NAME': 'shop',
+        'USER': 'shop_admin',
+        'PASSWORD': '12345',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
+
+# DATABASES = {
+#    'default': {
+#        # postgresql_psycopg2
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'd7rf4ue3n9ne06',
+#        'USER': 'vdnykejhafgtvo',
+#        'PASSWORD': 'ce812f69596457b403b4ef89adfdcd81e0d742f413563e3842dc44b9273cc577',
+#        'HOST': 'ec2-54-75-184-144.eu-west-1.compute.amazonaws.com',
+#    }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

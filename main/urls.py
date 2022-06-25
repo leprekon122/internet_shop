@@ -19,7 +19,7 @@ urlpatterns = [
     path('memory/', views.Memory.as_view(), name="memory"),
     path('accounts/', include('allauth.urls')),
     path('cartAPI/', views.CartApi.as_view()),
-
+    #path('__debug__/', include('debug_toolbar.urls'))
 
 ]
 if settings.DEBUG:

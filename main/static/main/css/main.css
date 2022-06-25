@@ -1,4 +1,4 @@
-body {background: linear-gradient(to right, #080707, #5d21bf, #080707)}
+body {background: linear-gradient(to right, #080707, #32b31e, #080707)}
 
 
 
@@ -87,16 +87,19 @@ body .cart_footers{display:flex;
             justify-content:center;
             text-align:center}
 
+
 #value_cart{
             color:#fff;
             position:relative;
             top:-11px;
             background: green;
             width:15px;
-            left:-8px;
+            left:-20px;
             border-radius:50%;
             font-size:12px;
             }
+
+
 
 .cart i{font-size:25px;
         cursor:pointer;
@@ -373,7 +376,7 @@ body .auth_panel {
 body .search_elements {width: 45%}
 
 body .auth_elem{
-                width:40%;
+                width:50%;
                 display:flex;
                 flex-direction:row;
                 justify-content:space-between}
@@ -468,34 +471,23 @@ body .home_electronics a {text-decoration: none;
 body .main_comodety{
                      width:100%;
                      display:flex;
-                     flex-decoration:row;
+                     flex-direction:row;
                         }
 
 body .manage_panel {
-    display: block;
+    /*display: block; */
     background: #fff;
-    min-height: 100vh;
+    height: 100vh;
     border-right: 2px solid #5d21bf;
     color: #fff;
     padding:.5%;
-    transform: translateX(-103%);
     transition-duration: 1s;
-    z-index:2;
-    position:absolute;
-
-
+    width: 25%;
 }
-
 
 .manage_panel button{width:100%}
 
-body .manage_panel .btn-light{position:absolute;
-                            top:0;
-                            width: 50px;
-                            height: 50px;
-                            background: #2bb32b;
-                            right:-70px;
-                           }
+
 
 body .main_comodety .btn-danger {height:6vh}
 
@@ -551,9 +543,7 @@ body .sliders{display:flex;
 
 body .all_stuff {
                 overflow:auto;
-                height:90vh;
-                padding-left: 4%;
-                padding-top: 5%;
+                height:95vh;
                 display:flex;
                 flex-display:row;
                 flex-wrap: wrap;
@@ -564,16 +554,17 @@ body .title_stuff {height: 32vh;
                    }
 
 
-body .note {border: 1px solid grey;
-            height: 60vh;
-            width:230px}
+body .note {border: 1px solid black;
+            height: 55vh;
+            z-index: 1;
+            width:210px}
 
 .note .fa-heart{color: #e35032;
                 font-size:18px;}
 
 .note button{background:#fff}
 
-body .note p{font-size: 14px;}
+body .note p{font-size: 12px;}
 
 
 body .note #des{width:200px;
@@ -582,17 +573,17 @@ body .note #des{width:200px;
                 }
 
 body .note:hover{
-                 transform: scale(1.05);
-                 height:77vh;
-                 z-index: 1;
+                 transform: scale(1.03);
+                 height:75vh;
+                 z-index: 2;
                  }
 
+
 body .note:hover #des{
-                 transform: scale(1.05);
+                 transform: scale(1.03);
                  display: block;
                  font-size: 12px;
-                 position:relative
-
+                 position: relative
                  }
 
 
@@ -620,13 +611,14 @@ body .note-videocard:hover #des{
                  display: block;
                  }
 
-body .description {width: 200px;
-                  display: none}
+body .description {max-width: 180px;
+                  display: none;
+                  }
 
 
 body .title {
-             max-width: 220px;
-             height: 17vh;
+             max-width: 230px;
+             height: 16vh;
              padding-top:5%}
 
 
@@ -950,18 +942,22 @@ body .text_comment{width:60%;
                   font-size:42px;
 
                   }
+@media screen and (max-width: 1300px){
+    body .manage_panel {width: 35%;}
+
+}
+
 
 @media screen and (max-width: 1050px){
-    body .note {width: 230px;
+    body .note {width: 210px;
                 height: 55vh;}
 
     body .title{height: 20vh}
 
-    body .note img{width: 200px;
-                   }
+
     body .detail_pic img{width:450px;
-                    height: 350px;
-                    transition-duration: 2s;}
+                        height: 350px;
+                        transition-duration: 2s;}
 
     body .detail_price_elem{display:flex;
                       flex-direction:column;
@@ -979,20 +975,48 @@ body .text_comment{width:60%;
     body .username{font-size: 15px;
                    }
 
+    body .manage_panel {width: 50%;}
+
+    #value_cart{
+            color:#fff;
+            position:relative;
+            top:-12px;
+            background: green;
+            width:15px;
+            left:-10px;
+            border-radius:50%;
+            font-size:12px;
+            display:flex;
+            justify-content:center;
+            }
+
     }
 
 
-
-
-
-
 @media screen and (max-width: 926px){
-    body .note {width: 270px;
+    body .list_items {width:100%}
+
+    body .main_panels {width:80%;}
+
+    #computers {
+            width: 95%;
+            display:none;
+            }
+
+    #smartphones {width: 65%;
+              display: none;}
+
+    #home_appliances {width: 65%;
+              display: none;}
+
+
+    body .note {width: 200px;
                 height: 50vh;}
 
     body .title{height: 15vh}
 
-    body .note img{width: 230px;
+    body .note img{width: 150px;
+                   height: 100px;
                    }
 
     .all_stuff{width: 90%}
@@ -1006,17 +1030,21 @@ body .text_comment{width:60%;
                             height:250px;
                             transition-duration: 2s;
                             }
-
     #value_cart{
             color:#fff;
             position:relative;
-            top:-34px;
+            top:-33px;
             background: green;
             width:15px;
-            left:15px;
+            left:16px;
             border-radius:50%;
             font-size:12px;
+            display:flex;
+            justify-content:center;
             }
+
+
+    body .manage_panel {width: 45%;}
 }
 
 
@@ -1033,23 +1061,25 @@ body .text_comment{width:60%;
 
     body .detail_pic iframe{width:450px}
 
+    body .manage_panel {width: 40%;}
 
-
-
+    body .auth_elem {width: 95%}
 }
 
 
-@media screen and (max-width: 721px) {
-    body .note {width: 230px;
-                height: 65vh;
+@media screen and (max-width: 763px) {
+    body .manage_panel {width: 45%;}
+
+    body .note {width: 200px;
+                height: 48vh;
                 }
 
-    body .title{height: 26vh;
+    body .title{height: 17vh;
                 max-width:350px;
                 }
 
-    body .note img{width: 200px;
-                   height: 170px
+    body .note img{width: 140px;
+                   height: 100px
                    }
 
 
@@ -1070,7 +1100,8 @@ body .text_comment{width:60%;
 
     body .auth_elem{
                     margin-top:3%;
-                    width: 90%}
+                    width: 90%;
+                    }
 
     body .carousel-item img {height:400px;}
 
@@ -1086,27 +1117,61 @@ body .text_comment{width:60%;
                     width: 100%;
                     height: 70vh}
 
+    body .auth_panel {
+                  margin-left: 4%;
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between
+                  }
+
+    body .search_elements {
+                           margin-top:3%;
+                           width:90%}
+
+    body .auth_elem{
+                    margin-top:3%;
+                    width: 90%}
+
+    body .detail_description{max-width:500px}
+
 }
 
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 591px) {
+
+    body .main_panels {width:92%;}
 
     body .detail_description{max-width:400px}
 
-    body .note {width: 200px;
-                height: 65vh;
+    body .note {width: 240px;
+                height: 50vh;
                 }
 
-    body .title{height: 26vh;
+    body .all_stuff{margin-top:3%}
+
+    body .title{height: 14vh;
                 max-width:350px;
                 }
 
     body .note img{width: 170px;
-                   height: 140px
+                   height: 130px
                    }
-    body .manage_panel{display: none}
+    body .manage_panel{display: block;
+                       margin-top:5%;
+                       width: 95%;
+                       height: 95vh;
+                       z-index:2;
+                       position: absolute;
+                       background: #fff;
+                       border-bottom: 3px solid #fff;
+                       border-top: 3px solid #fff;
+                       transform: translateX(-109%);
+                       transition-duration: 1.5s
 
-    body .panel_button{width:10%;
+                       }
+
+    body .panel_button{width:100%;
                    display: block}
 
     body .auth_panel {
@@ -1142,16 +1207,18 @@ body .text_comment{width:60%;
 
 @media screen and (max-width: 483px) {
     body .note {width: 300px;
-                height: 57vh;
+                height: 450px;
                 }
 
-    body .title{height: 14vh;
+    body .title{height: 10vh;
                 max-width:350px;
                 }
 
     body .note img{width: 240px;
                    height: 190px
                    }
+
+
     body .manage_panel{display: block;
                        margin-top:5%;
                        width: 90%;
@@ -1221,7 +1288,7 @@ body .text_comment{width:60%;
     body .detail_pic iframe{width: 100%;
                             height: 250px}
 
-    body .detail_description{width:100%;
+    body .detail_description{width: 100%;
                              }
 
     body .detail_price_elem{flex-direction: column;
@@ -1280,10 +1347,15 @@ body .text_comment{width:60%;
 
     body .comment_video iframe{max-width:270px}
 
+    body .note:hover {transform: scale(1);
+                      height: 450px
+                      }
 
     body .note:hover #des{
+                 transform: scale(1.03);
                  display: none;
-
+                 font-size: 12px;
+                 position: relative
                  }
 
     body .detail_title {width: 100%;
@@ -1303,7 +1375,7 @@ body .text_comment{width:60%;
             top:-35px;
             background: green;
             width:15px;
-            left:10px;
+            left:15px;
             border-radius:50%;
             font-size:12px;
             display:flex;
@@ -1461,13 +1533,11 @@ body .text_comment{width:60%;
 
 
   .detail_button {width:100%;
-                  display: flex;
-
                   }
 
 
-  .detail_button button{font-size:14px;
-                         }
+  .detail_button {font-size:14px;
+                        }
   body .main_panels {
          width:90%;
          display: none;

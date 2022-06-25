@@ -12,7 +12,7 @@ function catalog(){
 
 function comp_item(){
     var width = window.screen.width
-    if(width <= 412){
+    if(width <= 921){
         document.getElementById('computers').style.display='block'
         document.getElementById('all_cat').style.display='block'
         document.getElementById('smartphones').style.display='none'
@@ -30,7 +30,7 @@ function comp_item(){
 
 function smart() {
     var width = window.screen.width
-    if(width <= 412){
+    if(width <= 921){
         document.getElementById('smartphones').style.display='block'
         document.getElementById('all_cat_2').style.display='block'
         document.getElementById('computers').style.display='none';
@@ -46,7 +46,7 @@ function smart() {
 
 function home_stuff(){
     var width = window.screen.width
-    if(width <= 412){
+    if(width <= 921){
     document.getElementById('home_appliances').style.display='block'
     document.getElementById('all_cat_3').style.display='block'
     document.getElementById('smartphones').style.display='none'
@@ -118,7 +118,6 @@ function send_req(){
 */
 
 
-
 function reg() {
             document.getElementById('registration_all').style.display='block'
             document.getElementById('logins').style.display='none'
@@ -127,7 +126,7 @@ function reg() {
 
 //change buttons login/logout//
 function users_btn(){
-    if(document.URL != 'https://my-petshop.herokuapp.com/'){
+    if(document.URL != 'http://127.0.0.1:8000/'){
         document.getElementById('login').style.display = 'none'
         var name = document.getElementById('user').innerHTML
         if(name != 'AnonymousUser'){
