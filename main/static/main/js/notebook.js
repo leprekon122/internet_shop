@@ -11,4 +11,13 @@ function price_sliders(){
 price_sliders()
 
 
+function reject_like(){
+    var user_name = document.getElementById('user').innerHTML
+    if( user_name == 'AnonymousUser'){
+        window.alert('необхідно увійти у систему!')
+        return false
+    } else {
+        return true
+    }
+}
 

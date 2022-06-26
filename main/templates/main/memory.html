@@ -112,7 +112,8 @@
                     <p>{{el.title}}</p>
                 </div>
                 <form method="post">{% csrf_token %}
-                    <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"><i
+                    <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"
+                            onclick="return reject_like()"><i
                             class="fa-solid fa-heart"></i></button>
                 </form>
 

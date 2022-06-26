@@ -1207,7 +1207,7 @@ body .text_comment{width:60%;
 
 @media screen and (max-width: 483px) {
     body .note {width: 300px;
-                height: 450px;
+                max-height: 50vh;
                 }
 
     body .title{height: 10vh;
