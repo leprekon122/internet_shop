@@ -218,6 +218,10 @@ body .cart_footers{display:flex;
               }
 /* ---------- */
 
+body .detail_button{display:flex;
+                    flex-display: row;
+                    }
+
 /*____like list____*/
 
 .like_list {display:flex;
@@ -1207,7 +1211,7 @@ body .text_comment{width:60%;
 
 @media screen and (max-width: 483px) {
     body .note {width: 300px;
-                max-height: 50vh;
+                max-height: 55vh;
                 }
 
     body .title{height: 10vh;
@@ -1532,12 +1536,7 @@ body .text_comment{width:60%;
 
 
 
-  .detail_button {width:100%;
-                  }
 
-
-  .detail_button {font-size:14px;
-                        }
   body .main_panels {
          width:90%;
          display: none;
@@ -1554,4 +1553,8 @@ body .text_comment{width:60%;
     body .note {width: 300px;
                 height: 70vh;
                 }
+
+
+   body .detail_button {font-size:12px;
+                        }
 

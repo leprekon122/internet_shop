@@ -126,7 +126,7 @@ function reg() {
 
 //change buttons login/logout//
 function users_btn(){
-    if(document.URL != 'https://my-petshop.herokuapp.com/notebooks/'){
+    if(document.URL != 'https://my-petshop.herokuapp.com/'){
         document.getElementById('login').style.display = 'none'
         var name = document.getElementById('user').innerHTML
         if(name != 'AnonymousUser'){
@@ -169,19 +169,20 @@ window.onload = (function just_test(){
     var items = document.getElementById('detail_title')
 
     if(item.length != 0){
-    document.getElementById('value_cart').style.display = 'block'
-    document.getElementById('value_cart').innerHTML = item.length
-    }
+        document.getElementById('value_cart').style.display = 'block'
+        document.getElementById('value_cart').innerHTML = item.length
+        }
 
     for(var i = 0; i <= product_title.length; i++){
-        if(items.innerHTML == product_title[i].innerHTML){
-               document.getElementById('cart_buy_item').style.display = 'none'
-               document.getElementById('cart_sold').style.display = 'block';
-
-        }
+        if(items.innerHTML == product_title[i].innerText){
+            document.getElementById('cart_buy_item').style.display = 'none'
+            document.getElementById('cart_sold').style.display = 'block';}
        }
 
-    })
+
+  })
+
+
 
 
 function stuff_in_cart(){

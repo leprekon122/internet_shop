@@ -20,4 +20,3 @@ function reject_like(){
         return true
     }
 }
-
