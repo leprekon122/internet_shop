@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from .serializers import *
 from .models import *
 from .forms import *
-from django.db.models import Sum, Avg, Max
+from django.db.models import Sum,Max
 from django.contrib import messages
 
 
@@ -323,7 +323,6 @@ class Nothebooks(generics.GenericAPIView):
                                                                                                    'comment', 'date')
             quentety = len(model_1)
             quentety_1 = len(model_2)
-
 
             data = {'model': model,
                     'model_1': model_1,

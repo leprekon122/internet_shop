@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ezf+b#8pgve2vp(8o6y@u$f$uo!g(h7)n8h%a@ohtp9nhmuask'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['my-petshop.herokuapp.com', '127.0.0.1', 'localhost']
 
@@ -101,28 +101,28 @@ WSGI_APPLICATION = 'Shop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        # postgresql_psycopg2
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'shop',
-#        'USER': 'shop_admin',
-#        'PASSWORD': '12345',
-#        'HOST': '127.0.0.1',
-#        'PORT': '5432'
-#    }
-#}
-
 DATABASES = {
     'default': {
         # postgresql_psycopg2
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd7rf4ue3n9ne06',
-        'USER': 'vdnykejhafgtvo',
-        'PASSWORD': 'ce812f69596457b403b4ef89adfdcd81e0d742f413563e3842dc44b9273cc577',
-        'HOST': 'ec2-54-75-184-144.eu-west-1.compute.amazonaws.com',
+        'NAME': 'shop',
+        'USER': 'shop_admin',
+        'PASSWORD': '12345',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        # postgresql_psycopg2
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'd7rf4ue3n9ne06',
+#        'USER': 'vdnykejhafgtvo',
+#        'PASSWORD': 'ce812f69596457b403b4ef89adfdcd81e0d742f413563e3842dc44b9273cc577',
+#        'HOST': 'ec2-54-75-184-144.eu-west-1.compute.amazonaws.com',
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

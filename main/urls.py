@@ -12,7 +12,7 @@ urlpatterns = [
     path('detail_info/', views.DetailInfo.as_view(), name="detail"),
     path('notebooks/', views.Nothebooks.as_view(), name='note_main'),
     path('detail_comment/', views.DetailCommentsApi.as_view()),
-    path('notebook_api/', views.NothebookApi.as_view()),
+    path('notebook_api/', views.NothebookApi.as_view(), name='note_api'),
     path('notebook_api/<int:pk>', views.NothebookApiDeleteOrupdate.as_view()),
     path('videocards/', views.Videocard.as_view(), name="videocards"),
     path('displays/', views.Monitors.as_view(), name="displays"),

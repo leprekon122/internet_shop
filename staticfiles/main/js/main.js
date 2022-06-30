@@ -126,7 +126,7 @@ function reg() {
 
 //change buttons login/logout//
 function users_btn(){
-    if(document.URL != 'https://my-petshop.herokuapp.com/'){
+    if(document.URL != 'http://127.0.0.1:8000/'){
         document.getElementById('login').style.display = 'none'
         var name = document.getElementById('user').innerHTML
         if(name != 'AnonymousUser'){
