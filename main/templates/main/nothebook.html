@@ -172,5 +172,14 @@
         </div>
     </div>
     <script src="/static/main/js/notebook.js"></script>
+    {%if like_modal_status == 1%}
+    <script>
+        $('#likes_list').modal('show')
+    </script>
+    {% elif cart_modal_status == 1%}
+        <script>
+            $('#cart').modal('show')
+        </script>
+    {%endif%}
 </div>
 {%endblock%}

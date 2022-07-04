@@ -2,9 +2,6 @@ body {background: linear-gradient(to right, #080707, #32b31e, #080707)}
 
 
 
-
-
-
 body .cart{
         display:flex;
         justify-content:space-between;
@@ -578,7 +575,7 @@ body .note #des{width:200px;
 
 body .note:hover{
                  transform: scale(1.03);
-                 height:75vh;
+                 height:83vh;
                  z-index: 2;
                  }
 

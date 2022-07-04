@@ -136,6 +136,16 @@
             </div>
             {%endfor%}
         </div>
+
+        {%if like_modal_status == 1%}
+            <script>
+                $('#likes_list').modal('show')
+            </script>
+        {% elif cart_modal_status == 1%}
+            <script>
+                $('#cart').modal('show')
+            </script>
+        {%endif%}
     </div>
     <script src="/static/main/js/monitors.js"></script>
 

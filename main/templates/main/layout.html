@@ -60,7 +60,7 @@
 
 
                 <div class="navbar-nav" id="logout">
-                    <form action="http://127.0.0.1:8000/accounts/logout/" method="post">
+                    <form action="https://my-petshop.herokuapp.com/accounts/logout/" method="post">
                         {%csrf_token%}
                         <button class="btn btn-danger" type="submit">
                             <i class="fa-solid fa-right-from-bracket"></i>
@@ -217,7 +217,7 @@
     </div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" id="likes_list">
+<div class="modal like_modal" tabindex="-1" role="dialog" id="likes_list">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header like_header">

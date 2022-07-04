@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from django.urls import resolve, reverse
+from django.urls import reverse
 from .models import *
 from .forms import *
 from rest_framework.test import APITestCase
@@ -144,6 +144,9 @@ class TestForm(TestCase):
         })
 
         self.assertTrue(form.is_valid())
+
+
+"""Test APi"""
 
 
 class TestApi(APITestCase):

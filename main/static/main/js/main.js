@@ -126,7 +126,7 @@ function reg() {
 
 //change buttons login/logout//
 function users_btn(){
-    if(document.URL != 'http://127.0.0.1:8000/'){
+    if(document.URL != 'https://my-petshop.herokuapp.com/'){
         document.getElementById('login').style.display = 'none'
         var name = document.getElementById('user').innerHTML
         if(name != 'AnonymousUser'){
@@ -149,7 +149,7 @@ function active_panel(){
     if(count_panel % 2 == 1){
         document.getElementById('main_panels').style.transform = 'translateX(0%)'
         if(window.screen.width > 1200){
-            document.getElementById('main_panels').style.width = '20%'
+            document.getElementById('main_panels').style.width = '25%'
           } else {
             document.getElementById('main_panels').style.width = '35%'
           }

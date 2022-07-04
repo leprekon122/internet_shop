@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from .serializers import *
 from .models import *
 from .forms import *
-from django.db.models import Sum,Max
+from django.db.models import Sum, Max
 from django.contrib import messages
 
 
@@ -255,12 +255,20 @@ class Nothebooks(generics.GenericAPIView):
         username = request.user
         cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
 
+        """conditional of modal_like"""
+        like_modal_status = 0
+
+        """conditional of cart_modal"""
+        cart_modal_status = 0
+
         data = {'model': model,
                 'username': username,
                 'price_max': price_max['price__max'],
                 'model_cart': model_cart,
                 'cart_sum': cart_sum['product_price__sum'],
                 'model_like': model_like,
+                'like_modal_status': like_modal_status,
+                'cart_modal_status': cart_modal_status
                 }
         return render(request, 'main/nothebook.html', data)
 
@@ -273,8 +281,29 @@ class Nothebooks(generics.GenericAPIView):
         del_like = request.POST.get('del_like')
 
         if del_like:
+            model = NotebooksList.objects.all()
+            '''cart_all_items'''
+            model_cart = ProductCart.objects.all()
+
+            """Like like all"""
+            model_like = LikeListModel.objects.all()
+
             LikeListModel.objects.filter(id=del_like).delete()
-            return redirect(request.path)
+            like_modal_status = 1
+            price_max = model.aggregate(Max('price'))
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+            data = {'model': model,
+                    'username': username,
+                    'price_max': price_max['price__max'],
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'like_modal_status': like_modal_status
+                    }
+
+            return render(request, 'main/nothebook.html', data)
 
         if add_like:
             model_add_like = NotebooksList.objects.filter(id=add_like).values()[0]
@@ -290,8 +319,29 @@ class Nothebooks(generics.GenericAPIView):
             return redirect(request.path)
 
         if delete_btn:
+            model = NotebooksList.objects.all()
+            '''cart_all_items'''
+            model_cart = ProductCart.objects.all()
+
+            """Like like all"""
+            model_like = LikeListModel.objects.all()
+
             ProductCart.objects.filter(id=delete_btn).delete()
-            return redirect(request.path_info)
+            cart_modal_status = 1
+            price_max = model.aggregate(Max('price'))
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+            data = {'model': model,
+                    'username': username,
+                    'price_max': price_max['price__max'],
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'cart_modal_status': cart_modal_status
+                    }
+
+            return render(request, 'main/nothebook.html', data)
 
         if buy:
             model_add_cart = NotebooksList.objects.filter(id=buy).values()[0]
@@ -534,12 +584,20 @@ class Videocard(generics.GenericAPIView):
         """Like like all"""
         model_like = LikeListModel.objects.all()
 
+        """condition of modal_like"""
+        like_modal_status = 0
+
+        """conditional of modal_like"""
+        cart_modal_status = 0
+
         data = {"model": model,
                 'username': username,
                 'price_max': price_max['price__max'],
                 'model_cart': model_cart,
                 'cart_sum': cart_sum['product_price__sum'],
-                'model_like': model_like
+                'model_like': model_like,
+                'like_modal_status': like_modal_status,
+                'cart_modal_status': cart_modal_status
                 }
 
         return render(request, "main/videocards.html", data)
@@ -555,8 +613,30 @@ class Videocard(generics.GenericAPIView):
 
         # delete stuff from like list
         if del_like:
+            model = Videocards.objects.all()
+            '''cart_all_items'''
+            model_cart = ProductCart.objects.all()
+
+            """Like like all"""
+            model_like = LikeListModel.objects.all()
+
             LikeListModel.objects.filter(id=del_like).delete()
-            return redirect(request.path)
+            like_modal_status = 1
+            price_max = model.aggregate(Max('price'))
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+            data = {'model': model,
+                    'username': username,
+                    'price_max': price_max['price__max'],
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'like_modal_status': like_modal_status
+                    }
+
+            return render(request, 'main/videocards.html', data)
+
         # add stuff to list like
         if add_like:
             model_add_like = Videocards.objects.filter(id=add_like).values()[0]
@@ -572,8 +652,29 @@ class Videocard(generics.GenericAPIView):
             return redirect(request.path)
 
         if delete_btn:
+            model = Videocards.objects.all()
+            '''cart_all_items'''
+            model_cart = ProductCart.objects.all()
+
+            """Like like all"""
+            model_like = LikeListModel.objects.all()
+
             ProductCart.objects.filter(id=delete_btn).delete()
-            return redirect('videocards')
+            cart_modal_status = 1
+            price_max = model.aggregate(Max('price'))
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+            data = {'model': model,
+                    'username': username,
+                    'price_max': price_max['price__max'],
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'cart_modal_status': cart_modal_status
+                    }
+
+            return render(request, 'main/videocards.html', data)
 
         if buy:
             test = Videocards.objects.filter(id=buy).values()[0]
@@ -822,12 +923,20 @@ class Monitors(generics.GenericAPIView):
         """Like like all"""
         model_like = LikeListModel.objects.all()
 
+        """conditional of modal_like"""
+        like_modal_status = 0
+
+        """conditional of modal_cart"""
+        cart_modal_status = 0
+
         data = {'username': username,
                 'model': model,
                 'price_max': price_max['price__max'],
                 'model_cart': model_cart,
                 'cart_sum': cart_sum['product_price__sum'],
-                'model_like': model_like
+                'model_like': model_like,
+                'like_modal_status': like_modal_status,
+                'cart_modal_status': cart_modal_status
                 }
         return render(request, 'main/displays.html', data)
 
@@ -841,8 +950,29 @@ class Monitors(generics.GenericAPIView):
 
         # delete stuff from like list
         if del_like:
+            model = Monitors_list.objects.all()
+            '''cart_all_items'''
+            model_cart = ProductCart.objects.all()
+
+            """Like like all"""
+            model_like = LikeListModel.objects.all()
+
             LikeListModel.objects.filter(id=del_like).delete()
-            return redirect(request.path)
+            like_modal_status = 1
+            price_max = model.aggregate(Max('price'))
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+            data = {'model': model,
+                    'username': username,
+                    'price_max': price_max['price__max'],
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'like_modal_status': like_modal_status
+                    }
+
+            return render(request, 'main/displays.html', data)
 
         if add_like:
             model_add_like = Monitors_list.objects.filter(id=add_like).values()[0]
@@ -858,8 +988,29 @@ class Monitors(generics.GenericAPIView):
             return redirect(request.path)
 
         if delete_btn:
+            model = Monitors_list.objects.all()
+            '''cart_all_items'''
+            model_cart = ProductCart.objects.all()
+
+            """Like like all"""
+            model_like = LikeListModel.objects.all()
+
             ProductCart.objects.filter(id=delete_btn).delete()
-            return redirect('displays')
+            cart_modal_status = 1
+            price_max = model.aggregate(Max('price'))
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+            data = {'model': model,
+                    'username': username,
+                    'price_max': price_max['price__max'],
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'cart_modal_status': cart_modal_status
+                    }
+
+            return render(request, 'main/displays.html', data)
 
         if buy:
             test = Monitors_list.objects.filter(id=buy).values()[0]
@@ -1110,12 +1261,20 @@ class Memory(generics.GenericAPIView):
         """Like like all"""
         model_like = LikeListModel.objects.all()
 
+        """condition of like_modal"""
+        like_modal_status = 0
+
+        """conditional of cart_modal"""
+        cart_modal_status = 0
+
         data = {'username': username,
                 'model': model,
                 'price_max': price_max['price__max'],
                 'model_cart': model_cart,
                 'cart_sum': cart_sum['product_price__sum'],
-                'model_like': model_like
+                'model_like': model_like,
+                'like_modal_status': like_modal_status,
+                'cart_modal_status': cart_modal_status
                 }
 
         return render(request, 'main/memory.html', data)
@@ -1130,8 +1289,28 @@ class Memory(generics.GenericAPIView):
 
         # delete stuff from like list
         if del_like:
+            model = Memory_list.objects.all()
+            '''cart_all_items'''
+            model_cart = ProductCart.objects.all()
+
+            """Like like all"""
+            model_like = LikeListModel.objects.all()
+
             LikeListModel.objects.filter(id=del_like).delete()
-            return redirect(request.path)
+            like_modal_status = 1
+            price_max = model.aggregate(Max('price'))
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+            data = {'model': model,
+                    'username': username,
+                    'price_max': price_max['price__max'],
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'like_modal_status': like_modal_status
+                    }
+            return render(request, 'main/memory.html', data)
 
         if add_like:
             model_add_like = Memory_list.objects.filter(id=add_like).values()[0]
@@ -1147,8 +1326,29 @@ class Memory(generics.GenericAPIView):
             return redirect(request.path)
 
         if delete_btn:
+            model = Memory_list.objects.all()
+            '''cart_all_items'''
+            model_cart = ProductCart.objects.all()
+
+            """Like like all"""
+            model_like = LikeListModel.objects.all()
+
             ProductCart.objects.filter(id=delete_btn).delete()
-            return redirect('memory')
+            cart_modal_status = 1
+            price_max = model.aggregate(Max('price'))
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+            data = {'model': model,
+                    'username': username,
+                    'price_max': price_max['price__max'],
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'cart_modal_status': cart_modal_status
+                    }
+
+            return render(request, 'main/memory.html', data)
 
         if buy:
             test = Memory_list.objects.filter(id=buy).values()[0]

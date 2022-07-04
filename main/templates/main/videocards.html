@@ -67,7 +67,6 @@
                 <div class="coast_main" id="coast">
                     <h5 class="text-dark">Пошук за ціною</h5>
                     <br>
-                    <!--<form method="get"> -->
                     <div class="coast_search">
                         <input type="text" class="form-control" name="price_from" id="price_from" placeholder="Від">
                         <input type="text" class="form-control" name="price_to" placeholder="До" id="price_to">
@@ -136,6 +135,17 @@
             {%endfor%}
         </div>
     </div>
+    {%if like_modal_status == 1%}
+    <script>
+        $('#likes_list').modal('show')
+    </script>
+    {% elif cart_modal_status == 1%}
+        <script>
+            $('#cart').modal('show')
+        </script>
+    {%endif%}
 </div>
 <script src="/static/main/js/videocard.js"></script>
+
+
 {%endblock%}
