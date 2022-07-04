@@ -34,19 +34,75 @@ class MainPage(generics.GenericAPIView):
         """Like like all"""
         model_like = LikeListModel.objects.all()
 
+        """conditional of like_modal"""
+        like_modal_status = 0
+
+        """conditional of modal_cart"""
+        cart_modal_status = 0
+
         data = {'username': username,
                 'model_cart': model_cart,
                 'cart_sum': cart_sum['product_price__sum'],
-                'model_like': model_like
+                'model_like': model_like,
+                'like_modal_status': like_modal_status,
+                'cart_modal_status': cart_modal_status
                 }
         return render(request, 'main/main_page.html', data)
 
     def post(self, request):
         delete_btn = request.POST.get('delete_btn')
+        del_like = request.POST.get('del_like')
+        username = request.user
+
+        if del_like:
+            try:
+                '''cart_all_items'''
+                model_cart = ProductCart.objects.all()
+
+                """Like like all"""
+                model_like = LikeListModel.objects.all()
+
+                LikeListModel.objects.filter(id=del_like).delete()
+                like_modal_status = 1
+                cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+                data = {
+                    'username': username,
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'like_modal_status': like_modal_status
+                }
+
+                return render(request, 'main/main_page.html', data)
+
+            except Exception:
+                return redirect(request.path)
 
         if delete_btn:
-            ProductCart.objects.filter(id=delete_btn).delete()
-            return redirect('main')
+            try:
+                '''cart_all_items'''
+                model_cart = ProductCart.objects.all()
+
+                """Like like all"""
+                model_like = LikeListModel.objects.all()
+
+                ProductCart.objects.filter(id=delete_btn).delete()
+                cart_modal_status = 1
+                cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+                data = {
+                    'username': username,
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'cart_modal_status': cart_modal_status
+                }
+
+                return render(request, 'main/main_page.html', data)
+
+            except Exception:
+                return redirect('main')
 
 
 class Registration(generics.GenericAPIView,
