@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+import psycopg2
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,8 +58,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '909548435939-7037e8g3uiu9ktroiqje8pn38q5vr8fq.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 """local creditionals"""
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '605176420122-t1niqvg1ere0l5gafmkj74mq3v4ku919.apps.googleusercontent.com'
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '605176420122-t1niqvg1ere0l5gafmkj74mq3v4ku919.apps.googleusercontent.com'
+#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 
 MIDDLEWARE = [
@@ -100,28 +101,28 @@ WSGI_APPLICATION = 'Shop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        # postgresql_psycopg2
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'shop',
-#        'USER': 'shop_admin',
-#        'PASSWORD': '12345',
-#        'HOST': '127.0.0.1',
-#        'PORT': '5432'
-#    }
-#}
-
 DATABASES = {
     'default': {
         # postgresql_psycopg2
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd7rf4ue3n9ne06',
-        'USER': 'vdnykejhafgtvo',
-        'PASSWORD': 'ce812f69596457b403b4ef89adfdcd81e0d742f413563e3842dc44b9273cc577',
-        'HOST': 'ec2-54-75-184-144.eu-west-1.compute.amazonaws.com',
+        'NAME': 'shop',
+        'USER': 'shop_admin',
+        'PASSWORD': '12345',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        # postgresql_psycopg2
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'd7rf4ue3n9ne06',
+#        'USER': 'vdnykejhafgtvo',
+#        'PASSWORD': 'ce812f69596457b403b4ef89adfdcd81e0d742f413563e3842dc44b9273cc577',
+#        'HOST': 'ec2-54-75-184-144.eu-west-1.compute.amazonaws.com',
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

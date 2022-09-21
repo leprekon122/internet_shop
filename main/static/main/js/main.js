@@ -126,7 +126,7 @@ function reg() {
 
 //change buttons login/logout//
 function users_btn(){
-    if(document.URL != 'https://my-petshop.herokuapp.com/'){
+    if(document.URL != 'http://127.0.0.1:8000/'){
         document.getElementById('login').style.display = 'none'
         var name = document.getElementById('user').innerHTML
         if(name != 'AnonymousUser'){
@@ -149,7 +149,7 @@ function active_panel(){
     if(count_panel % 2 == 1){
         document.getElementById('main_panels').style.transform = 'translateX(0%)'
         if(window.screen.width > 1200){
-            document.getElementById('main_panels').style.width = '25%'
+            document.getElementById('main_panels').style.width = '35%'
           } else {
             document.getElementById('main_panels').style.width = '35%'
           }
@@ -171,6 +171,13 @@ window.onload = (function just_test(){
     if(item.length != 0){
         document.getElementById('value_cart').style.display = 'block'
         document.getElementById('value_cart').innerHTML = item.length
+        }
+
+    data = document.getElementById('product_cart_info')
+    console.log(data)
+    if(data == null){
+        document.getElementById('next_buy').style.display = 'none'
+        document.getElementById('make_order').style.display = 'none'
         }
 
     for(var i = 0; i <= product_title.length; i++){

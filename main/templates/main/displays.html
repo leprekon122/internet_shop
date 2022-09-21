@@ -11,17 +11,24 @@
     <div class="main_comodety">
         <div class="manage_panel" id="main_panels">
             <form method="get">
+
+
+
+
+
                 <button type="submit" class="text-light btn btn-success" name="search" value="search">
                     <i class="fa-solid fa-magnifying-glass"></i> пошук
                 </button>
                 <button class="btn btn-danger" type="submit" name="reject_filters" value="reject_filters">скасувати
                 </button>
 
+
                 <div class="alphabet_search">
                     <h5 class="text-dark">Пошук по бренду</h5>
                     <br>
                     <div class="form-check">
-                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Asus"
+                        <input class="form
+                        -check-input" name="exampleRadios" type="checkbox" value="Asus"
                                id="flexCheckDefault_1">
                         <label class="form-check-label text-dark" for="flexCheckDefault_1">
                             Asus
@@ -138,15 +145,19 @@
         </div>
 
         {%if like_modal_status == 1%}
-            <script>
+        <script>
                 $('#likes_list').modal('show')
-            </script>
+
+
+        </script>
         {% elif cart_modal_status == 1%}
-            <script>
+        <script>
                 $('#cart').modal('show')
-            </script>
+
+
+        </script>
         {%endif%}
     </div>
     <script src="/static/main/js/monitors.js"></script>
-
-    {%endblock%}
+</div>
+{%endblock%}
