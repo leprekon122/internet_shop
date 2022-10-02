@@ -1487,6 +1487,344 @@ class NothebookApi(generics.GenericAPIView,
         return self.create(request, *args, **kwargs)
 
 
+class HardDisk(generics.GenericAPIView):
+
+    @staticmethod
+    def get(request):
+        model = HardDiskLists.objects.all()
+        model_cart = ProductCart.objects.all()
+
+        detail = request.GET.get('stuff_detail')
+        filter = request.GET.get('search')
+        reject_filters = request.GET.get('reject_filters')
+
+        if filter:
+            search = request.GET.get('exampleRadios')
+            ready_deliver = request.GET.get('ready_deliver')
+            price_to = request.GET.get('price_to')
+            price_from = request.GET.get('price_from')
+
+            if search is not None:
+                # filter with start and end price
+                if price_from is not None and price_to is not None:
+                    # have stuff
+                    if ready_deliver:
+                        try:
+                            model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
+                                                                 price__lte=int(price_to), in_out='Є в наявності')
+                        except Exception:
+                            return redirect(request.path)
+
+                    # don't have stuff
+                    else:
+                        try:
+                            model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
+                                                                 price__lte=int(price_to))
+                        except Exception:
+                            return redirect(request.path)
+
+                # filter without  start price
+                elif price_from is None:
+                    #  have stuff
+                    if ready_deliver:
+                        try:
+                            model = HardDiskLists.objects.filter(brand=search, price__lte=int(price_to),
+                                                                 in_out='Є в наявності')
+                        except Exception:
+                            return redirect(request.path)
+
+                    # don't have  stuff
+                    else:
+                        try:
+                            model = HardDiskLists.objects.filter(brand=search, price__lte=int(price_to))
+                        except Exception:
+                            return redirect(request.path)
+
+                # filter without end price
+                else:
+                    # have stuff
+                    if ready_deliver:
+                        try:
+                            price_from = request.GET.get('price_from')
+                            model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
+                                                                 in_out='Є в наявності')
+                        except Exception:
+                            return redirect(request.path)
+
+                    # don't have stuff
+                    else:
+                        try:
+                            price_from = request.GET.get('price_from')
+                            model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
+                                                                 in_out='Є в наявності')
+                        except Exception:
+                            return redirect(request.path)
+
+            # search  by price without brand
+            elif search is None:
+                # filter with price with start and end
+                if price_from is not None and price_to is not None:
+                    # have stuff
+                    if ready_deliver:
+                        try:
+                            model = HardDiskLists.objects.filter(price__gte=int(price_from),
+                                                                 price__lte=int(price_to), in_out='Є в наявності')
+                        except Exception:
+                            return redirect(request.path)
+                    # don't have
+                    else:
+                        try:
+                            model = HardDiskLists.objects.filter(price__gte=int(price_from),
+                                                                 price__lte=int(price_to))
+                        except Exception:
+                            return redirect(request.path)
+                # filter by price without start price
+                elif price_from is None:
+                    # have stuff
+                    if ready_deliver:
+                        try:
+                            model = HardDiskLists.objects.filter(price__lte=int(price_to), in_out='Є в наявності')
+                        except Exception:
+                            return redirect(request.path)
+                    # don't have
+                    else:
+                        try:
+                            model = HardDiskLists.objects.filter(price__lte=int(price_to))
+                        except Exception:
+                            return redirect(request.path)
+
+                # filter by price without end price
+                else:
+                    # have stuff
+                    if ready_deliver:
+                        try:
+                            price_from = request.GET.get('price_from')
+                            model = HardDiskLists.objects.filter(price__gte=int(price_from), in_out='Є в наявності')
+                        except Exception:
+                            return redirect(request.path)
+                    # don't have
+                    else:
+                        try:
+                            price_from = request.GET.get('price_from')
+                            model = HardDiskLists.objects.filter(price__gte=int(price_from))
+                        except Exception:
+                            return redirect(request.path)
+
+        # cancel all filter
+        if reject_filters:
+            model = HardDiskLists.objects.all()
+
+        if detail:
+            model_rating = CommentsUserMemory.objects.filter(name_of_stuff=detail).values('rating')
+
+            avr_rating = 0
+            for el in model_rating:
+                res = el['rating']
+                if res is not None:
+                    avr_rating += int(res)
+                else:
+                    res = 0
+                    avr_rating += res
+
+            model = HardDiskLists.objects.filter(id=detail)
+            model_1 = CommentsUserHardDisk.objects.filter(name_of_stuff=HardDiskLists(detail)).values('rating',
+                                                                                                  'name_of_user',
+                                                                                                  'comment',
+                                                                                                  'link_video',
+                                                                                                  'date')
+            model_2 = QuestionUsersHardDisk.objects.filter(name_of_stuff=HardDiskLists(detail)).values('name_of_user',
+                                                                                                   'comment', 'date')
+
+            try:
+                avr_rating_plural = avr_rating // len(model_rating)
+            except Exception:
+                avr_rating_plural = 0
+            quantity_of_comment = len(model_rating)
+
+            quentety = len(model_1)
+            quentety_1 = len(model_2)
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+            data = {'model': model,
+                    'model_1': model_1,
+                    'model_2': model_2,
+                    'username': username,
+                    'quentety': quentety,
+                    'quentety_1': quentety_1,
+                    'avg_rating': avr_rating_plural,
+                    'quantity_of_comment': quantity_of_comment,
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum']
+                    }
+            return render(request, 'main/stuff_detail.html', data)
+
+        price_max = model.aggregate(Max('price'))
+        username = request.user
+
+        """aggregate sum of all cart items"""
+        cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+        """Like like all"""
+        model_like = LikeListModel.objects.all()
+
+        """condition of like_modal"""
+        like_modal_status = 0
+
+        """conditional of cart_modal"""
+        cart_modal_status = 0
+
+        data = {'username': username,
+                'model': model,
+                'price_max': price_max['price__max'],
+                'model_cart': model_cart,
+                'cart_sum': cart_sum['product_price__sum'],
+                'model_like': model_like,
+                'like_modal_status': like_modal_status,
+                'cart_modal_status': cart_modal_status
+                }
+
+        return render(request, "main/hard_disk_list.html", data)
+
+
+    def post(self, request):
+        add_comment = request.POST.get('add_comment')
+        add_question = request.POST.get('add_question')
+        buy = request.POST.get('buy')
+        add_like = request.POST.get('add_like')
+        delete_btn = request.POST.get('delete_btn')
+        del_like = request.POST.get('del_like')
+
+        # delete stuff from like list
+        if del_like:
+            model = HardDiskLists.objects.all()
+            '''cart_all_items'''
+            model_cart = ProductCart.objects.all()
+
+            """Like like all"""
+            model_like = LikeListModel.objects.all()
+
+            LikeListModel.objects.filter(id=del_like).delete()
+            like_modal_status = 1
+            price_max = model.aggregate(Max('price'))
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+            data = {'model': model,
+                    'username': username,
+                    'price_max': price_max['price__max'],
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'like_modal_status': like_modal_status
+                    }
+            return render(request, 'main/hard_disk_list.html', data)
+
+        if add_like:
+            model_add_like = HardDiskLists.objects.filter(id=add_like).values()[0]
+            username = request.user
+            title = model_add_like['title']
+            product_pic = model_add_like['pic_link']
+            product_price = model_add_like['price']
+            product_status = model_add_like['in_out']
+
+            LikeListModel.objects.create(user_name=username, product_title=title, product_pic=product_pic,
+                                         product_price=product_price, product_status=product_status)
+
+            return redirect(request.path)
+
+        if delete_btn:
+            model = HardDiskLists.objects.all()
+            '''cart_all_items'''
+            model_cart = ProductCart.objects.all()
+
+            """Like like all"""
+            model_like = LikeListModel.objects.all()
+
+            ProductCart.objects.filter(id=delete_btn).delete()
+            cart_modal_status = 1
+            price_max = model.aggregate(Max('price'))
+            username = request.user
+            cart_sum = ProductCart.objects.filter(user_name__username=username).aggregate(Sum('product_price'))
+
+            data = {'model': model,
+                    'username': username,
+                    'price_max': price_max['price__max'],
+                    'model_cart': model_cart,
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'model_like': model_like,
+                    'cart_modal_status': cart_modal_status
+                    }
+
+            return render(request, 'main/hard_disk_list.html', data)
+
+        if buy:
+            test = HardDiskLists.objects.filter(id=buy).values()[0]
+            username = request.user
+            title = test['title']
+            product_pic = test['pic_link']
+            product_price = test['price']
+            product_status = test['in_out']
+
+            ProductCart.objects.create(user_name=username, product_title=title, product_pic=product_pic,
+                                       product_price=product_price, product_status=product_status)
+
+            return redirect('hard_disk')
+
+        if add_comment:
+            username = request.user
+            rating = request.POST.get('simple-rating')
+            stuff_name = request.POST.get('add_comment')
+            comment = request.POST.get('comment')
+            link_video = request.POST.get('link_video')
+            CommentsUserHardDisk.objects.create(rating=rating, name_of_user=username,
+                                              name_of_stuff=HardDiskLists(stuff_name),
+                                              comment=comment, link_video=link_video)
+            model = HardDiskLists.objects.filter(id=stuff_name)
+            model_1 = CommentsUserHardDisk.objects.filter(name_of_stuff=HardDiskLists(stuff_name)).values('rating',
+                                                                                                      'name_of_user',
+                                                                                                      'comment',
+                                                                                                      'date')
+            model_2 = QuestionUsersHardDisk.objects.filter(name_of_stuff=HardDiskLists(stuff_name)).values(
+                'name_of_user',
+                'comment', 'date')
+
+            quentety = len(model_1)
+            quentety_1 = len(model_2)
+            data = {'model': model,
+                    'model_1': model_1,
+                    'username': username,
+                    'quentety': quentety,
+                    'quentety_1': quentety_1,
+
+                    }
+            return render(request, 'main/stuff_detail.html', data)
+
+        if add_question:
+            username = request.user
+            stuff_name = request.POST.get('add_question')
+            comment = request.POST.get('question')
+            QuestionUsersHardDisk.objects.create(name_of_user=username, name_of_stuff=HardDiskLists(stuff_name),
+                                               comment=comment)
+            model = HardDiskLists.objects.filter(id=stuff_name)
+            model_1 = CommentsUserHardDisk.objects.filter(name_of_stuff=HardDiskLists(stuff_name)).values('name_of_user',
+                                                                                                      'comment',
+                                                                                                      'date')
+
+            model_2 = QuestionUsersHardDisk.objects.filter(name_of_stuff=HardDiskLists(stuff_name)).values(
+                'name_of_user',
+                'comment', 'date')
+
+            quentety = len(model_1)
+            quentety_1 = len(model_2)
+            data = {'model': model,
+                    'model_1': model_2,
+                    'username': username,
+                    'quentety': quentety,
+                    'quentety_1': quentety_1}
+            return render(request, 'main/stuff_detail.html', data)
+
+
 class NothebookApiDeleteOrupdate(generics.GenericAPIView,
                                  mixins.RetrieveModelMixin,
                                  mixins.UpdateModelMixin,
