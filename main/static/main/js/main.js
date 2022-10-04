@@ -168,17 +168,24 @@ window.onload = (function just_test(){
     var product_title = document.getElementsByClassName('cart_title')
     var items = document.getElementById('detail_title')
 
+    var num_of_like = document.getElementsByClassName('like_list_all').length
+    document.getElementById('count_of_like').innerHTML = num_of_like
+
+    if(num_of_like == 0){
+        document.getElementById('count_of_like_div').style.display = 'none'
+    }
+
     if(item.length != 0){
         document.getElementById('value_cart').style.display = 'block'
         document.getElementById('value_cart').innerHTML = item.length
         }
 
     data = document.getElementById('product_cart_info')
-    console.log(data)
     if(data == null){
         document.getElementById('next_buy').style.display = 'none'
         document.getElementById('make_order').style.display = 'none'
         }
+
 
     for(var i = 0; i <= product_title.length; i++){
         if(items.innerHTML == product_title[i].innerText){
@@ -213,4 +220,5 @@ function manage_panel(){
             document.getElementById('main_panels').style.transform='translateX(-110%)'
         }
     }
+
 

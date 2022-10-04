@@ -1503,40 +1503,54 @@ class HardDisk(generics.GenericAPIView):
             ready_deliver = request.GET.get('ready_deliver')
             price_to = request.GET.get('price_to')
             price_from = request.GET.get('price_from')
+            memory_size = request.GET.get('memory_size')
 
             if search is not None:
                 # filter with start and end price
                 if price_from is not None and price_to is not None:
                     # have stuff
                     if ready_deliver:
-                        try:
+                        if memory_size:
+                            try:
+                                model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
+                                                                     price__lte=int(price_to), in_out='Є в наявності',
+                                                                     size=memory_size)
+                            except Exception:
+                                return redirect(request.path)
+                        else:
                             model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
-                                                                 price__lte=int(price_to), in_out='Є в наявності')
-                        except Exception:
-                            return redirect(request.path)
+                                                                 price__lte=int(price_to), in_out='Є в наявності',
+                                                                )
 
                     # don't have stuff
                     else:
-                        try:
+                        if memory_size:
+                            try:
+                                model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
+                                                                     price__lte=int(price_to), size=memory_size)
+                            except Exception:
+                                return redirect(request.path)
+                        else:
                             model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
                                                                  price__lte=int(price_to))
-                        except Exception:
-                            return redirect(request.path)
+
 
                 # filter without  start price
                 elif price_from is None:
                     #  have stuff
                     if ready_deliver:
-                        try:
-                            model = HardDiskLists.objects.filter(brand=search, price__lte=int(price_to),
-                                                                 in_out='Є в наявності')
-                        except Exception:
-                            return redirect(request.path)
+                        if memory_size:
+                            try:
+                                model = HardDiskLists.objects.filter(brand=search, price__lte=int(price_to),
+                                                                     in_out='Є в наявності', size=memory_size)
+                            except Exception:
+                                return redirect(request.path)
 
                     # don't have  stuff
                     else:
                         try:
-                            model = HardDiskLists.objects.filter(brand=search, price__lte=int(price_to))
+                            model = HardDiskLists.objects.filter(brand=search, price__lte=int(price_to),
+                                                                 )
                         except Exception:
                             return redirect(request.path)
 
@@ -1544,12 +1558,13 @@ class HardDisk(generics.GenericAPIView):
                 else:
                     # have stuff
                     if ready_deliver:
-                        try:
-                            price_from = request.GET.get('price_from')
-                            model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
-                                                                 in_out='Є в наявності')
-                        except Exception:
-                            return redirect(request.path)
+                        if memory_size:
+                            try:
+                                price_from = request.GET.get('price_from')
+                                model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
+                                                                     in_out='Є в наявності', size=memory_size)
+                            except Exception:
+                                return redirect(request.path)
 
                     # don't have stuff
                     else:
@@ -1566,30 +1581,51 @@ class HardDisk(generics.GenericAPIView):
                 if price_from is not None and price_to is not None:
                     # have stuff
                     if ready_deliver:
-                        try:
-                            model = HardDiskLists.objects.filter(price__gte=int(price_from),
-                                                                 price__lte=int(price_to), in_out='Є в наявності')
-                        except Exception:
-                            return redirect(request.path)
-                    # don't have
+                        if memory_size:
+                            try:
+                                model = HardDiskLists.objects.filter(price__gte=int(price_from),
+                                                                     price__lte=int(price_to), in_out='Є в наявності',
+                                                                     size=memory_size
+                                                                     )
+                            except Exception:
+                                return redirect(request.path)
+                        else:
+                            try:
+                                model = HardDiskLists.objects.filter(price__gte=int(price_from),
+                                                                     price__lte=int(price_to), in_out='Є в наявності',
+                                                                     )
+                            except Exception:
+                                return redirect(request.path)
+                    # don't have stuff
                     else:
-                        try:
-                            model = HardDiskLists.objects.filter(price__gte=int(price_from),
-                                                                 price__lte=int(price_to))
-                        except Exception:
-                            return redirect(request.path)
+                        if memory_size:
+                            try:
+                                model = HardDiskLists.objects.filter(price__gte=int(price_from),
+                                                                     price__lte=int(price_to), size=memory_size)
+                            except Exception:
+                                return redirect(request.path)
+                        else:
+                            try:
+                                model = HardDiskLists.objects.filter(price__gte=int(price_from),
+                                                                     price__lte=int(price_to))
+                            except Exception:
+                                return redirect(request.path)
+
+
                 # filter by price without start price
                 elif price_from is None:
                     # have stuff
                     if ready_deliver:
-                        try:
-                            model = HardDiskLists.objects.filter(price__lte=int(price_to), in_out='Є в наявності')
-                        except Exception:
-                            return redirect(request.path)
+                        if memory_size:
+                            try:
+                                model = HardDiskLists.objects.filter(price__lte=int(price_to), in_out='Є в наявності',
+                                                                     size=memory_size)
+                            except Exception:
+                                return redirect(request.path)
                     # don't have
                     else:
                         try:
-                            model = HardDiskLists.objects.filter(price__lte=int(price_to))
+                            model = HardDiskLists.objects.filter(price__lte=int(price_to), size=memory_size)
                         except Exception:
                             return redirect(request.path)
 
@@ -1597,16 +1633,18 @@ class HardDisk(generics.GenericAPIView):
                 else:
                     # have stuff
                     if ready_deliver:
-                        try:
-                            price_from = request.GET.get('price_from')
-                            model = HardDiskLists.objects.filter(price__gte=int(price_from), in_out='Є в наявності')
-                        except Exception:
-                            return redirect(request.path)
+                        if memory_size:
+                            try:
+                                price_from = request.GET.get('price_from')
+                                model = HardDiskLists.objects.filter(price__gte=int(price_from), in_out='Є в наявності',
+                                                                    size=memory_size)
+                            except Exception:
+                                return redirect(request.path)
                     # don't have
                     else:
                         try:
                             price_from = request.GET.get('price_from')
-                            model = HardDiskLists.objects.filter(price__gte=int(price_from))
+                            model = HardDiskLists.objects.filter(price__gte=int(price_from), size=memory_size)
                         except Exception:
                             return redirect(request.path)
 
@@ -1628,12 +1666,13 @@ class HardDisk(generics.GenericAPIView):
 
             model = HardDiskLists.objects.filter(id=detail)
             model_1 = CommentsUserHardDisk.objects.filter(name_of_stuff=HardDiskLists(detail)).values('rating',
-                                                                                                  'name_of_user',
-                                                                                                  'comment',
-                                                                                                  'link_video',
-                                                                                                  'date')
+                                                                                                      'name_of_user',
+                                                                                                      'comment',
+                                                                                                      'link_video',
+                                                                                                      'date')
             model_2 = QuestionUsersHardDisk.objects.filter(name_of_stuff=HardDiskLists(detail)).values('name_of_user',
-                                                                                                   'comment', 'date')
+                                                                                                       'comment',
+                                                                                                       'date')
 
             try:
                 avr_rating_plural = avr_rating // len(model_rating)
@@ -1683,9 +1722,7 @@ class HardDisk(generics.GenericAPIView):
                 'like_modal_status': like_modal_status,
                 'cart_modal_status': cart_modal_status
                 }
-
         return render(request, "main/hard_disk_list.html", data)
-
 
     def post(self, request):
         add_comment = request.POST.get('add_comment')
@@ -1778,13 +1815,13 @@ class HardDisk(generics.GenericAPIView):
             comment = request.POST.get('comment')
             link_video = request.POST.get('link_video')
             CommentsUserHardDisk.objects.create(rating=rating, name_of_user=username,
-                                              name_of_stuff=HardDiskLists(stuff_name),
-                                              comment=comment, link_video=link_video)
+                                                name_of_stuff=HardDiskLists(stuff_name),
+                                                comment=comment, link_video=link_video)
             model = HardDiskLists.objects.filter(id=stuff_name)
             model_1 = CommentsUserHardDisk.objects.filter(name_of_stuff=HardDiskLists(stuff_name)).values('rating',
-                                                                                                      'name_of_user',
-                                                                                                      'comment',
-                                                                                                      'date')
+                                                                                                          'name_of_user',
+                                                                                                          'comment',
+                                                                                                          'date')
             model_2 = QuestionUsersHardDisk.objects.filter(name_of_stuff=HardDiskLists(stuff_name)).values(
                 'name_of_user',
                 'comment', 'date')
@@ -1805,11 +1842,12 @@ class HardDisk(generics.GenericAPIView):
             stuff_name = request.POST.get('add_question')
             comment = request.POST.get('question')
             QuestionUsersHardDisk.objects.create(name_of_user=username, name_of_stuff=HardDiskLists(stuff_name),
-                                               comment=comment)
+                                                 comment=comment)
             model = HardDiskLists.objects.filter(id=stuff_name)
-            model_1 = CommentsUserHardDisk.objects.filter(name_of_stuff=HardDiskLists(stuff_name)).values('name_of_user',
-                                                                                                      'comment',
-                                                                                                      'date')
+            model_1 = CommentsUserHardDisk.objects.filter(name_of_stuff=HardDiskLists(stuff_name)).values(
+                'name_of_user',
+                'comment',
+                'date')
 
             model_2 = QuestionUsersHardDisk.objects.filter(name_of_stuff=HardDiskLists(stuff_name)).values(
                 'name_of_user',

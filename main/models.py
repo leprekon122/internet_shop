@@ -132,10 +132,15 @@ class HardDiskLists(models.Model):
     description = models.TextField()
     price = models.IntegerField()
     in_out = models.CharField(max_length=255, choices=in_out_list)
+    size = models.CharField(max_length=2,null=True, blank=True)
+    count_of_twist = models.CharField(max_length=4,null=True, blank=True, default=0)
+    socket = models.CharField(max_length=50)
+    buffer_size = models.CharField(max_length=3,null=True, blank=True)
 
     def __str__(self):
         return f"{self.brand} {self.title} {self.video_link} {self.pic}" \
-               f" {self.pic_link} {self.description} {self.price} {self.in_out}"
+               f" {self.pic_link} {self.description} {self.price} {self.in_out}" \
+               f"{self.size} {self.count_of_twist} {self.socket} {self.buffer_size}"
 
     class Meta:
         verbose_name = 'HardDiskList'

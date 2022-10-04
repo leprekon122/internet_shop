@@ -223,7 +223,25 @@ body .detail_button{display:flex;
 
 .like_list {display:flex;
             align-items:center;
+
             }
+
+.count_of_like{background-color:green;
+               position: relative;
+               width: 15px;
+               height: 15px;
+               border-radius: 50%;
+               display:flex;
+               justify-content: center;
+               align-items: center;
+               font-size: 10px;
+               right: 18%;
+               top: -27%;
+
+               }
+
+
+
 
 .fa-gratipay {color:red;
              font-size: 34px;
@@ -478,7 +496,8 @@ body .main_comodety{
 body .manage_panel {
     /*display: block; */
     background: #fff;
-    height: 100vh;
+    overflow: auto;
+    height: 95vh;
     border-right: 2px solid #5d21bf;
     color: #fff;
     padding:.5%;
@@ -549,6 +568,7 @@ body .all_stuff {
                 flex-display:row;
                 flex-wrap: wrap;
                 transition-duration: 1s;
+                width: 100%;
                 }
 
 body .title_stuff {height: 32vh;
