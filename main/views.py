@@ -150,96 +150,140 @@ class Nothebooks(generics.GenericAPIView):
             search = request.GET.get('exampleRadios')
             price_to = request.GET.get('price_to')
             price_from = request.GET.get('price_from')
-            print(search)
+            processor = request.GET.get('processor')
 
             if search is not None:
                 # filter with start and end price
-                if price_from is not None and price_to is not None:
+                if price_from is not None and price_to is not None and processor is not None:
                     # have stuff
                     if ready_deliver:
                         try:
                             model = NotebooksList.objects.filter(brand=search, price__gte=int(price_from),
-                                                                 price__lte=int(price_to), in_out='Є в наявності')
+                                                                 price__lte=int(price_to), in_out='Є в наявності',
+                                                                 processor=processor)
                         except Exception:
                             return redirect(request.path)
 
                     # don't have stuff
                     else:
-                        try:
-                            model = NotebooksList.objects.filter(brand=search, price__gte=int(price_from),
-                                                                 price__lte=int(price_to))
-                        except Exception:
-                            return redirect(request.path)
+                        if processor is not None:
+                            try:
+                                model = NotebooksList.objects.filter(brand=search, price__gte=int(price_from),
+                                                                     price__lte=int(price_to), processor=processor)
+                            except Exception:
+                                return redirect(request.path)
+                        else:
+                            try:
+                                model = NotebooksList.objects.filter(brand=search, price__gte=int(price_from),
+                                                                     price__lte=int(price_to))
+                            except Exception:
+                                return redirect(request.path)
 
                 # filter without  start price
-                elif price_from is None:
+                elif price_from is None and processor is not None:
                     #  have stuff
                     if ready_deliver:
                         try:
                             model = NotebooksList.objects.filter(brand=search, price__lte=int(price_to),
-                                                                 in_out='Є в наявності')
+                                                                 in_out='Є в наявності', processor=processor)
                         except Exception:
                             return redirect(request.path)
 
                     # don't have  stuff
                     else:
-                        try:
-                            model = NotebooksList.objects.filter(brand=search, price__lte=int(price_to))
-                        except Exception:
-                            return redirect(request.path)
+                        if processor is not None:
+                            try:
+                                model = NotebooksList.objects.filter(brand=search, price__lte=int(price_to),
+                                                                     processor=processor)
+                            except Exception:
+                                return redirect(request.path)
+                        else:
+                            try:
+                                model = NotebooksList.objects.filter(brand=search, price__lte=int(price_to),
+                                                                     )
+                            except Exception:
+                                return redirect(request.path)
+
 
                 # filter without end price
                 else:
                     # have stuff
-                    if ready_deliver:
+                    if ready_deliver and processor:
                         try:
                             price_from = request.GET.get('price_from')
                             model = NotebooksList.objects.filter(brand=search, price__gte=int(price_from),
-                                                                 in_out='Є в наявності')
+                                                                 in_out='Є в наявності', processor=processor)
                         except Exception:
                             return redirect(request.path)
 
                     # don't have stuff
                     else:
-                        try:
-                            price_from = request.GET.get('price_from')
-                            model = NotebooksList.objects.filter(brand=search, price__gte=int(price_from),
-                                                                 in_out='Є в наявності')
-                        except Exception:
-                            return redirect(request.path)
+                        if processor:
+                            try:
+                                price_from = request.GET.get('price_from')
+                                model = NotebooksList.objects.filter(brand=search, price__gte=int(price_from),
+                                                                     in_out='Є в наявності', processor=processor)
+                            except Exception:
+                                return redirect(request.path)
+                        else:
+                            try:
+                                price_from = request.GET.get('price_from')
+                                model = NotebooksList.objects.filter(brand=search, price__gte=int(price_from),
+                                                                     in_out='Є в наявності')
+                            except Exception:
+                                return redirect(request.path)
+
 
             # search  by price without brand
             elif search is None:
                 # filter with price with start and end
-                if price_from is not None and price_to is not None:
+                if price_from is not None and price_to is not None and processor:
                     # have stuff
                     if ready_deliver:
                         try:
                             model = NotebooksList.objects.filter(price__gte=int(price_from),
-                                                                 price__lte=int(price_to), in_out='Є в наявності')
+                                                                 price__lte=int(price_to), in_out='Є в наявності',
+                                                                 processor=processor)
                         except Exception:
                             return redirect(request.path)
                     # don't have
                     else:
-                        try:
-                            model = NotebooksList.objects.filter(price__gte=int(price_from),
-                                                                 price__lte=int(price_to))
-                        except Exception:
-                            return redirect(request.path)
+                        if processor:
+                            try:
+                                model = NotebooksList.objects.filter(price__gte=int(price_from),
+                                                                     price__lte=int(price_to), processor=processor)
+                            except Exception:
+                                return redirect(request.path)
+                        else:
+                            if processor:
+                                try:
+                                    model = NotebooksList.objects.filter(price__gte=int(price_from),
+                                                                         price__lte=int(price_to))
+                                except Exception:
+                                    return redirect(request.path)
+
                 # filter by price without start price
-                elif price_from is None:
+                elif price_from is None and processor:
                     # have stuff
                     if ready_deliver:
                         try:
-                            model = NotebooksList.objects.filter(price__lte=int(price_to), in_out='Є в наявності')
+                            model = NotebooksList.objects.filter(price__lte=int(price_to), in_out='Є в наявності',
+                                                                 processor=processor)
                         except Exception:
                             return redirect(request.path)
                     # don't have
                     else:
-                        try:
-                            model = NotebooksList.objects.filter(price__lte=int(price_to))
-                        except Exception:
-                            return redirect(request.path)
+                        if processor:
+                            try:
+                                model = NotebooksList.objects.filter(price__lte=int(price_to), processor=processor)
+                            except Exception:
+                                return redirect(request.path)
+                        else:
+                            if processor:
+                                try:
+                                    model = NotebooksList.objects.filter(price__lte=int(price_to))
+                                except Exception:
+                                    return redirect(request.path)
 
                 # filter by price without end price
                 else:
@@ -1520,7 +1564,7 @@ class HardDisk(generics.GenericAPIView):
                         else:
                             model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
                                                                  price__lte=int(price_to), in_out='Є в наявності',
-                                                                )
+                                                                 )
 
                     # don't have stuff
                     else:
@@ -1637,7 +1681,7 @@ class HardDisk(generics.GenericAPIView):
                             try:
                                 price_from = request.GET.get('price_from')
                                 model = HardDiskLists.objects.filter(price__gte=int(price_from), in_out='Є в наявності',
-                                                                    size=memory_size)
+                                                                     size=memory_size)
                             except Exception:
                                 return redirect(request.path)
                     # don't have

@@ -1,6 +1,7 @@
-body {background: linear-gradient(to right, #080707, #32b31e, #080707)}
+/*body {background: linear-gradient(to right, #080707, #32b31e, #080707)} */
+body {background-color: #030202}
 
-
+body .carousel-item{width: 630px}
 
 body .cart{
         display:flex;
@@ -528,6 +529,10 @@ body .coast_main {background: #fff;
 
 body .coast_main button{width:100%}
 
+body .processors{border-bottom: 2px solid grey;
+                 padding:3%;
+                 }
+
 body .coast_search {
                     display: flex;
                     flex-direction: row;
@@ -574,7 +579,7 @@ body .title_stuff {height: 32vh;
                    }
 
 
-body .note {border: 1px solid black;
+body .note {border: 1px solid #24ad2e;
             height: 55vh;
             z-index: 1;
             width:210px}
@@ -594,8 +599,9 @@ body .note #des{width:200px;
 
 body .note:hover{
                  transform: scale(1.03);
-                 height:83vh;
+                 height:75vh;
                  z-index: 2;
+                 border: 2px solid #24ad2e;
                  }
 
 
@@ -1039,7 +1045,7 @@ body .text_comment{width:60%;
                    height: 100px;
                    }
 
-    .all_stuff{width: 90%}
+    .all_stuff{width: 100%}
 
     body .detail_pic img{width:350px;
                     height: 250px;

@@ -171,6 +171,7 @@ window.onload = (function just_test(){
     var num_of_like = document.getElementsByClassName('like_list_all').length
     document.getElementById('count_of_like').innerHTML = num_of_like
 
+
     if(num_of_like == 0){
         document.getElementById('count_of_like_div').style.display = 'none'
     }
@@ -220,5 +221,8 @@ function manage_panel(){
             document.getElementById('main_panels').style.transform='translateX(-110%)'
         }
     }
+
+
+
 
 

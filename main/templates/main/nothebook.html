@@ -124,10 +124,66 @@
                         </label>
                     </div>
                 </div>
+
+                <!-- <button class="btn btn-light" onclick="active_panel()" id="filters">
+                    <i class="fa-solid fa-sliders"></i>
+                </button> -->
+                <br>
+                <div class="processors">
+                    <h5 class="text-black">Процесор</h5>
+                    <br>
+                    <div class="form-check">
+                        <input class="form-check-input" name="processor" type="checkbox" value="Intel Core i3"
+                               id="flexCheckDefault_i3">
+                        <label class="form-check-label text-dark" for="flexCheckDefault_i3">
+                            Intel Core i3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="processor" type="checkbox" value="Intel Core i5"
+                               id="flexCheckDefault_i5">
+                        <label class="form-check-label text-dark" for="flexCheckDefault_i5">
+                            Intel Core i5
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="processor" type="checkbox" value="Intel Core i7"
+                               id="flexCheckDefault_i7">
+                        <label class="form-check-label text-dark" for="flexCheckDefault_i7">
+                            Intel Core i7
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="processor" type="checkbox" value="Intel Celeron"
+                               id="flexCheckDefault_Celeron">
+                        <label class="form-check-label text-dark" for="flexCheckDefault_Celeron">
+                            Intel Celeron
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" name="processor" type="checkbox" value="AMD Ryzen 3"
+                               id="flexCheckDefault_Ryzen3">
+                        <label class="form-check-label text-dark" for="flexCheckDefault_Ryzen3">
+                            AMD Ryzen 3
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="processor" type="checkbox" value="AMD Ryzen 5"
+                               id="flexCheckDefault_Ryzen5">
+                        <label class="form-check-label text-dark" for="flexCheckDefault_Ryzen5">
+                            AMD Ryzen 5
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="processor" type="checkbox" value="M1"
+                               id="flexCheckDefault_m1">
+                        <label class="form-check-label text-dark" for="flexCheckDefault_m1">
+                            M1
+                        </label>
+                    </div>
+                </div>
             </form>
-            <!-- <button class="btn btn-light" onclick="active_panel()" id="filters">
-                <i class="fa-solid fa-sliders"></i>
-            </button> -->
         </div>
 
 
@@ -175,11 +231,15 @@
     {%if like_modal_status == 1%}
     <script>
         $('#likes_list').modal('show')
+
+
     </script>
     {% elif cart_modal_status == 1%}
-        <script>
+    <script>
             $('#cart').modal('show')
-        </script>
+
+
+    </script>
     {%endif%}
 </div>
 {%endblock%}
