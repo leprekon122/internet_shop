@@ -1,7 +1,7 @@
 /*body {background: linear-gradient(to right, #080707, #32b31e, #080707)} */
 body {background-color: #030202}
 
-body .carousel-item{width: 630px}
+body .carusel-detail{width: 600px}
 
 body .cart{
         display:flex;
@@ -580,7 +580,7 @@ body .title_stuff {height: 32vh;
 
 
 body .note {border: 1px solid #24ad2e;
-            height: 55vh;
+            height: 53vh;
             z-index: 1;
             width:210px}
 
@@ -841,6 +841,14 @@ body .add_detail_comment{padding:4%;
                          background-color:grey}
 
 
+body .head_panel_home a{color: #fff;
+                        text-decoration: none}
+
+
+body .head_panel_home a:hover{color: #e6d21e;
+                                }
+
+
 body .detail_all_comments{height: 40vh;
                           overflow: auto;
                           display: none}
@@ -966,24 +974,43 @@ body .text_comment{width:60%;
                   margin-top: -15%;
                   margin-left: 10%;
                   font-size:42px;
-
+                  padding: 3%;
                   }
+.memory_size{border-bottom: 3px solid grey;
+             padding: 3%}
+
+
 @media screen and (max-width: 1300px){
     body .manage_panel {width: 35%;}
+    body .note {width: 210px;
+                height: 53vh;}
+    body .title{height: 16vh}
 
 }
 
 
 @media screen and (max-width: 1050px){
     body .note {width: 210px;
-                height: 55vh;}
+                height: 51vh;}
 
-    body .title{height: 20vh}
+    body .title{height: 16vh}
 
 
     body .detail_pic img{width:450px;
                         height: 350px;
                         transition-duration: 2s;}
+
+
+    body .carusel-detail{
+                         width: 450px;
+                         height: 350px;
+    }
+
+    body .carusel-detail_img {width: 450px;
+                              height: 350px;}
+
+    body .detail_pic iframe{width: 100%;
+                            height: 350px;}
 
     body .detail_price_elem{display:flex;
                       flex-direction:column;
@@ -1056,6 +1083,17 @@ body .text_comment{width:60%;
                             height:250px;
                             transition-duration: 2s;
                             }
+
+
+    body .carusel-detail{
+                         width: 350px;
+                         height: 250px;
+    }
+
+    body .carusel-detail_img {width: 350px;
+                              height: 250px;}
+
+
     #value_cart{
             color:#fff;
             position:relative;
@@ -1086,6 +1124,14 @@ body .text_comment{width:60%;
                  }
 
     body .detail_pic iframe{width:450px}
+
+    body .carusel-detail{
+                         width: 450px;
+                         height: 400px;
+    }
+
+    body .carusel-detail_img {width: 450px;
+                              height: 200px;}
 
     body .manage_panel {width: 40%;}
 
@@ -1311,6 +1357,14 @@ body .text_comment{width:60%;
     body .detail_pic img{width: 100%;
                          height: 250px
                          }
+
+    body .carusel-detail {width: 100%;
+                    height: 250px;
+                    }
+
+    body .carusel-detail_img {width: 100%;
+                         height: 250px;}
+
     body .detail_pic iframe{width: 100%;
                             height: 250px}
 

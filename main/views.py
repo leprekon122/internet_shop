@@ -310,6 +310,7 @@ class Nothebooks(generics.GenericAPIView):
         if detail:
             model_rating = CommentsUsers.objects.filter(name_of_stuff=detail).values('rating')
             model_cart = ProductCart.objects.all()
+            curent_url = request.path
 
             avr_rating = 0
             for el in model_rating:
@@ -348,6 +349,7 @@ class Nothebooks(generics.GenericAPIView):
                     'quantity_of_comment': quantity_of_comment,
                     'model_cart': model_cart,
                     'cart_sum': cart_sum['product_price__sum'],
+                    'current_url': curent_url
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -632,6 +634,7 @@ class Videocard(generics.GenericAPIView):
 
         if detail:
             model_rating = CommentsUsersVideocard.objects.filter(name_of_stuff=detail).values('rating')
+            curent_url = request.path
 
             avr_rating = 0
             for el in model_rating:
@@ -671,7 +674,8 @@ class Videocard(generics.GenericAPIView):
                     'avg_rating': avr_rating_plural,
                     'quantity_of_comment': quantity_of_comment,
                     'model_cart': model_cart,
-                    'cart_sum': cart_sum['product_price__sum']
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'current_url': curent_url
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -971,6 +975,7 @@ class Monitors(generics.GenericAPIView):
 
         if detail:
             model_rating = CommentsUserMonitor.objects.filter(name_of_stuff=detail).values('rating')
+            curent_url = request.path
 
             avr_rating = 0
             for el in model_rating:
@@ -1010,7 +1015,8 @@ class Monitors(generics.GenericAPIView):
                     'avg_rating': avr_rating_plural,
                     'quantity_of_comment': quantity_of_comment,
                     'model_cart': model_cart,
-                    'cart_sum': cart_sum['product_price__sum']
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'current_url': curent_url
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -1309,6 +1315,7 @@ class Memory(generics.GenericAPIView):
 
         if detail:
             model_rating = CommentsUserMemory.objects.filter(name_of_stuff=detail).values('rating')
+            curent_url = request.path
 
             avr_rating = 0
             for el in model_rating:
@@ -1348,7 +1355,8 @@ class Memory(generics.GenericAPIView):
                     'avg_rating': avr_rating_plural,
                     'quantity_of_comment': quantity_of_comment,
                     'model_cart': model_cart,
-                    'cart_sum': cart_sum['product_price__sum']
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'current_url': curent_url
                     }
             return render(request, 'main/stuff_detail.html', data)
 
@@ -1698,6 +1706,7 @@ class HardDisk(generics.GenericAPIView):
 
         if detail:
             model_rating = CommentsUserMemory.objects.filter(name_of_stuff=detail).values('rating')
+            curent_url = request.path
 
             avr_rating = 0
             for el in model_rating:
@@ -1738,7 +1747,8 @@ class HardDisk(generics.GenericAPIView):
                     'avg_rating': avr_rating_plural,
                     'quantity_of_comment': quantity_of_comment,
                     'model_cart': model_cart,
-                    'cart_sum': cart_sum['product_price__sum']
+                    'cart_sum': cart_sum['product_price__sum'],
+                    'current_url': curent_url
                     }
             return render(request, 'main/stuff_detail.html', data)
 

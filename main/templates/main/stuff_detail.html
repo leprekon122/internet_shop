@@ -4,6 +4,23 @@
 
 {%block content%}
 <div class="container detail_container">
+    <div class="head_panel">
+        <div class="head_panel_home">
+            <a href="https://my-petshop.herokuapp.com/"><i class="fa-solid fa-house text-light"></i></a>
+            <i class="fa-solid fa-arrow-right text-success"></i>
+            {%if current_url == '/notebooks/' %}
+            <a href="https://my-petshop.herokuapp.com/notebooks/">ноутбуки</a>
+            {%elif current_url == '/videocards/'%}
+            <a href="https://my-petshop.herokuapp.com/videocards/">відеокарти</a>
+            {%elif current_url == '/displays/'%}
+            <a href="https://my-petshop.herokuapp.com/displays/">монітори</a>
+            {%elif current_url == '/memory/'%}
+            <a href="https://my-petshop.herokuapp.com/memory/">пам'ять</a>
+            {%elif current_url == '/hard_disk/'%}
+            <a href="https://my-petshop.herokuapp.com/hard_disk/">жорсткі диски</a>
+            {%endif%}
+        </div>
+    </div>
     <div class="detail_all">
         {%for el in model%}
         <div class="container detail_title">
@@ -79,8 +96,8 @@
             <!--<img src="/media/{{el.pic}}" width="600px" height="400px" id="detail_pic"> -->
 
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
+                <div class="carousel-inner carusel-detail">
+                    <div class="carousel-item active carusel-detail_img">
                         <img class="d-block w-100" width="550px" height="400px" loading="lazy" src="{{el.pic_link}}"
                              alt="First slide">
                     </div>
@@ -283,6 +300,8 @@
         $('.carousel').carousel({
             interval: false,
             });
+
+
 
 
     </script>
