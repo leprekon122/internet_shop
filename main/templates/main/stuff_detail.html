@@ -10,15 +10,46 @@
             <i class="fa-solid fa-arrow-right text-success"></i>
             {%if current_url == '/notebooks/' %}
             <a href="https://my-petshop.herokuapp.com/notebooks/">ноутбуки</a>
+            <i class="fa-solid fa-arrow-right text-success"></i>
+            {%for item in model%}
+            <form method="get">
+                <button class="btn btn-dark" name="filter_stuff" value="{{item.brand}}">ноутбуки {{item.brand}}</button>
+            </form>
+            {%endfor%}
             {%elif current_url == '/videocards/'%}
             <a href="https://my-petshop.herokuapp.com/videocards/">відеокарти</a>
+            <i class="fa-solid fa-arrow-right text-success"></i>
+            {%for item in model%}
+            <form method="get">
+                <button class="btn btn-dark" name="filter_stuff" value="{{item.brand}}">відеокарти {{item.brand}}</button>
+            </form>
+            {%endfor%}
             {%elif current_url == '/displays/'%}
             <a href="https://my-petshop.herokuapp.com/displays/">монітори</a>
+            <i class="fa-solid fa-arrow-right text-success"></i>
+            {%for item in model%}
+            <form method="get">
+                <button class="btn btn-dark" name="filter_stuff" value="{{item.brand}}">монітори {{item.brand}}</button>
+            </form>
+            {%endfor%}
             {%elif current_url == '/memory/'%}
             <a href="https://my-petshop.herokuapp.com/memory/">пам'ять</a>
+            <i class="fa-solid fa-arrow-right text-success"></i>
+            {%for item in model%}
+            <form method="get">
+                <button class="btn btn-dark" name="filter_stuff" value="{{item.brand}}">пам'ять {{item.brand}}</button>
+            </form>
+            {%endfor%}
             {%elif current_url == '/hard_disk/'%}
             <a href="https://my-petshop.herokuapp.com/hard_disk/">жорсткі диски</a>
+            <i class="fa-solid fa-arrow-right text-success"></i>
+            {%for item in model%}
+            <form method="get">
+                <button class="btn btn-dark" name="filter_stuff" value="{{item.brand}}">жорсткі диски {{item.brand}}</button>
+            </form>
+            {%endfor%}
             {%endif%}
+
         </div>
     </div>
     <div class="detail_all">
@@ -95,7 +126,7 @@
             </div>
             <!--<img src="/media/{{el.pic}}" width="600px" height="400px" id="detail_pic"> -->
 
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div id="carusel_main_detail" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner carusel-detail">
                     <div class="carousel-item active carusel-detail_img">
                         <img class="d-block w-100" width="550px" height="400px" loading="lazy" src="{{el.pic_link}}"
@@ -138,7 +169,7 @@
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#carusel_main_detail" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -300,6 +331,7 @@
         $('.carousel').carousel({
             interval: false,
             });
+
 
 
 

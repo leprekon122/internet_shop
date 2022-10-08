@@ -496,7 +496,6 @@ body .main_comodety{
 body .manage_panel {
     /*display: block; */
     background: #fff;
-    overflow: auto;
     height: 95vh;
     border-right: 2px solid #5d21bf;
     color: #fff;
@@ -505,7 +504,12 @@ body .manage_panel {
     width: 30%;
 }
 
-.manage_panel button{width:100%}
+body .manage_panel_scroll {overflow: auto;
+                           height: 80vh;
+                           }
+
+.manage_panel button{width:100%;
+                     }
 
 
 
@@ -841,8 +845,14 @@ body .add_detail_comment{padding:4%;
                          background-color:grey}
 
 
+body .head_panel_home {display: flex;
+                       flex-direction:row;
+                       align-items: center;
+                       }
+
 body .head_panel_home a{color: #fff;
                         text-decoration: none}
+
 
 
 body .head_panel_home a:hover{color: #e6d21e;

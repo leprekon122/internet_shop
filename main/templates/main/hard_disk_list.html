@@ -15,125 +15,127 @@
                 <button class="btn btn-danger" type="submit" name="reject_filters" value="reject_filters">скасувати
                 </button>
 
-                <div class="alphabet_search">
-                    <h5 class="text-dark">Пошук по бренду</h5>
-                    <br>
-                    <div class="form-check">
-                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Hitachi"
-                               id="flexCheckDefault_1">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_1">
-                            Hitachi
-                        </label>
-                    </div>
+                <div class="manage_panel_scroll">
+                    <div class="alphabet_search">
+                        <h5 class="text-dark">Пошук по бренду</h5>
+                        <br>
+                        <div class="form-check">
+                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Hitachi"
+                                   id="flexCheckDefault_1">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_1">
+                                Hitachi
+                            </label>
+                        </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Samsung"
-                               id="flexCheckDefault_2">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_2">
-                            Samsung
-                        </label>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Samsung"
+                                   id="flexCheckDefault_2">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_2">
+                                Samsung
+                            </label>
+                        </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Seagate"
-                               id="flexCheckDefault_3">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_3">
-                            Seagate
-                        </label>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Seagate"
+                                   id="flexCheckDefault_3">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_3">
+                                Seagate
+                            </label>
+                        </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Toshiba"
-                               id="flexCheckDefault_4">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_4">
-                            Toshiba
-                        </label>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Toshiba"
+                                   id="flexCheckDefault_4">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_4">
+                                Toshiba
+                            </label>
+                        </div>
 
 
-                    <div class="form-check">
-                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Samsung"
-                               id="flexCheckDefault_5">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_5">
-                            Samsung
-                        </label>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Samsung"
+                                   id="flexCheckDefault_5">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_5">
+                                Samsung
+                            </label>
+                        </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="WD"
-                               id="flexCheckDefault_6">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_6">
-                            WD
-                        </label>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="WD"
+                                   id="flexCheckDefault_6">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_6">
+                                WD
+                            </label>
+                        </div>
 
-                </div>
-                <br>
-                <div class="coast_main" id="coast">
-                    <h5 class="text-dark">Пошук за ціною</h5>
-                    <br>
-                    <div class="coast_search">
-                        <input type="text" class="form-control" name="price_from" id="price_from" placeholder="Від">
-                        <input type="text" class="form-control" name="price_to" placeholder="До" id="price_to">
                     </div>
                     <br>
-                    <div class="sliders">
-                        <input type="range" class="slider" min="0" max="{{price_max}}" step="500" value="500"
-                               id="price_slider"
-                               oninput="price_sliders()">
-                        <input type="range" class="slider" min="0" max="{{price_max}}" step="100"
-                               value="{{price_max}}"
-                               id="price_slider_2" oninput="price_sliders()">
+                    <div class="coast_main" id="coast">
+                        <h5 class="text-dark">Пошук за ціною</h5>
+                        <br>
+                        <div class="coast_search">
+                            <input type="text" class="form-control" name="price_from" id="price_from" placeholder="Від">
+                            <input type="text" class="form-control" name="price_to" placeholder="До" id="price_to">
+                        </div>
+                        <br>
+                        <div class="sliders">
+                            <input type="range" class="slider" min="0" max="{{price_max}}" step="500" value="500"
+                                   id="price_slider"
+                                   oninput="price_sliders()">
+                            <input type="range" class="slider" min="0" max="{{price_max}}" step="100"
+                                   value="{{price_max}}"
+                                   id="price_slider_2" oninput="price_sliders()">
+                        </div>
+                        <br>
                     </div>
                     <br>
-                </div>
-                <br>
-                <div class="ready_to_delivery">
-                    <div class="form-check">
-                        <input class="form-check-input" name="ready_deliver" type="checkbox" value="ready_deliver"
-                               id="flexCheckDefault">
-                        <label class="form-check-label text-dark" for="flexCheckDefault">
-                            готовий до відправлення
-                        </label>
+                    <div class="ready_to_delivery">
+                        <div class="form-check">
+                            <input class="form-check-input" name="ready_deliver" type="checkbox" value="ready_deliver"
+                                   id="flexCheckDefault">
+                            <label class="form-check-label text-dark" for="flexCheckDefault">
+                                готовий до відправлення
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="container memory_size">
-                    <h5 class="text-dark">Розмір накопичувача</h5>
-                    <div class="form-check">
-                        <input class="form-check-input" name="memory_size" type="checkbox" value="1"
-                               id="flexCheckDefault_1tb">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_1tb">
-                            1 TB
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="memory_size" type="checkbox" value="2"
-                               id="flexCheckDefault_2tb">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_2tb">
-                            2 TB
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="memory_size" type="checkbox" value="3"
-                               id="flexCheckDefault_3tb">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_3tb">
-                            3 TB
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="memory_size" type="checkbox" value="4"
-                               id="flexCheckDefault_4tb">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_4tb">
-                            4 TB
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="memory_size" type="checkbox" value="10"
-                               id="flexCheckDefault_10tb">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_10tb">
-                            10 TB
-                        </label>
+                    <br>
+                    <div class="container memory_size">
+                        <h5 class="text-dark">Розмір накопичувача</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" name="memory_size" type="checkbox" value="1"
+                                   id="flexCheckDefault_1tb">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_1tb">
+                                1 TB
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="memory_size" type="checkbox" value="2"
+                                   id="flexCheckDefault_2tb">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_2tb">
+                                2 TB
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="memory_size" type="checkbox" value="3"
+                                   id="flexCheckDefault_3tb">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_3tb">
+                                3 TB
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="memory_size" type="checkbox" value="4"
+                                   id="flexCheckDefault_4tb">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_4tb">
+                                4 TB
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="memory_size" type="checkbox" value="10"
+                                   id="flexCheckDefault_10tb">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_10tb">
+                                10 TB
+                            </label>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -181,13 +183,15 @@
     </div>
 
     {%if like_modal_status == 1%}
-        <script>
+    <script>
             $('#likes_list').modal('show')
-        </script>
+
+    </script>
     {% elif cart_modal_status == 1%}
-        <script>
+    <script>
             $('#cart').modal('show')
-        </script>
+
+    </script>
     {%endif%}
 </div>
 <script src="/static/main/js/notebook.js"></script>

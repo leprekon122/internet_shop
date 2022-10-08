@@ -13,88 +13,86 @@
             <form method="get">
 
 
-
-
-
                 <button type="submit" class="text-light btn btn-success" name="search" value="search">
                     <i class="fa-solid fa-magnifying-glass"></i> пошук
                 </button>
                 <button class="btn btn-danger" type="submit" name="reject_filters" value="reject_filters">скасувати
                 </button>
 
-
-                <div class="alphabet_search">
-                    <h5 class="text-dark">Пошук по бренду</h5>
-                    <br>
-                    <div class="form-check">
-                        <input class="form
+                <div class="manage_panel_scroll">
+                    <div class="alphabet_search">
+                        <h5 class="text-dark">Пошук по бренду</h5>
+                        <br>
+                        <div class="form-check">
+                            <input class="form
                         -check-input" name="exampleRadios" type="checkbox" value="Asus"
-                               id="flexCheckDefault_1">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_1">
-                            Asus
-                        </label>
-                    </div>
+                                   id="flexCheckDefault_1">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_1">
+                                Asus
+                            </label>
+                        </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Acer"
-                               id="flexCheckDefault_2">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_2">
-                            Acer
-                        </label>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Acer"
+                                   id="flexCheckDefault_2">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_2">
+                                Acer
+                            </label>
+                        </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="BenQ"
-                               id="flexCheckDefault_3">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_3">
-                            BenQ
-                        </label>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="BenQ"
+                                   id="flexCheckDefault_3">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_3">
+                                BenQ
+                            </label>
+                        </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="Dell"
-                               id="flexCheckDefault_4">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_4">
-                            Dell
-                        </label>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Dell"
+                                   id="flexCheckDefault_4">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_4">
+                                Dell
+                            </label>
+                        </div>
 
 
-                    <div class="form-check">
-                        <input class="form-check-input" name="exampleRadios" type="checkbox" value="LG"
-                               id="flexCheckDefault_5">
-                        <label class="form-check-label text-dark" for="flexCheckDefault_5">
-                            LG
-                        </label>
-                    </div>
-                </div>
-                <br>
-                <div class="coast_main" id="coast">
-                    <h5 class="text-dark">Пошук за ціною</h5>
-                    <br>
-                    <div class="coast_search">
-                        <input type="text" class="form-control" name="price_from" id="price_from" placeholder="Від">
-                        <input type="text" class="form-control" name="price_to" placeholder="До" id="price_to">
+                        <div class="form-check">
+                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="LG"
+                                   id="flexCheckDefault_5">
+                            <label class="form-check-label text-dark" for="flexCheckDefault_5">
+                                LG
+                            </label>
+                        </div>
                     </div>
                     <br>
-                    <div class="sliders">
-                        <input type="range" class="slider" min="0" max="{{price_max}}" step="500" value="5000"
-                               id="price_slider"
-                               oninput="price_sliders()">
-                        <input type="range" class="slider" min="0" max="{{price_max}}" step="100"
-                               value="{{price_max}}"
-                               id="price_slider_2" oninput="price_sliders()">
+                    <div class="coast_main" id="coast">
+                        <h5 class="text-dark">Пошук за ціною</h5>
+                        <br>
+                        <div class="coast_search">
+                            <input type="text" class="form-control" name="price_from" id="price_from" placeholder="Від">
+                            <input type="text" class="form-control" name="price_to" placeholder="До" id="price_to">
+                        </div>
+                        <br>
+                        <div class="sliders">
+                            <input type="range" class="slider" min="0" max="{{price_max}}" step="500" value="5000"
+                                   id="price_slider"
+                                   oninput="price_sliders()">
+                            <input type="range" class="slider" min="0" max="{{price_max}}" step="100"
+                                   value="{{price_max}}"
+                                   id="price_slider_2" oninput="price_sliders()">
+                        </div>
+                        <br>
                     </div>
                     <br>
-                </div>
-                <br>
-                <div class="ready_to_delivery">
-                    <div class="form-check">
-                        <input class="form-check-input" name="ready_deliver" type="checkbox" value="ready_deliver"
-                               id="flexCheckDefault">
-                        <label class="form-check-label text-dark" for="flexCheckDefault">
-                            готовий до відправлення
-                        </label>
+                    <div class="ready_to_delivery">
+                        <div class="form-check">
+                            <input class="form-check-input" name="ready_deliver" type="checkbox" value="ready_deliver"
+                                   id="flexCheckDefault">
+                            <label class="form-check-label text-dark" for="flexCheckDefault">
+                                готовий до відправлення
+                            </label>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -149,10 +147,12 @@
                 $('#likes_list').modal('show')
 
 
+
         </script>
         {% elif cart_modal_status == 1%}
         <script>
                 $('#cart').modal('show')
+
 
 
         </script>

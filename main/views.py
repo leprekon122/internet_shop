@@ -145,6 +145,11 @@ class Nothebooks(generics.GenericAPIView):
         filter = request.GET.get('search')
         reject_filters = request.GET.get('reject_filters')
 
+        filter_stuff = request.GET.get('filter_stuff')
+
+        if filter_stuff:
+            model = NotebooksList.objects.filter(brand=filter_stuff)
+
         if filter:
             ready_deliver = request.GET.get('ready_deliver')
             search = request.GET.get('exampleRadios')
@@ -516,6 +521,11 @@ class Videocard(generics.GenericAPIView):
         filter = request.GET.get('search')
         reject_filters = request.GET.get('reject_filters')
 
+        filter_stuff = request.GET.get('filter_stuff')
+
+        if filter_stuff:
+            model = Videocards.objects.filter(brand=filter_stuff)
+
         if filter:
             ready_deliver = request.GET.get('ready_deliver')
             search = request.GET.get('exampleRadios')
@@ -857,6 +867,11 @@ class Monitors(generics.GenericAPIView):
         filter = request.GET.get('search')
         reject_filters = request.GET.get('reject_filters')
 
+        filter_stuff = request.GET.get('filter_stuff')
+
+        if filter_stuff:
+            model = Monitors_list.objects.filter(brand=filter_stuff)
+
         if filter:
             search = request.GET.get('exampleRadios')
             ready_deliver = request.GET.get('ready_deliver')
@@ -1196,6 +1211,11 @@ class Memory(generics.GenericAPIView):
         detail = request.GET.get('stuff_detail')
         filter = request.GET.get('search')
         reject_filters = request.GET.get('reject_filters')
+
+        filter_stuff = request.GET.get('filter_stuff')
+
+        if filter_stuff:
+            model = Memory_list.objects.filter(brand=filter_stuff)
 
         if filter:
             search = request.GET.get('exampleRadios')
@@ -1549,6 +1569,11 @@ class HardDisk(generics.GenericAPIView):
         detail = request.GET.get('stuff_detail')
         filter = request.GET.get('search')
         reject_filters = request.GET.get('reject_filters')
+
+        filter_stuff = request.GET.get('filter_stuff')
+
+        if filter_stuff:
+            model = HardDiskLists.objects.filter(brand=filter_stuff)
 
         if filter:
             search = request.GET.get('exampleRadios')
