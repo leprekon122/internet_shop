@@ -213,6 +213,7 @@ function stuff_in_cart(){
 
 
 //active menu on phone///
+var count_panel = 0
 function manage_panel(){
     count_panel += 1
     if(count_panel % 2 == 1){
