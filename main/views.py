@@ -451,15 +451,16 @@ class Nothebooks(generics.GenericAPIView):
             return render(request, 'main/nothebook.html', data)
 
         if buy:
-            model_add_cart = NotebooksList.objects.filter(id=buy).values()[0]
+            model_add_cart = NotebooksList.objects.filter(id=buy, ).values()[0]
             username = request.user
             title = model_add_cart['title']
             product_pic = model_add_cart['pic_link']
             product_price = model_add_cart['price']
             product_status = model_add_cart['in_out']
 
-            ProductCart.objects.create(user_name=username, product_title=title, product_pic=product_pic,
-                                       product_price=product_price, product_status=product_status)
+            if product_status == 'Є в наявності':
+                ProductCart.objects.create(user_name=username, product_title=title, product_pic=product_pic,
+                                           product_price=product_price, product_status=product_status)
 
             return redirect(request.path_info)
 

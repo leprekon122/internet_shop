@@ -210,12 +210,14 @@
 
                 <div class="price_and_bag">
                     <h5>{{el.price}} UAH</h5>
+                    {%if el.in_out == 'Є в наявності'%}
                     <form method="post">{%csrf_token%}
                         <button class="btn btn-light sold_btn" type="submit" name="buy" value="{{el.id}}"
                                 onclick="return stuff_in_cart()" id="sold"><i
                                 class="fa-solid fa-cart-shopping"></i></button>
                         <i class="fa-solid fa-cart-plus" id="in_cart"></i>
                     </form>
+                    {%endif%}
                 </div>
                 {%if el.in_out == 'Є в наявності'%}
                 <p class="text-success">готовий до відправлення <span class="truck"><i
@@ -235,10 +237,12 @@
 
 
 
+
     </script>
     {% elif cart_modal_status == 1%}
     <script>
             $('#cart').modal('show')
+
 
 
 

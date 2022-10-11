@@ -202,12 +202,13 @@ window.onload = (function just_test(){
 
 function stuff_in_cart(){
     var user = document.getElementById('user').innerHTML
+
     if(user == 'AnonymousUser'){
         window.alert('Необхідно увійти у систему');
         return false
     } else{
         return true
-    }
+        }
 }
 
 
@@ -222,6 +223,7 @@ function manage_panel(){
             document.getElementById('main_panels').style.transform='translateX(-110%)'
         }
     }
+
 
 
 

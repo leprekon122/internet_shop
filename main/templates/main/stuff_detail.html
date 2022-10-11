@@ -132,38 +132,47 @@
                         <img class="d-block w-100" width="550px" height="400px" loading="lazy" src="{{el.pic_link}}"
                              alt="First slide">
                     </div>
+                    {%if el.pic_link_2 != 'none' %}
                     <div class="carousel-item">
-                        <img class="d-block w-100" width="550px" height="400px" loading="lazy" src="{{el.pic_link_2}}"
+                        <img class="d-block w-100" width="550px" height="450px" loading="lazy" src="{{el.pic_link_2}}"
                              alt="Second slide">
                     </div>
+                    {%elif el.pic_link_3 != 'none' %}
                     <div class="carousel-item">
-                        <img class="d-block w-100" width="550px" height="400px" loading="lazy" src="{{el.pic_link_3}}"
+                        <img class="d-block w-100" width="550px" height="450px" loading="lazy" src="{{el.pic_link_3}}"
                              alt="Third slide">
                     </div>
+                    {%elif el.pic_link_4 != 'none' %}
                     <div class="carousel-item">
-                        <img class="d-block w-100" width="550px" height="400px" loading="lazy" src="{{el.pic_link_4}}"
+                        <img class="d-block w-100" width="550px" height="450px" loading="lazy" src="{{el.pic_link_4}}"
                              alt="Third slide">
                     </div>
+                    {%elif el.pic_link_5 != 'none' %}
                     <div class="carousel-item">
-                        <img class="d-block w-100" width="550px" height="400px" loading="lazy" src="{{el.pic_link_5}}"
+                        <img class="d-block w-100" width="550px" height="450px" loading="lazy" src="{{el.pic_link_5}}"
                              alt="Third slide">
                     </div>
+                    {%elif el.pic_link_6 != 'none' %}
                     <div class="carousel-item">
-                        <img class="d-block w-100" width="550px" height="400px" loading="lazy" src="{{el.pic_link_6}}"
+                        <img class="d-block w-100" width="550px" height="450px" loading="lazy" src="{{el.pic_link_6}}"
                              alt="Third slide">
                     </div>
+                    {%elif el.pic_link_7 != 'none' %}
                     <div class="carousel-item">
-                        <img class="d-block w-100" width="550px" height="400px" loading="lazy" src="{{el.pic_link_7}}"
+                        <img class="d-block w-100" width="550px" height="450px" loading="lazy" src="{{el.pic_link_7}}"
                              alt="Third slide">
                     </div>
+                    {%elif el.pic_link_8 != 'none' %}
                     <div class="carousel-item">
-                        <img class="d-block w-100" width="550px" height="400px" loading="lazy" src="{{el.pic_link_8}}"
+                        <img class="d-block w-100" width="550px" height="450px" loading="lazy" src="{{el.pic_link_8}}"
                              alt="Third slide">
                     </div>
+                    {%elif el.pic_link_9 != 'none' %}
                     <div class="carousel-item">
-                        <img class="d-block w-100" width="550px" height="400px" loading="lazy" src="{{el.pic_link_9}}"
+                        <img class="d-block w-100" width="550px" height="450px" loading="lazy" src="{{el.pic_link_9}}"
                              alt="Third slide">
                     </div>
+                    {%endif%}
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -181,6 +190,8 @@
             <div class="container detail_price">
                 <div class="detail_price_elem text-light">
                     <h4>{{el.price}} UAH</h4>
+                    {%for el in model%}
+                    {%if el.in_out == 'Є в наявності'%}
                     <form method="post">{%csrf_token%}
                         <div class="detail_button">
                             <button class="btn btn-success" type="submit" name="buy" value="{{el.id}}"
@@ -193,6 +204,10 @@
                             <button class="btn btn-primary">Купити в кредит</button>
                         </div>
                     </form>
+                    {%else%}
+                    <p class="text-unsuccess" id="not_have">немає в наявності <i class="fa-solid fa-hourglass-end "></i></p>
+                    {%endif%}
+                    {%endfor%}
                 </div>
                 <br>
                 <div class="container detail_all_comments" id="detail_comment">
