@@ -40,7 +40,9 @@ class NotebooksList(models.Model):
     video_card = models.CharField(max_length=65, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.brand} {self.title} {self.video_link} {self.pic} {self.pic_link} {self.description}" \
+        return f"{self.brand} {self.title} {self.video_link} {self.pic} {self.pic_link} {self.pic_link_2}" \
+               f" {self.pic_link_3} {self.pic_link_4} {self.pic_link_5} {self.pic_link_6}" \
+               f"{self.pic_link_7} {self.pic_link_8} {self.pic_link_9} {self.description}" \
                f"{self.price} {self.in_out} {self.processor} {self.display_width} {self.ram} {self.video_card}"
 
 
@@ -61,12 +63,24 @@ class Videocards(models.Model):
     video_link = models.TextField(null=True, blank=True)
     pic = models.ImageField(upload_to='videocards_pic')
     pic_link = models.TextField(null=True, blank=True)
+    pic_link_2 = models.TextField(null=True, blank=True)
+    pic_link_3 = models.TextField(null=True, blank=True)
+    pic_link_4 = models.TextField(null=True, blank=True)
+    pic_link_5 = models.TextField(null=True, blank=True)
+    pic_link_6 = models.TextField(null=True, blank=True)
+    pic_link_7 = models.TextField(null=True, blank=True)
+    pic_link_8 = models.TextField(null=True, blank=True)
+    pic_link_9 = models.TextField(null=True, blank=True)
     description = models.TextField()
     price = models.IntegerField()
     in_out = models.CharField(max_length=255, choices=in_out_list)
+    name_of_model = models.CharField(max_length=70, null=True, blank=True)
+    vram = models.CharField(max_length=10, blank=True, null=True)
+    processor = models.CharField(max_length=60, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.brand} {self.title} {self.video_link} {self.pic} {self.description} {self.price} {self.in_out}"
+        return f"{self.brand} {self.title} {self.video_link} {self.pic} {self.description} {self.price} {self.in_out}" \
+               f"{self.name_of_model} {self.vram} {self.processor}"
 
 
 class Monitors_list(models.Model):
@@ -85,6 +99,14 @@ class Monitors_list(models.Model):
     video_link = models.TextField(null=True, blank=True)
     pic = models.ImageField(upload_to='monitors_pic')
     pic_link = models.TextField(null=True, blank=True)
+    pic_link_2 = models.TextField(null=True, blank=True)
+    pic_link_3 = models.TextField(null=True, blank=True)
+    pic_link_4 = models.TextField(null=True, blank=True)
+    pic_link_5 = models.TextField(null=True, blank=True)
+    pic_link_6 = models.TextField(null=True, blank=True)
+    pic_link_7 = models.TextField(null=True, blank=True)
+    pic_link_8 = models.TextField(null=True, blank=True)
+    pic_link_9 = models.TextField(null=True, blank=True)
     description = models.TextField()
     price = models.IntegerField()
     in_out = models.CharField(max_length=255, choices=in_out_list)
@@ -114,6 +136,14 @@ class Memory_list(models.Model):
     video_link = models.TextField(null=True, blank=True)
     pic = models.ImageField(upload_to='monitors_pic')
     pic_link = models.TextField(null=True, blank=True)
+    pic_link_2 = models.TextField(null=True, blank=True)
+    pic_link_3 = models.TextField(null=True, blank=True)
+    pic_link_4 = models.TextField(null=True, blank=True)
+    pic_link_5 = models.TextField(null=True, blank=True)
+    pic_link_6 = models.TextField(null=True, blank=True)
+    pic_link_7 = models.TextField(null=True, blank=True)
+    pic_link_8 = models.TextField(null=True, blank=True)
+    pic_link_9 = models.TextField(null=True, blank=True)
     description = models.TextField()
     price = models.IntegerField()
     in_out = models.CharField(max_length=255, choices=in_out_list)
@@ -146,6 +176,14 @@ class HardDiskLists(models.Model):
     video_link = models.TextField(null=True, blank=True)
     pic = models.ImageField(upload_to='hard_disc_pic', null=True, blank=True)
     pic_link = models.TextField(null=True, blank=True)
+    pic_link_2 = models.TextField(null=True, blank=True)
+    pic_link_3 = models.TextField(null=True, blank=True)
+    pic_link_4 = models.TextField(null=True, blank=True)
+    pic_link_5 = models.TextField(null=True, blank=True)
+    pic_link_6 = models.TextField(null=True, blank=True)
+    pic_link_7 = models.TextField(null=True, blank=True)
+    pic_link_8 = models.TextField(null=True, blank=True)
+    pic_link_9 = models.TextField(null=True, blank=True)
     description = models.TextField()
     price = models.IntegerField()
     in_out = models.CharField(max_length=255, choices=in_out_list)
