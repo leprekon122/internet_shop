@@ -199,7 +199,7 @@
                     </button>
                 </form>
                 <div class="title title_note">
-                    <p>{{el.title}}</p>
+                    <p class="title_note_text">{{el.title}}</p>
                 </div>
                 <form method="post">{% csrf_token %}
                     <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"
@@ -210,14 +210,18 @@
 
                 <div class="price_and_bag">
                     <h5>{{el.price}} UAH</h5>
-                    {%if el.in_out == 'Є в наявності'%}
                     <form method="post">{%csrf_token%}
+                        {%if el.in_out == 'Є в наявності'%}
                         <button class="btn btn-light sold_btn" type="submit" name="buy" value="{{el.id}}"
                                 onclick="return stuff_in_cart()" id="sold"><i
                                 class="fa-solid fa-cart-shopping"></i></button>
                         <i class="fa-solid fa-cart-plus" id="in_cart"></i>
+                        {%else%}
+                        <button class="btn btn-light sold_btn" type="submit" name="buy" value="{{el.id}}"
+                                onclick="return stuff_in_cart()"disabled><i
+                                class="fa-solid fa-cart-shopping"></i></button>
+                        {%endif%}
                     </form>
-                    {%endif%}
                 </div>
                 {%if el.in_out == 'Є в наявності'%}
                 <p class="text-success">готовий до відправлення <span class="truck"><i

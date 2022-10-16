@@ -133,6 +133,7 @@ class DetailInfo(generics.GenericAPIView):
 class Nothebooks(generics.GenericAPIView):
     @staticmethod
     def get(request):
+        print(NotebooksList.objects.filter(id=14).values('id', 'title'))
 
         model = NotebooksList.objects.all()
         '''cart_all_items'''

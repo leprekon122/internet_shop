@@ -60,12 +60,7 @@ function detail_color_question(){
 
 
 
-/*var csrf_token = ''
-function get_csrf_token(){
-    var token = document.cookie.split('=')
-    csrf_token = token[1]
-}
-get_csrf_token() */
+
 
 
 

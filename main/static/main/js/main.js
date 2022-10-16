@@ -166,7 +166,19 @@ function active_panel(){
 window.onload = (function just_test(){
     var item = document.getElementsByClassName('cart_price')
     var product_title = document.getElementsByClassName('cart_title')
-    var items = document.getElementById('detail_title')
+    var items = document.getElementsByClassName('title_note_text')
+    var buy_btn = document.getElementsByClassName('sold_btn')
+
+    for(let i = 0; i <= items.length - 1 ; i++){
+            res = items[i].innerHTML
+
+            for(let el = 0; el <= product_title.length - 1; el++){
+                if(product_title[el].innerHTML == res){
+                    buy_btn[i].style.color = 'green'
+                    buy_btn[i].disabled = 'true'
+                }
+            }
+        }
 
     var num_of_like = document.getElementsByClassName('like_list_all').length
     document.getElementById('count_of_like').innerHTML = num_of_like
@@ -187,14 +199,6 @@ window.onload = (function just_test(){
         document.getElementById('make_order').style.display = 'none'
         }
 
-
-    for(var i = 0; i <= product_title.length; i++){
-        if(items.innerHTML == product_title[i].innerText){
-            document.getElementById('cart_buy_item').style.display = 'none'
-            document.getElementById('cart_sold').style.display = 'block';}
-       }
-
-
   })
 
 
@@ -209,6 +213,7 @@ function stuff_in_cart(){
     } else{
         return true
         }
+
 }
 
 
@@ -223,6 +228,7 @@ function manage_panel(){
             document.getElementById('main_panels').style.transform='translateX(-110%)'
         }
     }
+
 
 
 
