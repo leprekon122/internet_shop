@@ -199,6 +199,14 @@ window.onload = (function just_test(){
         document.getElementById('make_order').style.display = 'none'
         }
 
+    var detail_title = document.getElementById('detail_title')
+    for(let els = 0; els <= product_title.length - 1; els++){
+        if(product_title[els].innerHTML == detail_title.innerHTML){
+            document.getElementById('cart_buy_item').style.display = 'none'
+            document.getElementById('cart_sold').style.display = 'block'
+        }
+    }
+
   })
 
 

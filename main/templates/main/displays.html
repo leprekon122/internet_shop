@@ -111,8 +111,8 @@
                     </button>
                 </form>
                 <br>
-                <div class="title">
-                    <p>{{el.title}}</p>
+                <div class="title title_note">
+                    <p class="title_note_text">{{el.title}}</p>
                 </div>
                 <form method="post">{% csrf_token %}
                     <button class="btn btn-light" type="submit" name="add_like" value="{{el.id}}"

@@ -997,6 +997,12 @@ body .text_comment{width:60%;
                 height: 53vh;}
     body .title{height: 16vh}
 
+    body .detail_price_elem {display: flex;
+                            flex-direction: column;
+                            }
+    body .carusel-detail {width: 530px;
+                          height: 350px;
+                          }
 }
 
 
@@ -1013,12 +1019,12 @@ body .text_comment{width:60%;
 
 
     body .carusel-detail{
-                         width: 450px;
+                         width: 500px;
                          height: 350px;
     }
 
-    body .carusel-detail_img {width: 450px;
-                              height: 350px;}
+    body .carusel-detail_img {width: 500px;
+                              height: 330px;}
 
     body .detail_pic iframe{width: 100%;
                             height: 350px;}
@@ -1058,6 +1064,9 @@ body .text_comment{width:60%;
 
 
 @media screen and (max-width: 926px){
+    body .detail_price_elem button{font-size: 14px}
+    body .detail_price_elem a{font-size: 14px}
+
     body .list_items {width:100%}
 
     body .main_panels {width:80%;}
