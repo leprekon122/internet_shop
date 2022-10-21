@@ -80,6 +80,7 @@ body .cart_footers{display:flex;
             justify-content:space-around;
             }
 
+body .cart_footers a{width: 100%}
 
 .value_cart{display:flex;
             justify-content:center;
@@ -989,6 +990,8 @@ body .text_comment{width:60%;
                   }
 .memory_size{border-bottom: 3px solid grey;
              padding: 3%}
+
+
 
 
 @media screen and (max-width: 1300px){

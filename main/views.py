@@ -160,7 +160,7 @@ class Nothebooks(generics.GenericAPIView):
 
             if search is not None:
                 # filter with start and end price
-                if price_from is not None and price_to is not None and processor is not None:
+                if all([(price_from is not None), (price_to is not None), processor]):
                     # have stuff
                     if ready_deliver:
                         try:
@@ -186,7 +186,7 @@ class Nothebooks(generics.GenericAPIView):
                                 return redirect(request.path)
 
                 # filter without  start price
-                elif price_from is None and processor is not None:
+                elif all([(price_from is None), (processor is not None)]):
                     #  have stuff
                     if ready_deliver:
                         try:
@@ -243,7 +243,7 @@ class Nothebooks(generics.GenericAPIView):
             # search  by price without brand
             elif search is None:
                 # filter with price with start and end
-                if price_from is not None and price_to is not None and processor:
+                if all([(price_from is not None), (price_to is not None), processor]):
                     # have stuff
                     if ready_deliver:
                         try:
@@ -269,9 +269,9 @@ class Nothebooks(generics.GenericAPIView):
                                     return redirect(request.path)
 
                 # filter by price without start price
-                elif price_from is None and processor:
+                elif all([(price_from is None), (price_to is not None), processor]):
                     # have stuff
-                    if ready_deliver:
+                    if all([ready_deliver, processor]):
                         try:
                             model = NotebooksList.objects.filter(price__lte=int(price_to), in_out='Є в наявності',
                                                                  processor=processor)
@@ -279,17 +279,16 @@ class Nothebooks(generics.GenericAPIView):
                             return redirect(request.path)
                     # don't have
                     else:
-                        if processor:
+                        if all([(price_to is not None), processor]):
                             try:
                                 model = NotebooksList.objects.filter(price__lte=int(price_to), processor=processor)
                             except Exception:
                                 return redirect(request.path)
                         else:
-                            if processor:
-                                try:
-                                    model = NotebooksList.objects.filter(price__lte=int(price_to))
-                                except Exception:
-                                    return redirect(request.path)
+                            try:
+                                model = NotebooksList.objects.filter(price__lte=int(price_to))
+                            except Exception:
+                                return redirect(request.path)
 
                 # filter by price without end price
                 else:
@@ -536,7 +535,7 @@ class Videocard(generics.GenericAPIView):
 
             if search is not None:
                 # filter with start and end price
-                if price_from is not None and price_to is not None:
+                if all([(price_from is not None), (price_to is not None)]):
                     # have stuff
                     if ready_deliver:
                         try:
@@ -556,7 +555,7 @@ class Videocard(generics.GenericAPIView):
                 # filter without  start price
                 elif price_from is None:
                     #  have stuff
-                    if ready_deliver:
+                    if all([ready_deliver, (price_from is not None)]):
                         try:
                             model = Videocards.objects.filter(brand=search, price__lte=int(price_to),
                                                               in_out='Є в наявності')
@@ -573,7 +572,7 @@ class Videocard(generics.GenericAPIView):
                 # filter without end price
                 else:
                     # have stuff
-                    if ready_deliver:
+                    if all([ready_deliver, (price_from is not None)]):
                         try:
                             price_from = request.GET.get('price_from')
                             model = Videocards.objects.filter(brand=search, price__gte=int(price_from),
@@ -586,21 +585,20 @@ class Videocard(generics.GenericAPIView):
                         try:
                             price_from = request.GET.get('price_from')
                             model = Videocards.objects.filter(brand=search, price__gte=int(price_from),
-                                                              in_out='Є в наявності')
+                                                              )
                         except Exception:
                             return redirect(request.path)
 
             # search  by price without brand
             elif search is None:
                 # filter with price with start and end
-                if price_from is not None and price_to is not None:
+                if all([(price_from is not None), (price_to is not None), ready_deliver]):
                     # have stuff
-                    if ready_deliver:
-                        try:
-                            model = Videocards.objects.filter(price__gte=int(price_from),
-                                                              price__lte=int(price_to), in_out='Є в наявності')
-                        except Exception:
-                            return redirect(request.path)
+                    try:
+                        model = Videocards.objects.filter(price__gte=int(price_from),
+                                                          price__lte=int(price_to), in_out='Є в наявності')
+                    except Exception:
+                        return redirect(request.path)
                     # don't have
                     else:
                         try:
@@ -1942,6 +1940,22 @@ class HardDisk(generics.GenericAPIView):
                     'quentety': quentety,
                     'quentety_1': quentety_1}
             return render(request, 'main/stuff_detail.html', data)
+
+
+"""Buy_form"""
+
+
+class Checkout(generics.GenericAPIView):
+
+    @staticmethod
+    def get(request):
+        user = request.user
+        if user:
+            model = ProductCart.objects.filter(user_name=user).values('product_pic', 'product_price', 'product_title')
+            curt_sum = ProductCart.objects.filter(user_name=user).aggregate(Sum('product_price'))
+        data = {'model': model,
+                'curt_sum': curt_sum['product_price__sum']}
+        return render(request, 'main/checkout.html', data)
 
 
 class NothebookApiDeleteOrupdate(generics.GenericAPIView,
