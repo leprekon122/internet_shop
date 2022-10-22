@@ -19,80 +19,88 @@
 
                 <div class="manage_panel_scroll">
                     <div class="alphabet_search">
-                        <h5 class="text-dark">Пошук по бренду</h5>
+                        <div class="alphabet_search_header">
+                            <h5 class="text-dark">Пошук по бренду</h5>
+                            <i class="fa-solid fa-angle-up text-dark" onclick="return alphabet_search_up()"
+                               id="alphabet_search_up"></i>
+                            <i class="fa-solid fa-angle-down text-dark" id="alphabet_search_down"
+                               onclick="return alphabet_search_down()"></i>
+                        </div>
                         <br>
-                        <div class="form-check">
-                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Apple"
-                                   id="flexCheckDefault_1">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_1">
-                                Apple
-                            </label>
-                        </div>
+                        <div class="all_alphabet_stuff" id="all_alphabet_stuff">
+                            <div class="form-check">
+                                <input class="form-check-input" name="exampleRadios" type="checkbox" value="Apple"
+                                       id="flexCheckDefault_1">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_1">
+                                    Apple
+                                </label>
+                            </div>
 
-                        <div class="form-check">
-                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Acer"
-                                   id="flexCheckDefault_2">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_2">
-                                Acer
-                            </label>
-                        </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="exampleRadios" type="checkbox" value="Acer"
+                                       id="flexCheckDefault_2">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_2">
+                                    Acer
+                                </label>
+                            </div>
 
-                        <div class="form-check">
-                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Asus"
-                                   id="flexCheckDefault_3">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_3">
-                                Asus
-                            </label>
-                        </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="exampleRadios" type="checkbox" value="Asus"
+                                       id="flexCheckDefault_3">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_3">
+                                    Asus
+                                </label>
+                            </div>
 
-                        <div class="form-check">
-                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Dell"
-                                   id="flexCheckDefault_4">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_4">
-                                Dell
-                            </label>
-                        </div>
-
-
-                        <div class="form-check">
-                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="HP"
-                                   id="flexCheckDefault_5">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_5">
-                                HP
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Lenovo"
-                                   id="flexCheckDefault_6">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_6">
-                                Lenovo
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="MSI"
-                                   id="flexCheckDefault_7">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_7">
-                                MSI
-                            </label>
-                        </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="exampleRadios" type="checkbox" value="Dell"
+                                       id="flexCheckDefault_4">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_4">
+                                    Dell
+                                </label>
+                            </div>
 
 
-                        <div class="form-check">
-                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Razer"
-                                   id="flexCheckDefault_8">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_8">
-                                Razer
-                            </label>
-                        </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="exampleRadios" type="checkbox" value="HP"
+                                       id="flexCheckDefault_5">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_5">
+                                    HP
+                                </label>
+                            </div>
 
-                        <div class="form-check">
-                            <input class="form-check-input" name="exampleRadios" type="checkbox" value="Samsung"
-                                   id="flexCheckDefault_9">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_9">
-                                Samsung
-                            </label>
+                            <div class="form-check">
+                                <input class="form-check-input" name="exampleRadios" type="checkbox" value="Lenovo"
+                                       id="flexCheckDefault_6">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_6">
+                                    Lenovo
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" name="exampleRadios" type="checkbox" value="MSI"
+                                       id="flexCheckDefault_7">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_7">
+                                    MSI
+                                </label>
+                            </div>
+
+
+                            <div class="form-check">
+                                <input class="form-check-input" name="exampleRadios" type="checkbox" value="Razer"
+                                       id="flexCheckDefault_8">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_8">
+                                    Razer
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" name="exampleRadios" type="checkbox" value="Samsung"
+                                       id="flexCheckDefault_9">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_9">
+                                    Samsung
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -130,57 +138,63 @@
                     </button> -->
                     <br>
                     <div class="processors">
-                        <h5 class="text-black">Процесор</h5>
+                        <div class="processors_header">
+                            <h5 class="text-black">Процесор</h5>
+                            <i class="fa-solid fa-angle-up text-dark" id="processors_up" onclick="return processors_up()"></i>
+                            <i class="fa-solid fa-angle-down  text-dark" id="processors_down" onclick="return processors_down()"></i>
+                        </div>
                         <br>
-                        <div class="form-check">
-                            <input class="form-check-input" name="processor" type="checkbox" value="Intel Core i3"
-                                   id="flexCheckDefault_i3">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_i3">
-                                Intel Core i3
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="processor" type="checkbox" value="Intel Core i5"
-                                   id="flexCheckDefault_i5">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_i5">
-                                Intel Core i5
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="processor" type="checkbox" value="Intel Core i7"
-                                   id="flexCheckDefault_i7">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_i7">
-                                Intel Core i7
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="processor" type="checkbox" value="Intel Celeron"
-                                   id="flexCheckDefault_Celeron">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_Celeron">
-                                Intel Celeron
-                            </label>
-                        </div>
+                        <div class="all_processors_stuff" id="all_processors_stuff">
+                            <div class="form-check">
+                                <input class="form-check-input" name="processor" type="checkbox" value="Intel Core i3"
+                                       id="flexCheckDefault_i3">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_i3">
+                                    Intel Core i3
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="processor" type="checkbox" value="Intel Core i5"
+                                       id="flexCheckDefault_i5">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_i5">
+                                    Intel Core i5
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="processor" type="checkbox" value="Intel Core i7"
+                                       id="flexCheckDefault_i7">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_i7">
+                                    Intel Core i7
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="processor" type="checkbox" value="Intel Celeron"
+                                       id="flexCheckDefault_Celeron">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_Celeron">
+                                    Intel Celeron
+                                </label>
+                            </div>
 
-                        <div class="form-check">
-                            <input class="form-check-input" name="processor" type="checkbox" value="AMD Ryzen 3"
-                                   id="flexCheckDefault_Ryzen3">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_Ryzen3">
-                                AMD Ryzen 3
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="processor" type="checkbox" value="AMD Ryzen 5"
-                                   id="flexCheckDefault_Ryzen5">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_Ryzen5">
-                                AMD Ryzen 5
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="processor" type="checkbox" value="M1"
-                                   id="flexCheckDefault_m1">
-                            <label class="form-check-label text-dark" for="flexCheckDefault_m1">
-                                M1
-                            </label>
+                            <div class="form-check">
+                                <input class="form-check-input" name="processor" type="checkbox" value="AMD Ryzen 3"
+                                       id="flexCheckDefault_Ryzen3">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_Ryzen3">
+                                    AMD Ryzen 3
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="processor" type="checkbox" value="AMD Ryzen 5"
+                                       id="flexCheckDefault_Ryzen5">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_Ryzen5">
+                                    AMD Ryzen 5
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="processor" type="checkbox" value="M1"
+                                       id="flexCheckDefault_m1">
+                                <label class="form-check-label text-dark" for="flexCheckDefault_m1">
+                                    M1
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -218,7 +232,7 @@
                         <i class="fa-solid fa-cart-plus" id="in_cart"></i>
                         {%else%}
                         <button class="btn btn-light sold_btn" type="submit" name="buy" value="{{el.id}}"
-                                onclick="return stuff_in_cart()"disabled><i
+                                onclick="return stuff_in_cart()" disabled><i
                                 class="fa-solid fa-cart-shopping"></i></button>
                         {%endif%}
                     </form>
@@ -242,10 +256,20 @@
 
 
 
+
+
+
+
+
     </script>
     {% elif cart_modal_status == 1%}
     <script>
             $('#cart').modal('show')
+
+
+
+
+
 
 
 

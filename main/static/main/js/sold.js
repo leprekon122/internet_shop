@@ -5,3 +5,4 @@ function pay_status(){
 function pay_status_off(){
     document.getElementById('pay_with_card').style.display = 'none'
 }
+

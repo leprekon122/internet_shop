@@ -118,3 +118,58 @@ body {background-color: #030202;
        font-family: cursive;
        background-color: green;
        color: #fff}
+
+
+.alert_total_mobile {display: none}
+
+@media screen and (max-width: 770px){
+    .total_value {display: none}
+
+    .alert_total_mobile {display: block;
+                         }
+
+    .total_delivery_mobile {display:flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+
+                            }
+
+    .total_pay_mobile {display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        }
+
+    .alert_total_mobile button{width: 100%;
+                         }
+
+
+    .checkout_main_scroll {height: 60vh;
+                       width: 100%;
+                       overflow: auto;
+                       }
+
+    .delivery_data {flex-direction: column;}
+
+    .delivery_main_detail {width: 100%;}
+
+}
+
+@media screen and (max-width: 380px){
+    .checkout_main_scroll {height: 55vh;
+                           width: 100%;
+                           overflow: auto;
+                       }
+
+    .total_delivery_mobile {display:flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            font-size: 12px;
+                            }
+
+    .total_pay_mobile {display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        font-size: 12px;
+                        }
+
+}

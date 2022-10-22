@@ -414,7 +414,7 @@ body .main_panels {
 
 body .alert-dark{display:flex;
                  flex-direction:row;
-                 background-color: #2b2827;
+                 background-color: #020302;
                  }
 
 
@@ -528,6 +528,15 @@ body .alphabet_search {
     border-bottom: 2px solid grey
 }
 
+.alphabet_search_header {display:flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  align-items: center;
+                }
+
+#alphabet_search_down {display: none}
+
+
 body .coast_main {background: #fff;
                   padding:3%;
                   border-bottom: 2px solid grey}
@@ -537,6 +546,12 @@ body .coast_main button{width:100%}
 body .processors{border-bottom: 2px solid grey;
                  padding:3%;
                  }
+
+.processors_header {display: flex;
+                   flex-direction: row;
+                   justify-content: space-between;
+                   }
+#processors_down {display: none}
 
 body .coast_search {
                     display: flex;
@@ -992,6 +1007,12 @@ body .text_comment{width:60%;
              padding: 3%}
 
 
+.computers_and_a {padding: 2%;
+                  border-bottom: 1px solid #fff;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                    }
 
 
 @media screen and (max-width: 1300px){
@@ -1235,7 +1256,8 @@ body .text_comment{width:60%;
 
 @media screen and (max-width: 591px) {
 
-    body .main_panels {width:92%;}
+    body .main_panels {width:92%;
+                      }
 
     body .detail_description{max-width:400px}
 
@@ -1301,6 +1323,19 @@ body .text_comment{width:60%;
 }
 
 @media screen and (max-width: 483px) {
+
+    #item_hover1 {border-bottom: 1px solid #fff;
+                  padding: 2%;
+                  }
+
+    #item_hover2 {border-bottom: 1px solid #fff;
+                  padding: 2%;
+                  }
+
+    #item_hover3 {border-bottom: 1px solid #fff;
+                  padding: 2%;
+                  }
+
     body .note {width: 300px;
                 max-height: 55vh;
                 }
@@ -1403,14 +1438,22 @@ body .text_comment{width:60%;
                   display:flex;
                   flex-direction:column;
                   font-size: 13px;
+                  border: none
                   }
 
     body .computers {
                  width: 100%;
                  display: flex;
                  flex-direction: column;
-                 padding-left:5%
+                 padding-left: 5%
                  }
+
+    body .computers_and_a {padding: 2%;
+                        border-bottom: 1px solid #fff;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                    }
 
     body .all_cat{width: 150px}
 

@@ -238,8 +238,31 @@ function manage_panel(){
     }
 
 
+function alphabet_search_up(){
+    document.getElementById('all_alphabet_stuff').style.display = 'none'
+    document.getElementById('alphabet_search_down').style.display = 'block'
+    document.getElementById('alphabet_search_up').style.display = 'none'
+
+}
 
 
+function alphabet_search_down(){
+    document.getElementById('all_alphabet_stuff').style.display = 'block'
+    document.getElementById('alphabet_search_down').style.display = 'none'
+    document.getElementById('alphabet_search_up').style.display = 'block'
+}
 
 
+function processors_up(){
+    document.getElementById('all_processors_stuff').style.display = 'none'
+    document.getElementById('processors_down').style.display = 'block'
+    document.getElementById('processors_up').style.display = 'none'
 
+}
+
+function processors_down(){
+    document.getElementById('all_processors_stuff').style.display = 'block'
+    document.getElementById('processors_down').style.display = 'none'
+    document.getElementById('processors_up').style.display = 'block'
+
+}
