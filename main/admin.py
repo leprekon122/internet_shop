@@ -18,3 +18,6 @@ admin.site.register(QuestionUsersMemory)
 admin.site.register(QuestionUsersHardDisk)
 admin.site.register(ProductCart)
 admin.site.register(LikeListModel)
+admin.site.register(OrderList)
+admin.site.register(DocumentOfSold)
+

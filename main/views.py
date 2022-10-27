@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import render, redirect
 from rest_framework import generics, mixins, permissions
 from django.contrib.auth import authenticate, login
@@ -1957,6 +1959,28 @@ class Checkout(generics.GenericAPIView):
                 'curt_sum': curt_sum['product_price__sum']}
         return render(request, 'main/checkout.html', data)
 
+    @staticmethod
+    def post(request, *args, **kwargs):
+        user = request.user
+        name = request.POST.get('client_name')
+        sur_name = request.POST.get('client_surname')
+        client_phone = request.POST.get('client_phone')
+        client_email = request.POST.get('client_email')
+        state = request.POST.get('state')
+        city = request.POST.get('city')
+        num_of_post = request.POST.get('post_num')
+        model = ProductCart.objects.filter(user_name=user).values('product_pic', 'product_price', 'product_title')
+        order_num = random.randint(1, 150000)
+        for el in range(len(model)):
+            product_pic = model[el]['product_pic']
+            product_price = model[el]['product_price']
+            product_title = model[el]['product_title']
+            OrderList.objects.create(username=user, name=name, sur_name=sur_name, mobile_number=client_phone,
+                                     email=client_email, state=state, city=city, num_of_post=num_of_post,
+                                     product_pic=product_pic, product_price=product_price, product_title=product_title,
+                                     order_num=order_num)
+        return redirect('main')
+
 
 class NothebookApiDeleteOrupdate(generics.GenericAPIView,
                                  mixins.RetrieveModelMixin,
@@ -1997,3 +2021,65 @@ class CartApi(generics.GenericAPIView,
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+class AdminPanelStartPage(generics.GenericAPIView,
+                          mixins.CreateModelMixin,
+                          mixins.DestroyModelMixin):
+    serializer_class = DocumentOfSoldSerializer
+
+    @staticmethod
+    def get(request):
+        order_username = request.GET.get('order_username')
+        model = OrderList.objects.all()
+        total_sum = OrderList.objects.aggregate(Sum('product_price'))['product_price__sum']
+
+        options = request.GET.get('options')
+
+        personal_data = None
+
+        if order_username:
+            model_user = User.objects.filter(username=options).values('id')[0]['id']
+            model = OrderList.objects.filter(username=model_user)
+            total_sum = OrderList.objects.filter(username=model_user).aggregate(Sum('product_price'))[
+                'product_price__sum']
+            personal_data = OrderList.objects.filter(username=model_user).values('name', 'sur_name', 'mobile_number',
+                                                                                 'email')[0]
+
+        data = {'model': model,
+                'total_sum': total_sum,
+                'username': options,
+                'personal_data': personal_data,
+                }
+
+
+        return render(request, "main/AdminPanelStartPage.html", data)
+
+    @staticmethod
+    def post(request):
+        model = OrderList.objects.all()
+        total_sum = OrderList.objects.aggregate(Sum('product_price'))['product_price__sum']
+
+        count_comodety = request.POST.get('count_comodety')
+        if count_comodety:
+            res = OrderList.objects.filter(id=count_comodety).values()[0]
+            username = User.objects.filter(id=res['username_id']).values('username')[0]['username']
+            name = res['name']
+            sur_name = res['sur_name']
+            mobile_number = res['mobile_number']
+            email = res['email']
+            product_title = res['product_title']
+            product_pic = res['product_pic']
+            product_price = res['product_price']
+            order_num = res['order_num']
+
+            DocumentOfSold.objects.create(username=username, name=name, sur_name=sur_name, product_title=product_title,
+                                          mobile_number=mobile_number, email=email, product_pic=product_pic,
+                                          product_price=product_price, order_num=order_num)
+            OrderList.objects.filter(id=count_comodety).delete()
+
+        data = {'model': model,
+                'total_sum': total_sum
+                }
+
+        return render(request, "main/AdminPanelStartPage.html", data)

@@ -1,0 +1,104 @@
+body {background-color: #050505}
+
+
+.head_menu .alert-light {background-color: #050505;
+                         display: flex;
+                         justify-content: row;
+
+ }
+
+.orders {border-right: 3px solid grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .4%;
+        }
+
+.orders a {text-decoration: none;}
+
+.orders:hover {background-color: green}
+
+
+.statistic {border-right: 3px solid grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .4%;
+        }
+
+.statistic:hover {background-color: green}
+
+.all_orders_main {display: flex;
+                  flex-direction: row;
+                   }
+
+.all_orders {height: 80vh;
+             overflow: auto;
+             }
+
+.all_orders_header {display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    }
+
+.order_stuff {background-color: #050505;
+              }
+
+.order_stuff button{width: 100%;}
+
+.personal_data {
+               padding: 1%;
+               font-size: 18px;
+               width: 100%;
+               border: 1px  solid #fff
+               }
+
+.personal_data_filter {width: 30%;
+                       padding: 2%;
+                       }
+
+.personal_data_filter button{width: 100%;
+                             margin-top: 3%;
+                                }
+
+.name_and_sur {display: flex;
+               justify-content: space-between;
+               }
+
+.phone_and_email{display: flex;
+                 justify-content: space-between;
+                }
+
+.stuff_detail_data {display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 2%;
+                    font-size: 12px;
+                    }
+
+.title{width: 50%;}
+
+.list_of_orders {display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 35%
+                }
+
+.list_of_orders .alert-dark {width: 80%;}
+
+
+/* data detail in modal */
+
+.order_modal_body {
+                   height: 60vh;
+                   overflow: auto;
+                   }
+
+.commodity_modal {display: flex;
+                  flex-direction: row;
+                  font-size: 14px;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 1%;
+                  border-bottom: 1px solid green;
+                  }

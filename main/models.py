@@ -46,7 +46,6 @@ class NotebooksList(models.Model):
                f"{self.price} {self.in_out} {self.processor} {self.display_width} {self.ram} {self.video_card}"
 
 
-
 class Videocards(models.Model):
     in_out_list = (('Є в наявності', 'Є в наявності'),
                    ('Немає в наявності', 'Немає в наявності'))
@@ -187,10 +186,10 @@ class HardDiskLists(models.Model):
     description = models.TextField()
     price = models.IntegerField()
     in_out = models.CharField(max_length=255, choices=in_out_list)
-    size = models.CharField(max_length=2,null=True, blank=True)
-    count_of_twist = models.CharField(max_length=4,null=True, blank=True, default=0)
+    size = models.CharField(max_length=2, null=True, blank=True)
+    count_of_twist = models.CharField(max_length=4, null=True, blank=True, default=0)
     socket = models.CharField(max_length=50)
-    buffer_size = models.CharField(max_length=3,null=True, blank=True)
+    buffer_size = models.CharField(max_length=3, null=True, blank=True)
 
     def __str__(self):
         return f"{self.brand} {self.title} {self.video_link} {self.pic}" \
@@ -440,3 +439,48 @@ class LikeListModel(models.Model):
     class Meta:
         verbose_name = 'LikeListModel'
         verbose_name_plural = 'LikeListModel'
+
+
+class OrderList(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=60)
+    sur_name = models.CharField(max_length=60)
+    mobile_number = models.CharField(max_length=60)
+    email = models.EmailField(max_length=60)
+    state = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    num_of_post = models.CharField(max_length=10)
+    product_title = models.CharField(max_length=255)
+    product_pic = models.TextField()
+    product_price = models.IntegerField()
+    order_num = models.CharField(max_length=255, null=True, blank=True)
+    data = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.username} {self.name} {self.sur_name} {self.mobile_number}" \
+               f" {self.email} {self.state} {self.city} {self.num_of_post} {self.product_price}" \
+               f" {self.product_pic} {self.product_price}"
+
+    class Meta:
+        verbose_name = 'OrderList'
+        verbose_name_plural = 'OrderList'
+
+
+class DocumentOfSold(models.Model):
+    username = models.CharField(max_length=60)
+    name = models.CharField(max_length=60)
+    sur_name = models.CharField(max_length=60)
+    mobile_number = models.CharField(max_length=60)
+    email = models.EmailField(max_length=60)
+    product_title = models.CharField(max_length=255)
+    product_pic = models.TextField()
+    product_price = models.IntegerField()
+    order_num = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.username} {self.name} {self.sur_name} {self.mobile_number}" \
+               f" {self.email} {self.product_title} {self.product_pic} {self.product_price}"
+
+    class Meta:
+        verbose_name = 'DocumentOfSold'
+        verbose_name_plural = 'DocumentOfSold'

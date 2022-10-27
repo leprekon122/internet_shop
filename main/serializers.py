@@ -18,3 +18,10 @@ class CartApiSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductCart
         fields = ['user_name', 'product_title']
+
+
+class DocumentOfSoldSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DocumentOfSold
+        fields = ['username', 'name', 'sur_name', 'mobile_number', 'email', 'product_title', 'product_pic',
+                  'product_price', 'order_num']

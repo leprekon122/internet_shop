@@ -39,116 +39,122 @@
         </div>
         <button class="btn btn-success">Підтверджую замовлення</button>
     </div>
-    <div class="checkout_main_scroll_object">
-        <div class="checkout_main_scroll">
-            <div class="contact_information">
-                <div class="contact_information_head">
-                    <h5 class="text-light">Контактні данні</h5>
-                </div>
-                <div class="contact_information_input">
-                    <div class="contact_information_input_detail">
-                        <label for="client_surname" class="text-light">Ім'я</label>
-                        <input class="form-control" type="text" id="client_surname" name="client_surname"
-                               placeholder="Ім'я">
+    <form method="post">
+        {%csrf_token%}
+        <div class="checkout_main_scroll_object">
+            <div class="checkout_main_scroll">
+                <div class="contact_information">
+                    <div class="contact_information_head">
+                        <h5 class="text-light">Контактні данні</h5>
                     </div>
-                    <div class="contact_information_input_detail">
-                        <label for="client_name" class="text-light">Прізвище</label>
-                        <input class="form-control" type="text" id="client_name" name="client_name"
-                               placeholder="Прізвище">
-                    </div>
-                    <div class="contact_information_input_detail">
-                        <label for="client_phone" class="text-light">Мобільний телефон</label>
-                        <input class="form-control" type="text" id="client_phone" name="client_phone"
-                               placeholder="Мобільний телефон">
-                    </div>
-                    <div class="contact_information_input_detail">
-                        <label for="client_email" class="text-light">Електронна пошта</label>
-                        <input class="form-control" type="email" id="client_email" name="client_email"
-                               placeholder="Електронна пошта">
-                    </div>
-                </div>
-            </div>
-            <div class="buy_stuff">
-                <div class="buy_stuff_head">
-                    <h5 class="text-light">Замовлення</h5>
-                    <p class="text-light">на суму: {{curt_sum}} <i class="fa-solid fa-hryvnia-sign"></i></p>
-                </div>
-                {%for el in model%}
-                <div class="alert alert-light">
-                    <div class="buy_stuff_header">
-                        <img src="{{el.product_pic}}" width="130px" height="100px">
-                        <p class="text-dark buy_stuff_title">{{el.product_title}}</p>
-                        <p class="text-dark">{{el.product_price}} <i class="fa-solid fa-hryvnia-sign"></i></p>
+                    <div class="contact_information_input">
+                        <div class="contact_information_input_detail">
+                            <label for="client_name" class="text-light">Ім'я</label>
+                            <input class="form-control" type="text" id="client_name" name="client_name"
+                                   placeholder="Ім'я">
+                        </div>
+                        <div class="contact_information_input_detail">
+                            <label for="client_surname" class="text-light">Прізвище</label>
+                            <input class="form-control" type="text" id="client_surname" name="client_surname"
+                                   placeholder="Прізвище">
+                        </div>
+                        <div class="contact_information_input_detail">
+                            <label for="client_phone" class="text-light">Мобільний телефон</label>
+                            <input class="form-control" type="text" id="client_phone" name="client_phone"
+                                   placeholder="Мобільний телефон">
+                        </div>
+                        <div class="contact_information_input_detail">
+                            <label for="client_email" class="text-light">Електронна пошта</label>
+                            <input class="form-control" type="email" id="client_email" name="client_email"
+                                   placeholder="Електронна пошта">
+                        </div>
                     </div>
                 </div>
-                {%endfor%}
-            </div>
+                <div class="buy_stuff">
+                    <div class="buy_stuff_head">
+                        <h5 class="text-light">Замовлення</h5>
+                        <p class="text-light">на суму: {{curt_sum}} <i class="fa-solid fa-hryvnia-sign"></i></p>
+                    </div>
+                    {%for el in model%}
+                    <div class="alert alert-light">
+                        <div class="buy_stuff_header">
+                            <img src="{{el.product_pic}}" width="130px" height="100px">
+                            <p class="text-dark buy_stuff_title">{{el.product_title}}</p>
+                            <p class="text-dark">{{el.product_price}} <i class="fa-solid fa-hryvnia-sign"></i></p>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </div>
 
-            <div class="delivery_main">
-                <h5 class="text-light">Доставка</h5>
-                <div class="delivery_data">
-                    <div class="delivery_main_detail">
-                        <label for="state_name" class="text-light">Область</label>
-                        <input class="form-control" type="text" placeholder="Місто" id="state_name">
-                    </div>
-                    <div class="delivery_main_detail">
-                        <label for="city_name" class="text-light">Назва міста</label>
-                        <input class="form-control" type="text" placeholder="Місто" id="city_name">
-                    </div>
-                    <div class="delivery_main_detail">
-                        <label for="num_of_post" class="text-light">Номер відділення</label>
-                        <input class="form-control" type="text" placeholder="Номер відділення" id="num_of_post">
-                    </div>
-                </div>
-                <div class="container pay_method">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                               oninput="return pay_status_off()">
-                        <label class="form-check-label text-light" for="flexRadioDefault1">
-                            Оплата під час отримання товару
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                               oninput="return pay_status()">
-                        <label class="form-check-label text-light" for="flexRadioDefault2">
-                            Оплатити зараз
-                        </label>
-                    </div>
-                    <div class="pay_with_card" id="pay_with_card">
-                        <div class="card_num">
-                            <label for="card_num" class="text-light">Номер картки</label>
-                            <input class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" id="card_num">
+                <div class="delivery_main">
+                    <h5 class="text-light">Доставка</h5>
+                    <div class="delivery_data">
+                        <div class="delivery_main_detail">
+                            <label for="state_name" class="text-light">Область</label>
+                            <input class="form-control" type="text" placeholder="Місто" id="state_name" name="state">
                         </div>
-                        <div class="personal_card_data">
-                            <div class="card_cred">
-                                <label for="expire_data" class="text-light">Термін дїї</label>
-                                <input class="form-control" placeholder="MM/РР" id="expire_data">
+                        <div class="delivery_main_detail">
+                            <label for="city_name" class="text-light">Назва міста</label>
+                            <input class="form-control" type="text" placeholder="Місто" id="city_name" name="city">
+                        </div>
+                        <div class="delivery_main_detail">
+                            <label for="num_of_post" class="text-light">Номер відділення</label>
+                            <input class="form-control" type="text" placeholder="Номер відділення" id="num_of_post"
+                                   name="post_num">
+                        </div>
+                    </div>
+                    <div class="container pay_method">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                                   oninput="return pay_status_off()">
+                            <label class="form-check-label text-light" for="flexRadioDefault1">
+                                Оплата під час отримання товару
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                                   oninput="return pay_status()">
+                            <label class="form-check-label text-light" for="flexRadioDefault2">
+                                Оплатити зараз
+                            </label>
+                        </div>
+                        <div class="pay_with_card" id="pay_with_card">
+                            <div class="card_num">
+                                <label for="card_num" class="text-light">Номер картки</label>
+                                <input class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" id="card_num">
                             </div>
-                            <div class="card_cred">
-                                <label for="CVV" class="text-light">СVV</label>
-                                <input class="form-control" placeholder="MM/РР" id="CVV">
+                            <div class="personal_card_data">
+                                <div class="card_cred">
+                                    <label for="expire_data" class="text-light">Термін дїї</label>
+                                    <input class="form-control" placeholder="MM/РР" id="expire_data">
+                                </div>
+                                <div class="card_cred">
+                                    <label for="CVV" class="text-light">СVV</label>
+                                    <input class="form-control" placeholder="MM/РР" id="CVV">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="total_value">
-            <div class="alert alert-light alert_total">
-                <h5 class="text-dark">Разом</h5>
-                <div class="total_delivery">
-                    <p>вартість доставки</p>
-                    <p>за тарифами перевізника</p>
+            <div class="total_value">
+                <div class="alert alert-light alert_total">
+                    <h5 class="text-dark">Разом</h5>
+                    <div class="total_delivery">
+                        <p>вартість доставки</p>
+                        <p>за тарифами перевізника</p>
+                    </div>
+                    <div class="total_pay">
+                        <p>До сплати</p>
+                        <h5>{{curt_sum}} <i class="fa-solid fa-hryvnia-sign"></i></h5>
+                    </div>
+
+                    <button class="btn btn-success" name="order" value="order">Підтверджую замовлення</button>
+
                 </div>
-                <div class="total_pay">
-                    <p>До сплати</p>
-                    <h5>{{curt_sum}} <i class="fa-solid fa-hryvnia-sign"></i></h5>
-                </div>
-                <button class="btn btn-success">Підтверджую замовлення</button>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
 <script src="/static/main/js/sold.js">

@@ -21,6 +21,7 @@ urlpatterns = [
     path('checkout/', views.Checkout.as_view(), name="checkout"),
     path('accounts/', include('allauth.urls')),
     path('cartAPI/', views.CartApi.as_view()),
+    path('admin_panels/', views.AdminPanelStartPage.as_view(), name='admin_panels')
     #path('__debug__/', include('debug_toolbar.urls'))
 
 ]
