@@ -102,7 +102,7 @@
                 <h5>Замовлення</h5>
                 <p>кількість замовлень - {{model|length}}</p>
                 <p>Загальна Сума - {{total_sum}} <i class="fa-solid fa-hryvnia-sign"></i></p>
-                <button class="btn btn-success"  data-toggle="modal" data-target="#order">Оформити
+                <button class="btn btn-success" data-toggle="modal" data-target="#order">Оформити
                     замовлення
                 </button>
             </div>
@@ -114,9 +114,9 @@
 <div class="modal" tabindex="-1" role="dialog" id="order">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-header order_modal_header">
+                <h5 class="modal-title text-light">Комплектування замовлення</h5>
+                <button type="button" class="close btn btn-danger text-light" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -124,14 +124,17 @@
                 {%for el in model%}
                 <div class="commodity_modal">
                     <img src="{{el.product_pic}}" width="170px" height="130px">
-                    <p>{{el.product_title}}</p>
-                    <p>{{el.product_price}}</p>
+                    <p class="text-light">{{el.product_title}}</p>
+                    <p class="text-light">{{el.product_price}}</p>
                 </div>
                 {%endfor%}
             </div>
-            <div class="modal-footer">
-                <h5>Загальна сума: {{total_sum}}</h5>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-footer order_modal_footer">
+                <h5 class="text-light">Загальна сума: {{total_sum}}</h5>
+                <form method="post">
+                    {%csrf_token%}
+                    <button type="submit" class="btn btn-success" name="sold" value="{{username}}">Сформувати</button>
+                </form>
             </div>
         </div>
     </div>

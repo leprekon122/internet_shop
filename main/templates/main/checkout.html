@@ -50,23 +50,23 @@
                     <div class="contact_information_input">
                         <div class="contact_information_input_detail">
                             <label for="client_name" class="text-light">Ім'я</label>
-                            <input class="form-control" type="text" id="client_name" name="client_name"
-                                   placeholder="Ім'я">
+                            <input class="form-control personal_data" type="text" id="client_name" name="client_name"
+                                   placeholder="Ім'я(*)">
                         </div>
                         <div class="contact_information_input_detail">
                             <label for="client_surname" class="text-light">Прізвище</label>
-                            <input class="form-control" type="text" id="client_surname" name="client_surname"
-                                   placeholder="Прізвище">
+                            <input class="form-control personal_data" type="text" id="client_surname" name="client_surname"
+                                   placeholder="Прізвище(*)">
                         </div>
                         <div class="contact_information_input_detail">
                             <label for="client_phone" class="text-light">Мобільний телефон</label>
-                            <input class="form-control" type="text" id="client_phone" name="client_phone"
-                                   placeholder="Мобільний телефон">
+                            <input class="form-control personal_data" type="text" id="client_phone" name="client_phone"
+                                   placeholder="Мобільний телефон(*)">
                         </div>
                         <div class="contact_information_input_detail">
                             <label for="client_email" class="text-light">Електронна пошта</label>
-                            <input class="form-control" type="email" id="client_email" name="client_email"
-                                   placeholder="Електронна пошта">
+                            <input class="form-control personal_data" type="email" id="client_email" name="client_email"
+                                   placeholder="Електронна пошта(*)">
                         </div>
                     </div>
                 </div>
@@ -91,15 +91,15 @@
                     <div class="delivery_data">
                         <div class="delivery_main_detail">
                             <label for="state_name" class="text-light">Область</label>
-                            <input class="form-control" type="text" placeholder="Місто" id="state_name" name="state">
+                            <input class="form-control personal_data" type="text" placeholder="Область(*)" id="state_name" name="state">
                         </div>
                         <div class="delivery_main_detail">
                             <label for="city_name" class="text-light">Назва міста</label>
-                            <input class="form-control" type="text" placeholder="Місто" id="city_name" name="city">
+                            <input class="form-control personal_data" type="text" placeholder="Місто(*)" id="city_name" name="city">
                         </div>
                         <div class="delivery_main_detail">
                             <label for="num_of_post" class="text-light">Номер відділення</label>
-                            <input class="form-control" type="text" placeholder="Номер відділення" id="num_of_post"
+                            <input class="form-control personal_data" type="text" placeholder="Номер відділення(*)" id="num_of_post"
                                    name="post_num">
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                         <h5>{{curt_sum}} <i class="fa-solid fa-hryvnia-sign"></i></h5>
                     </div>
 
-                    <button class="btn btn-success" name="order" value="order">Підтверджую замовлення</button>
+                    <button class="btn btn-success" name="order" value="order" onclick="return write_data()">Підтверджую замовлення</button>
 
                 </div>
             </div>

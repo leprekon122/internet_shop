@@ -89,9 +89,14 @@ body {background-color: #050505}
 
 /* data detail in modal */
 
+.order_modal_header {background-color: #090a09;
+
+                     }
+
 .order_modal_body {
                    height: 60vh;
                    overflow: auto;
+                   background-color: #202120;
                    }
 
 .commodity_modal {display: flex;
@@ -102,3 +107,8 @@ body {background-color: #050505}
                   padding: 1%;
                   border-bottom: 1px solid green;
                   }
+
+.order_modal_footer {background-color: #090a09;
+                     display: flex;
+                     justify-content: space-between;
+                     }

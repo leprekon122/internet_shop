@@ -2052,7 +2052,6 @@ class AdminPanelStartPage(generics.GenericAPIView,
                 'personal_data': personal_data,
                 }
 
-
         return render(request, "main/AdminPanelStartPage.html", data)
 
     @staticmethod
@@ -2060,23 +2059,51 @@ class AdminPanelStartPage(generics.GenericAPIView,
         model = OrderList.objects.all()
         total_sum = OrderList.objects.aggregate(Sum('product_price'))['product_price__sum']
 
-        count_comodety = request.POST.get('count_comodety')
-        if count_comodety:
-            res = OrderList.objects.filter(id=count_comodety).values()[0]
-            username = User.objects.filter(id=res['username_id']).values('username')[0]['username']
-            name = res['name']
-            sur_name = res['sur_name']
-            mobile_number = res['mobile_number']
-            email = res['email']
-            product_title = res['product_title']
-            product_pic = res['product_pic']
-            product_price = res['product_price']
-            order_num = res['order_num']
+        count_commodety = request.POST.get('count_comodety')
 
-            DocumentOfSold.objects.create(username=username, name=name, sur_name=sur_name, product_title=product_title,
-                                          mobile_number=mobile_number, email=email, product_pic=product_pic,
-                                          product_price=product_price, order_num=order_num)
-            OrderList.objects.filter(id=count_comodety).delete()
+        sold_order = request.POST.get('sold')
+
+        if sold_order:
+            username = User.objects.filter(username=sold_order).values('id')[0]['id']
+            model_order = OrderList.objects.filter(username=username).values()
+            print(model_order)
+            for el in model_order:
+                name = el['name']
+                sur_name = el['sur_name']
+                mobile_number = el['mobile_number']
+                email = el['email']
+                product_title = el['product_title']
+                product_pic = el['product_pic']
+                product_price = el['product_price']
+                order_num = el['order_num']
+
+                DocumentOfSold.objects.create(username=username, name=name, sur_name=sur_name,
+                                              product_title=product_title, mobile_number=mobile_number, email=email,
+                                              product_pic=product_pic, product_price=product_price, order_num=order_num)
+
+                OrderList.objects.filter(id=el['id']).delete()
+
+                clean_product_cart = ProductCart.objects.filter(user_name_id=username).values()
+
+                for item in clean_product_cart:
+                    ProductCart.objects.filter(id=item['id']).delete()
+
+        # if count_comodety:
+        #    res = OrderList.objects.filter(id=count_comodety).values()[0]
+        #    username = User.objects.filter(id=res['username_id']).values('username')[0]['username']
+        #    name = res['name']
+        #    sur_name = res['sur_name']
+        #    mobile_number = res['mobile_number']
+        #    email = res['email']
+        #    product_title = res['product_title']
+        #    product_pic = res['product_pic']
+        #    product_price = res['product_price']
+        #    order_num = res['order_num']
+
+        #    DocumentOfSold.objects.create(username=username, name=name, sur_name=sur_name, product_title=product_title,
+        #                                  mobile_number=mobile_number, email=email, product_pic=product_pic,
+        #                                  product_price=product_price, order_num=order_num)
+        #    OrderList.objects.filter(id=count_comodety).delete()
 
         data = {'model': model,
                 'total_sum': total_sum
