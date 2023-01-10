@@ -1,6 +1,8 @@
 import random
+import os
 
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_protect
 from rest_framework import generics, mixins, permissions
 from django.contrib.auth import authenticate, login
 from .serializers import *
@@ -135,7 +137,6 @@ class DetailInfo(generics.GenericAPIView):
 class Nothebooks(generics.GenericAPIView):
     @staticmethod
     def get(request):
-        print(NotebooksList.objects.filter(id=14).values('id', 'title'))
 
         model = NotebooksList.objects.all()
         '''cart_all_items'''

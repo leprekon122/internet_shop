@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ezf+b#8pgve2vp(8o6y@u$f$uo!g(h7)n8h%a@ohtp9nhmuask'
+SECRET_KEY = os.path.join('secret_key.py')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -54,12 +54,10 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '909548435939-7037e8g3uiu9ktroiqje8pn38q5vr8fq.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.path.join('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY.py')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.path.join('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET.py')
 
-"""local creditionals"""
-#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '605176420122-t1niqvg1ere0l5gafmkj74mq3v4ku919.apps.googleusercontent.com'
-#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
 
 
 MIDDLEWARE = [
@@ -103,16 +101,16 @@ WSGI_APPLICATION = 'Shop.wsgi.application'
 
 DATABASES = {
     'default': {
-      'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'shop',
         'USER': 'shop_admin',
-        'PASSWORD': '12345',
+        'PASSWORD': os.path.join('pg_pass.py'),
         'HOST': '127.0.0.1',
         'PORT': '5432'
     }
 }
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
 #        # postgresql_psycopg2
 #        'ENGINE': 'django.db.backends.postgresql',
@@ -121,8 +119,7 @@ DATABASES = {
 #        'PASSWORD': 'ce812f69596457b403b4ef89adfdcd81e0d742f413563e3842dc44b9273cc577',
 #        'HOST': 'ec2-54-75-184-144.eu-west-1.compute.amazonaws.com',
 #    }
-#}
-
+# }
 
 
 # Password validation
