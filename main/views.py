@@ -1,13 +1,11 @@
 import random
-import os
 
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_protect
 from rest_framework import generics, mixins, permissions
 from django.contrib.auth import authenticate, login
-from .serializers import *
+from .serializers import NothebooksSerializer, CommentUserSerializer, CartApiSerializer, DocumentOfSoldSerializer
 from .models import *
-from .forms import *
+from .forms import RegistrationUser
 from django.db.models import Sum, Max
 from django.contrib import messages
 
@@ -53,7 +51,8 @@ class MainPage(generics.GenericAPIView):
                 }
         return render(request, 'main/main_page.html', data)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         delete_btn = request.POST.get('delete_btn')
         del_like = request.POST.get('del_like')
         username = request.user
@@ -118,7 +117,8 @@ class Registration(generics.GenericAPIView,
         data = {"form": form}
         return render(request, "main/registration.html", data)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         try:
             form = RegistrationUser(request.POST)
             if form.is_valid():
@@ -213,7 +213,6 @@ class Nothebooks(generics.GenericAPIView):
                             except Exception:
                                 return redirect(request.path)
 
-
                 # filter without end price
                 else:
                     # have stuff
@@ -241,7 +240,6 @@ class Nothebooks(generics.GenericAPIView):
                                                                      in_out='Є в наявності')
                             except Exception:
                                 return redirect(request.path)
-
 
             # search  by price without brand
             elif search is None:
@@ -382,7 +380,8 @@ class Nothebooks(generics.GenericAPIView):
                 }
         return render(request, 'main/nothebook.html', data)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         add_comment = request.POST.get('add_comment')
         add_questions = request.POST.get('add_question')
         buy = request.POST.get('buy')
@@ -1064,7 +1063,8 @@ class Monitors(generics.GenericAPIView):
                 }
         return render(request, 'main/displays.html', data)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         add_comment = request.POST.get('add_comment')
         add_question = request.POST.get('add_question')
         buy = request.POST.get('buy')
@@ -1410,7 +1410,8 @@ class Memory(generics.GenericAPIView):
 
         return render(request, 'main/memory.html', data)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         add_comment = request.POST.get('add_comment')
         add_question = request.POST.get('add_question')
         buy = request.POST.get('buy')
@@ -1614,7 +1615,6 @@ class HardDisk(generics.GenericAPIView):
                             model = HardDiskLists.objects.filter(brand=search, price__gte=int(price_from),
                                                                  price__lte=int(price_to))
 
-
                 # filter without  start price
                 elif price_from is None:
                     #  have stuff
@@ -1690,7 +1690,6 @@ class HardDisk(generics.GenericAPIView):
                                                                      price__lte=int(price_to))
                             except Exception:
                                 return redirect(request.path)
-
 
                 # filter by price without start price
                 elif price_from is None:
@@ -1806,7 +1805,8 @@ class HardDisk(generics.GenericAPIView):
                 }
         return render(request, "main/hard_disk_list.html", data)
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         add_comment = request.POST.get('add_comment')
         add_question = request.POST.get('add_question')
         buy = request.POST.get('buy')
@@ -1953,33 +1953,44 @@ class Checkout(generics.GenericAPIView):
     @staticmethod
     def get(request):
         user = request.user
-        if user:
-            model = ProductCart.objects.filter(user_name=user).values('product_pic', 'product_price', 'product_title')
-            curt_sum = ProductCart.objects.filter(user_name=user).aggregate(Sum('product_price'))
-        data = {'model': model,
-                'curt_sum': curt_sum['product_price__sum']}
-        return render(request, 'main/checkout.html', data)
+        try:
+            if user:
+                model = ProductCart.objects.filter(user_name=user).values('product_pic', 'product_price',
+                                                                          'product_title')
+                curt_sum = ProductCart.objects.filter(user_name=user).aggregate(Sum('product_price'))
+
+                data = {'model': model,
+                        'curt_sum': curt_sum['product_price__sum']}
+
+                return render(request, 'main/checkout.html', data)
+        except Exception:
+            return render(request, 'main/checkout.html')
 
     @staticmethod
-    def post(request, *args, **kwargs):
-        user = request.user
-        name = request.POST.get('client_name')
-        sur_name = request.POST.get('client_surname')
-        client_phone = request.POST.get('client_phone')
-        client_email = request.POST.get('client_email')
-        state = request.POST.get('state')
-        city = request.POST.get('city')
-        num_of_post = request.POST.get('post_num')
-        model = ProductCart.objects.filter(user_name=user).values('product_pic', 'product_price', 'product_title')
-        order_num = random.randint(1, 150000)
-        for el in range(len(model)):
-            product_pic = model[el]['product_pic']
-            product_price = model[el]['product_price']
-            product_title = model[el]['product_title']
-            OrderList.objects.create(username=user, name=name, sur_name=sur_name, mobile_number=client_phone,
-                                     email=client_email, state=state, city=city, num_of_post=num_of_post,
-                                     product_pic=product_pic, product_price=product_price, product_title=product_title,
-                                     order_num=order_num)
+    def post(request):
+        order = request.POST.get('order')
+        if order:
+            user = request.user
+            name = request.POST.get('client_name')
+            sur_name = request.POST.get('client_surname')
+            client_phone = request.POST.get('client_phone')
+            client_email = request.POST.get('client_email')
+            state = request.POST.get('state')
+            city = request.POST.get('city')
+            num_of_post = request.POST.get('post_num')
+            model = ProductCart.objects.filter(user_name=user).values('product_pic', 'product_price', 'product_title')
+            order_num = random.randint(1, 150000)
+            for el in range(len(model)):
+                product_pic = model[el]['product_pic']
+                product_price = model[el]['product_price']
+                product_title = model[el]['product_title']
+                OrderList.objects.create(username=user, name=name, sur_name=sur_name, mobile_number=client_phone,
+                                         email=client_email, state=state, city=city, num_of_post=num_of_post,
+                                         product_pic=product_pic, product_price=product_price,
+                                         product_title=product_title,
+                                         order_num=order_num)
+                ProductCart.objects.filter(product_title=product_title).delete()
+
         return redirect('main')
 
 
@@ -2024,6 +2035,9 @@ class CartApi(generics.GenericAPIView,
         return self.list(request, *args, **kwargs)
 
 
+"""CRM main page"""
+
+
 class AdminPanelStartPage(generics.GenericAPIView,
                           mixins.CreateModelMixin,
                           mixins.DestroyModelMixin):
@@ -2060,8 +2074,6 @@ class AdminPanelStartPage(generics.GenericAPIView,
         model = OrderList.objects.all()
         total_sum = OrderList.objects.aggregate(Sum('product_price'))['product_price__sum']
 
-        count_commodety = request.POST.get('count_comodety')
-
         sold_order = request.POST.get('sold')
 
         if sold_order:
@@ -2083,28 +2095,6 @@ class AdminPanelStartPage(generics.GenericAPIView,
                                               product_pic=product_pic, product_price=product_price, order_num=order_num)
 
                 OrderList.objects.filter(id=el['id']).delete()
-
-                clean_product_cart = ProductCart.objects.filter(user_name_id=username).values()
-
-                for item in clean_product_cart:
-                    ProductCart.objects.filter(id=item['id']).delete()
-
-        # if count_comodety:
-        #    res = OrderList.objects.filter(id=count_comodety).values()[0]
-        #    username = User.objects.filter(id=res['username_id']).values('username')[0]['username']
-        #    name = res['name']
-        #    sur_name = res['sur_name']
-        #    mobile_number = res['mobile_number']
-        #    email = res['email']
-        #    product_title = res['product_title']
-        #    product_pic = res['product_pic']
-        #    product_price = res['product_price']
-        #    order_num = res['order_num']
-
-        #    DocumentOfSold.objects.create(username=username, name=name, sur_name=sur_name, product_title=product_title,
-        #                                  mobile_number=mobile_number, email=email, product_pic=product_pic,
-        #                                  product_price=product_price, order_num=order_num)
-        #    OrderList.objects.filter(id=count_comodety).delete()
 
         data = {'model': model,
                 'total_sum': total_sum

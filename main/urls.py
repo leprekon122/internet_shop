@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.urls import path, include
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+
 
 from . import views
 from django.conf import settings
