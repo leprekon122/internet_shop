@@ -1950,6 +1950,8 @@ class HardDisk(generics.GenericAPIView):
 
 class Checkout(generics.GenericAPIView):
 
+    permission_classes = [permissions.IsAuthenticated]
+
     @staticmethod
     def get(request):
         user = request.user
@@ -2040,8 +2042,10 @@ class CartApi(generics.GenericAPIView,
 
 class AdminPanelStartPage(generics.GenericAPIView,
                           mixins.CreateModelMixin,
-                          mixins.DestroyModelMixin):
+                          mixins.DestroyModelMixin,
+                          ):
     serializer_class = DocumentOfSoldSerializer
+    permission_classes = [permissions.BasePermission]
 
     @staticmethod
     def get(request):
@@ -2053,13 +2057,16 @@ class AdminPanelStartPage(generics.GenericAPIView,
 
         personal_data = None
 
-        if order_username:
-            model_user = User.objects.filter(username=options).values('id')[0]['id']
-            model = OrderList.objects.filter(username=model_user)
-            total_sum = OrderList.objects.filter(username=model_user).aggregate(Sum('product_price'))[
-                'product_price__sum']
-            personal_data = OrderList.objects.filter(username=model_user).values('name', 'sur_name', 'mobile_number',
-                                                                                 'email')[0]
+        test = User.objects.filter(username=request.user).values('is_superuser', 'groups')
+        if any([(test[0]['is_superuser'] == True), (test[0]['groups'] == 1)]):
+            if order_username:
+                model_user = User.objects.filter(username=options).values('id')[0]['id']
+                model = OrderList.objects.filter(username=model_user)
+                print(model)
+                total_sum = OrderList.objects.filter(username=model_user).aggregate(Sum('product_price'))[
+                        'product_price__sum']
+
+                personal_data = OrderList.objects.filter(username=model_user).values()[0]
 
         data = {'model': model,
                 'total_sum': total_sum,
@@ -2067,7 +2074,8 @@ class AdminPanelStartPage(generics.GenericAPIView,
                 'personal_data': personal_data,
                 }
 
-        return render(request, "main/AdminPanelStartPage.html", data)
+        if any([(test[0]['is_superuser'] == True), (test[0]['groups'] == 1)]):
+            return render(request, "main/AdminPanelStartPage.html", data)
 
     @staticmethod
     def post(request):

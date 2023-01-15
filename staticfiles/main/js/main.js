@@ -149,7 +149,7 @@ function active_panel(){
     if(count_panel % 2 == 1){
         document.getElementById('main_panels').style.transform = 'translateX(0%)'
         if(window.screen.width > 1200){
-            document.getElementById('main_panels').style.width = '25%'
+            document.getElementById('main_panels').style.width = '35%'
           } else {
             document.getElementById('main_panels').style.width = '35%'
           }
@@ -166,19 +166,46 @@ function active_panel(){
 window.onload = (function just_test(){
     var item = document.getElementsByClassName('cart_price')
     var product_title = document.getElementsByClassName('cart_title')
-    var items = document.getElementById('detail_title')
+    var items = document.getElementsByClassName('title_note_text')
+    var buy_btn = document.getElementsByClassName('sold_btn')
+
+    for(let i = 0; i <= items.length - 1 ; i++){
+            res = items[i].innerHTML
+
+            for(let el = 0; el <= product_title.length - 1; el++){
+                if(product_title[el].innerHTML == res){
+                    buy_btn[i].style.color = 'green'
+                    buy_btn[i].disabled = 'true'
+                }
+            }
+        }
+
+    var num_of_like = document.getElementsByClassName('like_list_all').length
+    document.getElementById('count_of_like').innerHTML = num_of_like
+
+
+    if(num_of_like == 0){
+        document.getElementById('count_of_like_div').style.display = 'none'
+    }
 
     if(item.length != 0){
         document.getElementById('value_cart').style.display = 'block'
         document.getElementById('value_cart').innerHTML = item.length
         }
 
-    for(var i = 0; i <= product_title.length; i++){
-        if(items.innerHTML == product_title[i].innerText){
-            document.getElementById('cart_buy_item').style.display = 'none'
-            document.getElementById('cart_sold').style.display = 'block';}
-       }
+    data = document.getElementById('product_cart_info')
+    if(data == null){
+        document.getElementById('next_buy').style.display = 'none'
+        document.getElementById('make_order').style.display = 'none'
+        }
 
+    var detail_title = document.getElementById('detail_title')
+    for(let els = 0; els <= product_title.length - 1; els++){
+        if(product_title[els].innerHTML == detail_title.innerHTML){
+            document.getElementById('cart_buy_item').style.display = 'none'
+            document.getElementById('cart_sold').style.display = 'block'
+        }
+    }
 
   })
 
@@ -187,17 +214,20 @@ window.onload = (function just_test(){
 
 function stuff_in_cart(){
     var user = document.getElementById('user').innerHTML
+
     if(user == 'AnonymousUser'){
         window.alert('Необхідно увійти у систему');
         return false
     } else{
         return true
-    }
+        }
+
 }
 
 
 
 //active menu on phone///
+var count_panel = 0
 function manage_panel(){
     count_panel += 1
     if(count_panel % 2 == 1){
@@ -207,3 +237,32 @@ function manage_panel(){
         }
     }
 
+
+function alphabet_search_up(){
+    document.getElementById('all_alphabet_stuff').style.display = 'none'
+    document.getElementById('alphabet_search_down').style.display = 'block'
+    document.getElementById('alphabet_search_up').style.display = 'none'
+
+}
+
+
+function alphabet_search_down(){
+    document.getElementById('all_alphabet_stuff').style.display = 'block'
+    document.getElementById('alphabet_search_down').style.display = 'none'
+    document.getElementById('alphabet_search_up').style.display = 'block'
+}
+
+
+function processors_up(){
+    document.getElementById('all_processors_stuff').style.display = 'none'
+    document.getElementById('processors_down').style.display = 'block'
+    document.getElementById('processors_up').style.display = 'none'
+
+}
+
+function processors_down(){
+    document.getElementById('all_processors_stuff').style.display = 'block'
+    document.getElementById('processors_down').style.display = 'none'
+    document.getElementById('processors_up').style.display = 'block'
+
+}

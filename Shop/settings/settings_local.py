@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'main',
-    # "debug_toolbar",
+    #"debug_toolbar",
 
     'allauth',
     'allauth.account',
@@ -58,8 +58,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.path.join('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY.py')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.path.join('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET.py')
 
 
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -68,11 +66,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware"
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    #"debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-# INTERNAL_IPS = [
+#INTERNAL_IPS = [
 #    "127.0.0.1",
 # ]
 
@@ -109,18 +107,6 @@ DATABASES = {
         'PORT': '5432'
     }
 }
-
-# DATABASES = {
-#    'default': {
-#        # postgresql_psycopg2
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'd7rf4ue3n9ne06',
-#        'USER': 'vdnykejhafgtvo',
-#        'PASSWORD': 'ce812f69596457b403b4ef89adfdcd81e0d742f413563e3842dc44b9273cc577',
-#        'HOST': 'ec2-54-75-184-144.eu-west-1.compute.amazonaws.com',
-#    }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
