@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>{%block title%}{%endblock%}</title>
@@ -37,16 +37,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <br>
+
         <div class="navbar-nav">
+
             <button class="btn btn-dark" onclick="catalog()" id="btn_catalog">
                 <i class="fa-solid fa-layer-group"></i> Каталог
             </button>
+
         </div>
         <br>
 
 
         <div class="container auth_panel">
-            <div class="search_elements">
+            <div class="search_elements" id="search_elements">
                 <input type="text" class="form-control" placeholder="search" id="search">
                 <button class="btn btn-success">Знайти</button>
             </div>
@@ -68,7 +71,7 @@
                     </form>
                 </div>
                 <div class="navbar-nav username">
-                    <h5>Hello there: <span id="user">{{username}}</span></h5>
+                    <h5>Hello: <span id="user">{{username}}</span></h5>
                 </div>
 
                 <div class="navbar-nav cart">
@@ -82,6 +85,14 @@
                     <i class="fa-brands fa-gratipay" data-toggle="modal" data-target="#likes_list"></i>
                     <div class="count_of_like" id="count_of_like_div">
                         <span id="count_of_like"></span>
+                    </div>
+                </div>
+
+                <div class="navbar-nav chose_theme">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                               onclick="change_color()">
+                        <p id="label_color">white mode</p>
                     </div>
                 </div>
 
@@ -283,6 +294,30 @@
     </div>
 </div>
 
+<script>
+    color_count = 0
+    function change_color(){
+        color_count += 1
+        if (color_count % 2 == 1){
+            document.body.style.backgroundColor = '#fff'
+            document.getElementById('label_color').innerHTML = 'dark mode'
+            data = document.getElementsByClassName("note")
+            for(let el=0; el <= data.length; el ++){
+                data[el].style.borderColor = "black"
+            }
+
+
+        } else if (color_count % 2 == 0){
+            document.body.style.backgroundColor = '#030202'
+            document.getElementById('label_color').innerHTML = 'white mode'
+            data = document.getElementsByClassName("note")
+            for(let el=0; el <= data.length; el ++){
+                data[el].style.borderColor = "#24ad2e"
+            }
+        }
+
+    }
+</script>
 
 <body>
 {%block content%}

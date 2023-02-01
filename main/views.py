@@ -2045,7 +2045,7 @@ class AdminPanelStartPage(generics.GenericAPIView,
                           mixins.DestroyModelMixin,
                           ):
     serializer_class = DocumentOfSoldSerializer
-    permission_classes = [permissions.BasePermission]
+    permission_classes = [permissions.IsAuthenticated]
 
     @staticmethod
     def get(request):
@@ -2076,6 +2076,9 @@ class AdminPanelStartPage(generics.GenericAPIView,
 
         if any([(test[0]['is_superuser'] == True), (test[0]['groups'] == 1)]):
             return render(request, "main/AdminPanelStartPage.html", data)
+        else:
+            return render(request, "main/errors_pages/500_code.html")
+
 
     @staticmethod
     def post(request):

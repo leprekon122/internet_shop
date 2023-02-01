@@ -266,3 +266,4 @@ function processors_down(){
     document.getElementById('processors_up').style.display = 'block'
 
 }
+
