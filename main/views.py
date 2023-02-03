@@ -10,7 +10,7 @@ from django.db.models import Sum, Max
 from django.contrib import messages
 
 
-# Create your views here.
+# Create your views_dir here.
 class MainPage(generics.GenericAPIView):
     @staticmethod
     def get(request):
@@ -1949,7 +1949,6 @@ class HardDisk(generics.GenericAPIView):
 
 
 class Checkout(generics.GenericAPIView):
-
     permission_classes = [permissions.IsAuthenticated]
 
     @staticmethod
@@ -2064,7 +2063,7 @@ class AdminPanelStartPage(generics.GenericAPIView,
                 model = OrderList.objects.filter(username=model_user)
                 print(model)
                 total_sum = OrderList.objects.filter(username=model_user).aggregate(Sum('product_price'))[
-                        'product_price__sum']
+                    'product_price__sum']
 
                 personal_data = OrderList.objects.filter(username=model_user).values()[0]
 
@@ -2078,7 +2077,6 @@ class AdminPanelStartPage(generics.GenericAPIView,
             return render(request, "main/AdminPanelStartPage.html", data)
         else:
             return render(request, "main/errors_pages/500_code.html")
-
 
     @staticmethod
     def post(request):

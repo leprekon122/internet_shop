@@ -98,7 +98,7 @@ body .cart_footers a{width: 100%}
             top:-11px;
             background: green;
             width:15px;
-            left:-43px;
+            left:-10px;
             border-radius:50%;
             font-size:12px;
             }
@@ -218,7 +218,7 @@ body .cart_footers a{width: 100%}
 
 #in_cart{display:none}
 
-.cart_header {background: linear-gradient(to right, #080707, #5d21bf, #080707);
+.cart_header {background-color: #24ad2e ;
               }
 /* ---------- */
 
@@ -232,6 +232,16 @@ body .detail_button{display:flex;
             align-items:center;
 
             }
+
+.like_and_cart {width: 22%;
+                display:flex;
+                justify-content:space-between;
+                border-left: 1px solid grey;
+                border-right: 1px solid grey;
+                padding-left:10px;
+                padding-right: 10px;
+
+                }
 
 .count_of_like{background-color:green;
                position: relative;
@@ -282,7 +292,7 @@ body .detail_button{display:flex;
 .like-body{width:100%;
            overflow: auto}
 
-.like_header {background: linear-gradient(to right, #080707, #5d21bf, #080707)}
+.like_header {background-color: #24ad2e}
 
 .del_like {width:100%;
            height:6vh;
@@ -310,6 +320,7 @@ body .detail_button{display:flex;
 .username {display:flex;
           justify-content:center;
           align-items:center;
+
           }
 
 .username h5{font-size: 14px;
@@ -403,8 +414,8 @@ body .auth_panel {
 
 .chose_theme {display:flex;
               align-items: center;
-              height: 6vh;
-              align-items: center;
+              /* height: 6vh; */
+              padding-top: 2%;
               justify-content: center}
 
 body .search_elements {width: 45%}
@@ -1084,7 +1095,8 @@ body .text_comment{width:60%;
 
     body .detail_title h4{width:100%}
 
-    body .username{font-size: 15px;
+    body .username{font-size: 12px;
+                   width: 25%;
                    }
 
     body .manage_panel {width: 50%;}
@@ -1135,7 +1147,8 @@ body .text_comment{width:60%;
                    height: 100px;
                    }
 
-    .all_stuff{width: 100%}
+    .all_stuff{width: 100%;
+               }
 
     body .detail_pic img{width:350px;
                     height: 250px;
@@ -1343,6 +1356,23 @@ body .text_comment{width:60%;
 }
 
 @media screen and (max-width: 483px) {
+
+    .chose_theme {display:flex;
+                  width: 30%;
+                  font-size: 12px;
+                }
+
+    .like_and_cart {width: 35%;
+                    display:flex;
+                    justify-content:space-around;
+                    border-left: 1px solid grey;
+                    border-right: 1px solid grey;
+                    align-items: center;
+                    flex-direction: row;
+
+
+
+                }
 
     #item_hover1 {border-bottom: 1px solid #fff;
                   padding: 2%;
@@ -1719,8 +1749,8 @@ body .text_comment{width:60%;
                justify-content: center;
                align-items: center;
                font-size: 10px;
-               right: 45%;
-               top: -67%;
+               right: -35%;
+               top: -35px;
                }
 
 

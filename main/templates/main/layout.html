@@ -28,7 +28,7 @@
 </head>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light" id="nav-panel">
     <a class="navbar-brand" id="logo" href="{% url 'main' %}"><i class="fa-solid fa-m text-warning"></i>y
         Shop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -74,17 +74,19 @@
                     <h5>Hello: <span id="user">{{username}}</span></h5>
                 </div>
 
-                <div class="navbar-nav cart">
-                    <i class="fa-solid fa-cart-shopping" data-target="#cart" data-toggle="modal"></i>
-                    <div class="value_cart">
-                        <span id="value_cart"></span>
+                <div class="navbar-nav like_and_cart">
+                    <div class="navbar-nav cart">
+                        <i class="fa-solid fa-cart-shopping" data-target="#cart" data-toggle="modal"></i>
+                        <div class="value_cart">
+                            <span id="value_cart"></span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="navbar-nav like_list">
-                    <i class="fa-brands fa-gratipay" data-toggle="modal" data-target="#likes_list"></i>
-                    <div class="count_of_like" id="count_of_like_div">
-                        <span id="count_of_like"></span>
+                    <div class="navbar-nav like_list">
+                        <i class="fa-brands fa-gratipay" data-toggle="modal" data-target="#likes_list"></i>
+                        <div class="count_of_like" id="count_of_like_div">
+                            <span id="count_of_like"></span>
+                        </div>
                     </div>
                 </div>
 
@@ -301,9 +303,11 @@
         if (color_count % 2 == 1){
             document.body.style.backgroundColor = '#fff'
             document.getElementById('label_color').innerHTML = 'dark mode'
+
+
             data = document.getElementsByClassName("note")
-            for(let el=0; el <= data.length; el ++){
-                data[el].style.borderColor = "black"
+            for(let el=0; el < data.length; el ++){
+                var box = data[el].style.borderColor = "black"
             }
 
 
@@ -311,12 +315,13 @@
             document.body.style.backgroundColor = '#030202'
             document.getElementById('label_color').innerHTML = 'white mode'
             data = document.getElementsByClassName("note")
-            for(let el=0; el <= data.length; el ++){
-                data[el].style.borderColor = "#24ad2e"
+            for(let el=0; el < data.length; el ++){
+                var box1 = data[el].style.borderColor = "#24ad2e"
             }
         }
 
     }
+
 </script>
 
 <body>

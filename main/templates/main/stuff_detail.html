@@ -3,7 +3,7 @@
 {%block title%}Detail info{%endblock%}
 
 {%block content%}
-<div class="container detail_container">
+<div class="container detail_container" id="detail_container_id">
     <div class="head_panel">
         <div class="head_panel_home">
             <a href="http://127.0.0.1:8000/"><i class="fa-solid fa-house text-light"></i></a>
@@ -52,7 +52,7 @@
 
         </div>
     </div>
-    <div class="detail_all">
+    <div class="detail_all" id="detail_all_id">
         {%for el in model%}
         <div class="container detail_title">
             <h4 id="detail_title">{{el.title}}</h4>
